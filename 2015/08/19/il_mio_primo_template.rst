@@ -164,5 +164,5 @@ Ciao alla prossima. (stay tune!)
 
 .. author:: default
 .. categories:: programming
-.. tags:: python
+.. tags:: programming, python
 .. comments::
