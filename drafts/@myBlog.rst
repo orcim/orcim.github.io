@@ -143,7 +143,7 @@ modifichiamo in ssh::
 modifichiamo in https::
 
 	$ git remote set-url origin https://github.com/USERNAME/OTHERREPOSITORY.git
-	$ git remote set-url origin https://github.com/oricm/orcim.github.io.git
+	$ git remote set-url origin https://github.com/orcim/orcim.github.io.git
 
 Per vedere la configurazione::
 
@@ -170,15 +170,6 @@ se non si è impostato l'autenticazione auto::
 
 	user: orciml@gmail.com
 	pass: 135790Azz 
-
-Se si vuol ricordare il tipo di push da eseguire su git::
-
-	$ git config --global push.default current	
-	$ git config --global push.default matching  (solo quello gia' esistente)
-
-Se si vuol ricordare il tipo di push da eseguire si git-2.0::
-
-	$ git config --global push.default simple  (solo quello gia' esistente)
 
 view
 ----
