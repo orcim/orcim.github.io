@@ -1,1 +1,0 @@
-/home/orcim/0work/appuntiLinux/_develop/git/@myGit.rst
