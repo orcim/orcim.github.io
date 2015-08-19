@@ -1,0 +1,1 @@
+/home/orcim/0work/_myDoc/tinkerer/myDocument/pages/tinkerer.rst

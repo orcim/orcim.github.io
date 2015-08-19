@@ -1,0 +1,315 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="my notes of pyGtk">
+        <meta name="viewport" content="width=device-width">
+        <title>Il mio primo template &mdash; myGtk</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="prev" title="Questo è il primo post!" href="../18/this_is_the_first_post.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">myGtk</a></h1><h2>python</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Pagina iniziale</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/about.html">About</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>agosto 19, 2015</span>
+        </div>
+    <div class="section" id="il-mio-primo-template">
+<h1>Il mio primo template</h1>
+<p>Dopo un pò di ciacole, come si dice a Venezia, iniziamo a vedere un aspetto della programmazione che a mio modesto avviso viene spesso sottovalutato.</p>
+<p>Quando iniziamo a scrivere del codice ci dobbiamo ricordare di dare una struttura al nostro lavoro, nota bene sto sottolineando la parola <strong>Lavoro</strong> non codice.</p>
+<div id="more"> </div><p>Come dicevo nel precedente post è importante dare una impronta al nostro modo di lavorare e cercare di seguirla senza modificarla il più possibile. Forse all&#8217;inizio ci ritroveremo a modificarla più frequentemente a causa della nostra inesperienza ma col passare del tempo la affineremo e apprezzeremo presto il suo utilizzo.</p>
+<p>Qui vengono in aiuto i <strong>Templates</strong> che altro non sono dei modelli da cui partire per il nostro lavoro. Sono dei semplici files costruiti precedente che di danno le linee guida per il nostro futuro lavoro.</p>
+<p>Vediamo un esempio concreto <strong>l00_start.py</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot; lista oggetti definiti:</span>
+
+<span class="sd">	- myDefine</span>
+<span class="sd">	- MyClass</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.20150811)&quot;</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># Modules</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myModules</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myDefines</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myDefine</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">name</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">testMyDefine</span><span class="p">():</span>
+	<span class="k">print</span> <span class="n">myDefine</span><span class="p">(</span><span class="s">&quot;la mia callback!&quot;</span><span class="p">)</span>
+	<span class="c"># end idle</span>
+	<span class="k">return</span> <span class="bp">False</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myClass</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">testMyClass</span><span class="p">():</span>
+	<span class="bp">self</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="s">&quot;MyClass&quot;</span><span class="p">)</span>
+	<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myTry</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry01</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot; test myDefine</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">testMyDefine</span><span class="p">()</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry02</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot; test myClass</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">testMyClass</span><span class="p">()</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># Main</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+
+	<span class="c"># test arguments</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="c"># no arguments (scelgo io)</span>
+		<span class="n">choi</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="c"># get first argument (scelta esterna)</span>
+		<span class="n">choi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+	<span class="k">if</span> <span class="n">choi</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="s">&quot;test myDefine&quot;</span>
+		<span class="n">myTry01</span><span class="p">()</span>
+
+	<span class="k">elif</span> <span class="n">choi</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="s">&quot;test myClass&quot;</span>
+		<span class="n">myTry02</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="descrizione">
+<h2>Descrizione</h2>
+<p>Questo è un template base per uno script <strong>Python</strong>.</p>
+<p>Commentiamo assieme la sua struttura.</p>
+<p>Nella prima riga troviamo la classica direttiva per fare diventare uno script eseguibile da linea di comando senza anteporre l&#8217;interprete python.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+</pre></div>
+</div>
+<p>Nella seconda indichiamo il coding che vogliamo utilizzare.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="il-primo-commento">
+<h2>Il primo commento</h2>
+<p>Segue la classica <strong>Doc string</strong> che riassume cosa contiene il nostro file.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot; lista oggetti definiti:</span>
+
+<span class="sd">        - myDefine</span>
+<span class="sd">        - MyClass</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="la-revisione">
+<h2>La revisione</h2>
+<p>E&#8217; bene inoltre definire un attributo che ricordi la revisione del nostro codice.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.20150811)&quot;</span>
+</pre></div>
+</div>
+<p>Il metodo che ho scelto per indicare la revisione e la data Osi che ci permette di avere un ordinamento corretto in caso di indicizzazione.</p>
+<p>La forma è molto semplice AAAAMMGG.</p>
+<p>Se si avesse la necessità di avere più granularità nello stesso giorno io di solito aggiungo una lettera progressiva. Esempio</p>
+<div class="highlight-rest"><div class="highlight"><pre>20150811a
+20150811b
+</pre></div>
+</div>
+<p>Si perchè in python ogni file puo&#8217; diventare un modulo ed essere raggruppato in package inserendolo in una directory dove sarà prensente il file col nome <strong>__init__.py</strong>.</p>
+<p>Questo indica al nostro interprete che questa directory diventa un package in altre parole una libreria.</p>
+</div>
+<div class="section" id="commenti">
+<h2>Commenti</h2>
+<p>Come si diceva meglio abbondare di commenti. Questi ci aiutano sia a ricordare quello che facciamo ma anche ad aumentare la leggibilità. Come avrete potuto notare nell&#8217;esempio precedente io uso separare o meglio raggruppare zone di codice antecedendo
+una intestazione che richiama a prima vista di cosa tratta il codice seguente.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># Modules</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="suddivisione">
+<h2>Suddivisione</h2>
+<p>La prima grande suddivisione separa i richiami dei moduli dalle definizioni di metodi e classi. E per finire i test del codice stesso con relativo richiamo tramite il <strong>main</strong> principale.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># Main</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+
+        <span class="c"># test arguments</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c"># no arguments (scelgo io)</span>
+                <span class="n">choi</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="c"># get first argument (scelta esterna)</span>
+                <span class="n">choi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>E qui si scatenerà una guerra. Perchè non usare <strong>unitest</strong> con i metodi <strong>assert</strong> o <strong>fail</strong>.
+E&#8217; solo una scelta personale. Ognuno è libero di scegliere come lavorare se non si hanno dei vincoli imposti ovvio.</p>
+<p>Ricordo che in <strong>python</strong> uno script in esecuzione prende il nome di default <strong>__main__</strong> perciò si può sfruttare questa peculiarità per rendere eseguibili anche dei moduli che normalmente sarebbero solo richiamati da altri scripts. In questo modo possiamo testare tramite l&#8217; attributo <strong>choi</strong> vari pezzi di codice.</p>
+</div>
+<div class="section" id="test">
+<h2>Test</h2>
+<p>Normalmente quando scrivo un nuovo metodo o una nuova classe subito dopo scrivo anche il metodo che li testa.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">testMyClass</span><span class="p">():</span>
+        <span class="c"># (name=&quot;&quot;)</span>
+        <span class="bp">self</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="s">&quot;MyClass&quot;</span><span class="p">)</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<p>Questo mi permette a distanza di tempo:</p>
+<ul class="simple">
+<li>di vedere come utilizzare il codice</li>
+<li>copiare e incollare le linee di codice come fosse un template.</li>
+</ul>
+<p>Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri possibili. Ricordate cosa dice il buon programmatore:</p>
+<ul class="simple">
+<li>meglio esplicito che implicito.</li>
+</ul>
+</div>
+<div class="section" id="try">
+<h2>Try</h2>
+<p>Nella sezione <strong>try</strong> scrivo dei metodi che simulano dei test più complessi dell&#8217;uso dei vari oggetti definiti. In questo caso nel nostro file campione gli oggetti definiti sono molto semplici e può risultare ridondante il codice scritto. Ma per un template questo va benissimo.</p>
+</div>
+<div class="section" id="labels">
+<h2>Labels</h2>
+<p>Come avrete notato le <strong>labels</strong> che utilizzo sono acronimi composti. Se la definizione è un metodo o un attributo inizia sempre in minuscolo mentre se è una classe inizia con una maiuscola. Ogni acronimo inizia con una maiuscola per enfatizzare la composizione della label.</p>
+<p>Tendo ad accorciare le parole quasi sempre con 4 lettere mentre la finale la lascio integra se non troppo lunga.</p>
+<p>Le variabili locali interne a dei metodi sono lunghe 3 lettere mentre quelle di passaggio 4 lettere per distinguerle meglio.</p>
+</div>
+<div class="section" id="saluti">
+<h2>Saluti</h2>
+<p>Nel prossimo post inizieremo a parlare di GTK.</p>
+<p>Ciao alla prossima. (stay tune!)</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Scritto da Orcim</span>
+        </div>
+        <div class="categories">
+            <span>
+                Pubblicato in:
+                <a href="../../../categories/programming.html">programming</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tag:
+                <a href="../../../tags/python.html">python</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"> &laquo; <a href="../18/this_is_the_first_post.html">Questo è il primo post!</a></li>
+            <li class="right"></li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
+    <h1>Articoli Recenti</h1>
+    <ul><li>
+            <a href="../18/this_is_the_first_post.html">Questo è il primo post!</a>
+        </li><li>
+            <a href="#">Il mio primo template</a>
+        </li></ul>
+</div>
+</section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Cerca</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section><div class="widget">
+    <h1>Categorie</h1>
+    <ul><li><a href="../../../categories/programming.html">programming</a> (2)</li></ul>
+</div></section><section><div class="widget">
+    <h1>Tag Cloud</h1>
+      <a href="../../../tags/programming.html" style="font-size: 8pt">programming</a>&nbsp;&nbsp;
+      <a href="../../../tags/python.html" style="font-size: 8pt">python</a>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2015, Orcim. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

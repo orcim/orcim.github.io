@@ -1,0 +1,152 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="my notes of pyGtk">
+        <meta name="viewport" content="width=device-width">
+        <title>Questo è il primo post! &mdash; myGtk</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="Il mio primo template" href="../19/il_mio_primo_template.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">myGtk</a></h1><h2>python</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Pagina iniziale</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/about.html">About</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>agosto 18, 2015</span>
+        </div>
+    <div class="section" id="questo-e-il-primo-post">
+<h1>Questo è il primo post!</h1>
+<div class="section" id="premessa">
+<h2>Premessa</h2>
+<p>Ciao a tutti. Mi chiamo Loris nella rete sono conosciuto come Orcim e sono appassionato e lavoro da circa 30 anni in ambito di programmazione embedded.</p>
+<p>Normalmente sviluppo in C a basso livello e in Python ad alto livello. Adoro <strong>Linux</strong> e tutto il mondo dell&#8217; <strong>Open Source</strong>.</p>
+<p>In questo blog parleremo di programmazione <strong>Python</strong> in ambiente grafico <strong>Gtk</strong>.</p>
+<div id="more"> </div><p>Cercherò di riassumere dei concetti di lavoro che ho seguito per vari anni cercando
+di affinarli. Molto spesso si sottovalutano e ci si concentra più sulla risoluzione
+degli algoritmi invece della manuntenabilità, leggibilità, ecc.</p>
+<p>Ognuno di noi nel lavoro cerca di crearsi l&#8217;ambiente più consono per poter essere
+più efficace nel suo svolgimento, almeno credo per me è stato così.</p>
+<p>La cosa che un programmatore fa più difficoltà a cambiare è il suo <strong>editor</strong> preferito.
+Perchè lo conosce bene da diverso tempo e cambiare gli costa molta fatica. Lo cambia solo se realmente vede delle grosse opportunità che realmente gli facilitano la vita.</p>
+<p>Gli editor di oggi arrivano a sostituire gli <strong>IDE</strong> che sono quegli ambienti di sviluppo integrati che ti permettono di gestire e sviluppare progetti complessi.</p>
+<p>Io cerco di sviluppare, quando posso, da riga di comando perche&#8217; credo sia un modo più snello e veloce di lavorare. Da buon utente <strong>Linux</strong> uso il terminale e ancor peggio un mio grosso difetto è cercare di ridurre le labels il più possibile. Il mondo <strong>Unix</strong> è fatto così. Si cerca sempre di eliminare il superfluo. A volte però si corre il rischio di buttar via il bambino con l&#8217;acqua sporca.</p>
+<p>Ho usato vari anni gli IDE, un esempio classico <strong>Eclipse</strong> ma il solo aspettare che si apra mi da fastidio; preferisco il buon makefile per i progetti complessi in C e la suddivisione in files e directories con python. Se penso che al giorno d&#8217;oggi abbiamo dei super PC ma sembra che non riescano mai a velocizzarsi perchè la tecnologia avanza sempre più della loro possibilità computazionale. E&#8217; vero adesso fanno anche la grafica 3D con effetti di animazione ma quando lavori e hai fretta non ti puoi permettere di perdere tempo.</p>
+<p>Se volete un consiglio date un&#8217;occhiata a Sublime Text. Io mi trovo molto bene.
+E&#8217; multi piattaforma (Linux, Mac, Windows) lavora su più finestre e progetti. Edita anche in modalità colonna. Sarà perchè è sviluppato in python ed è altamente programmabile attraverso i packages e altro ancora che una volta che lo conosci non puoi più farne a meno.</p>
+<p>Il modo di programmare non cambia al cambiare del linguaggio perchè non è questione di sintassi ma come lo fai. Come commenti, come lo organizzi, ecc.
+Perciò non fossalizzatevi sulla sintassi ma sui modi di fare le cose.
+Trovate un modo organizzato e consono di lavorare e cercate di perfezionarlo ma mai cambiarlo di fondo.</p>
+<p>Se devi riprendere in mano un lavoro che hai fatti anni indietro non devi perdere tempo per ricordarti quello che hai fatto. Se lo fai sempre nello stesso modo ti ritroverai nel lavoro quotidiano di tutti i giorni. Non elemosinate nei <strong>Commenti</strong> perchè quando si scrive sembra tutto ovvio ma quando lo riprendi in mano dopo qualche mese non ci si ricorda piu&#8217; perche&#8217; avevi fatto in quel modo. Inoltre è più facile leggere un commento che non il codice di un linguaggio.</p>
+<p>Per concludere questo mio primo post ricordate una cosa importante, nella vita bisogna condividere quello che si fa. E&#8217; la cosa più bella e semplice da fare. E&#8217; il modo più veloce di apprendere e divulgare la nostra conoscenza.</p>
+<p>Non pensate mai che quello che ti sta davanti voglia fare il sapientone (forse a volte è anche vero) ma lo spinge la voglia di condividere le proprie esperienze, sbagliate o giuste che siano, perchè questo e&#8217; il modo di abbattere quelle barriere invisibili che dividono le persone.</p>
+<p>Alla fine sei sempre tu che decidi quello che vuoi apprendere o meno.</p>
+<p>Mi raccomando non voglio scatenare nessun flame, alla fine ognuno di noi usa e fa quello che più gli piace e quello che dico non prendetelo per oro colato è solo un modo di fare Blog.</p>
+</div>
+<div class="section" id="saluti">
+<h2>Saluti</h2>
+<p>Nel prossimo post vedremo un modello di partenza di uno script python.</p>
+<p>Ciao alla prossima. (stay tune!)</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Scritto da Orcim</span>
+        </div>
+        <div class="categories">
+            <span>
+                Pubblicato in:
+                <a href="../../../categories/programming.html">programming</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tag:
+                <a href="../../../tags/programming.html">programming</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="../19/il_mio_primo_template.html">Il mio primo template</a> &raquo; </li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
+    <h1>Articoli Recenti</h1>
+    <ul><li>
+            <a href="#">Questo è il primo post!</a>
+        </li><li>
+            <a href="../19/il_mio_primo_template.html">Il mio primo template</a>
+        </li></ul>
+</div>
+</section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Cerca</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section><div class="widget">
+    <h1>Categorie</h1>
+    <ul><li><a href="../../../categories/programming.html">programming</a> (2)</li></ul>
+</div></section><section><div class="widget">
+    <h1>Tag Cloud</h1>
+      <a href="../../../tags/programming.html" style="font-size: 8pt">programming</a>&nbsp;&nbsp;
+      <a href="../../../tags/python.html" style="font-size: 8pt">python</a>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2015, Orcim. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>
