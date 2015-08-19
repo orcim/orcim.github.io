@@ -39,7 +39,7 @@ Nella seconda indichiamo il coding che vogliamo utilizzare.
 Il primo commento
 -----------------
 
-Segue la classica **Doc string** che riassume cosa contiene il nostro file.
+Segue la classica **Doc string** che nel nostro caso riassume cosa contiene il nostro file.
 
 .. code-block:: python
 
