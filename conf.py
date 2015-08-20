@@ -25,7 +25,7 @@ author = 'Orcim'
 copyright = '2015, ' + author
 
 # Change this to your blog root URL (required for RSS feed)
-website = 'https://orcim.github.io/blog/html/'
+website = 'orcim.github.io/blog/html/'
 
 # Localization
 language = "it"
