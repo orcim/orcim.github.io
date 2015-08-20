@@ -1,5 +1,5 @@
-Il mio primo template
-=====================
+Template base
+=============
 
 Dopo un pò di ciacole, come si dice a Venezia, iniziamo a vedere un aspetto della programmazione che a mio modesto avviso viene spesso sottovalutato.
 

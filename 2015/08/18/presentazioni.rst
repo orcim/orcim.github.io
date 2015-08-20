@@ -1,5 +1,5 @@
-Questo è il primo post!
-=======================
+Presentazioni
+=============
 
 Premessa
 --------
@@ -49,6 +49,8 @@ Mi raccomando non voglio scatenare nessun flame, alla fine ognuno di noi usa e f
 
 Saluti
 ------
+
+Cercherò di postare almeno una volta alla settimana.
 
 Nel prossimo post vedremo un modello di partenza di uno script python.
 
