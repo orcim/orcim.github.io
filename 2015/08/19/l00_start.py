@@ -4,7 +4,6 @@
 
 	- myDefine
 	- MyClass
-
 """
 
 myRev = "(rev.20150811)"
@@ -24,7 +23,9 @@ def myDefine(name=""):
 	return name
 #-----------------------------------------------------------------------------
 def testMyDefine():
-	print myDefine("la mia callback!")
+	# (name="")
+	for ind in xrange(3):
+		print ind, myDefine("la mia callback!")
 	# end idle
 	return False
 
@@ -36,6 +37,7 @@ class MyClass(object):
 		self.name = name
 #-----------------------------------------------------------------------------
 def testMyClass():
+	# (name="")
 	self = MyClass("MyClass")
 	print self.name
 

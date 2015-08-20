@@ -36,7 +36,7 @@
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
-    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script>
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -80,7 +80,6 @@
 
 <span class="sd">	- myDefine</span>
 <span class="sd">	- MyClass</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.20150811)&quot;</span>
@@ -100,7 +99,9 @@
 	<span class="k">return</span> <span class="n">name</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">testMyDefine</span><span class="p">():</span>
-	<span class="k">print</span> <span class="n">myDefine</span><span class="p">(</span><span class="s">&quot;la mia callback!&quot;</span><span class="p">)</span>
+	<span class="c"># (name=&quot;&quot;)</span>
+	<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+		<span class="k">print</span> <span class="n">ind</span><span class="p">,</span> <span class="n">myDefine</span><span class="p">(</span><span class="s">&quot;la mia callback!&quot;</span><span class="p">)</span>
 	<span class="c"># end idle</span>
 	<span class="k">return</span> <span class="bp">False</span>
 
@@ -112,6 +113,7 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">testMyClass</span><span class="p">():</span>
+	<span class="c"># (name=&quot;&quot;)</span>
 	<span class="bp">self</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="s">&quot;MyClass&quot;</span><span class="p">)</span>
 	<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
@@ -166,12 +168,11 @@
 </div>
 <div class="section" id="il-primo-commento">
 <h2>Il primo commento</h2>
-<p>Segue la classica <strong>Doc string</strong> che riassume cosa contiene il nostro file.</p>
+<p>Segue la classica <strong>Doc string</strong> che nel nostro caso riassume cosa contiene il nostro file.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot; lista oggetti definiti:</span>
 
 <span class="sd">        - myDefine</span>
 <span class="sd">        - MyClass</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
@@ -182,7 +183,7 @@
 <div class="highlight-python"><div class="highlight"><pre><span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.20150811)&quot;</span>
 </pre></div>
 </div>
-<p>Il metodo che ho scelto per indicare la revisione e la data Osi che ci permette di avere un ordinamento corretto in caso di indicizzazione.</p>
+<p>Il metodo che ho scelto per indicare la revisione è la data Osi che ci permette di avere un ordinamento corretto in caso di indicizzazione.</p>
 <p>La forma è molto semplice AAAAMMGG.</p>
 <p>Se si avesse la necessità di avere più granularità nello stesso giorno io di solito aggiungo una lettera progressiva. Esempio</p>
 <div class="highlight-rest"><div class="highlight"><pre>20150811a
@@ -194,7 +195,7 @@
 </div>
 <div class="section" id="commenti">
 <h2>Commenti</h2>
-<p>Come si diceva meglio abbondare di commenti. Questi ci aiutano sia a ricordare quello che facciamo ma anche ad aumentare la leggibilità. Come avrete potuto notare nell&#8217;esempio precedente io uso separare o meglio raggruppare zone di codice antecedendo
+<p>Come si diceva meglio abbondare di commenti. Questi ci aiutano sia a ricordare quello che facciamo ma anche ad aumentare la leggibilità. Come avrete potuto notare nell&#8217; esempio precedente io uso separare o meglio raggruppare zone di codice antecedendo
 una intestazione che richiama a prima vista di cosa tratta il codice seguente.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># Modules</span>
@@ -243,20 +244,53 @@ E&#8217; solo una scelta personale. Ognuno è libero di scegliere come lavorare 
 <li>di vedere come utilizzare il codice</li>
 <li>copiare e incollare le linee di codice come fosse un template.</li>
 </ul>
-<p>Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri possibili. Ricordate cosa dice il buon programmatore:</p>
+<p>Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri che si possono passare. Ricordate cosa dice il buon programmatore:</p>
 <ul class="simple">
 <li>meglio esplicito che implicito.</li>
 </ul>
 </div>
 <div class="section" id="try">
 <h2>Try</h2>
-<p>Nella sezione <strong>try</strong> scrivo dei metodi che simulano dei test più complessi dell&#8217;uso dei vari oggetti definiti. In questo caso nel nostro file campione gli oggetti definiti sono molto semplici e può risultare ridondante il codice scritto. Ma per un template questo va benissimo.</p>
+<p>Nella sezione <strong>try</strong> scrivo dei metodi che simulano dei test più complessi dell&#8217; uso dei vari oggetti definiti. In questo caso nel nostro file campione gli oggetti definiti sono molto semplici e può risultare ridondante il codice scritto. Ma per un template questo va benissimo.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myTry</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry01</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot; test myDefine</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">testMyDefine</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="labels">
 <h2>Labels</h2>
-<p>Come avrete notato le <strong>labels</strong> che utilizzo sono acronimi composti. Se la definizione è un metodo o un attributo inizia sempre in minuscolo mentre se è una classe inizia con una maiuscola. Ogni acronimo inizia con una maiuscola per enfatizzare la composizione della label.</p>
+<p>Come avrete notato le <strong>labels</strong> che utilizzo sono acronimi composti. Se la definizione è un metodo o un attributo inizia sempre in minuscolo</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">myDefine</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>mentre se è una classe inizia con una maiuscola.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Ogni acronimo inizia con una maiuscola per enfatizzare la composizione della label.</p>
 <p>Tendo ad accorciare le parole quasi sempre con 4 lettere mentre la finale la lascio integra se non troppo lunga.</p>
-<p>Le variabili locali interne a dei metodi sono lunghe 3 lettere mentre quelle di passaggio 4 lettere per distinguerle meglio.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">testMyDefine</span><span class="p">():</span>
+</pre></div>
+</div>
+<p>Le variabili locali interne sono lunghe 3 lettere mentre quelle di passaggio 4 lettere per distinguerle meglio.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myDefine</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">name</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">testMyDefine</span><span class="p">():</span>
+        <span class="c"># (name=&quot;&quot;)</span>
+        <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="k">print</span> <span class="n">ind</span><span class="p">,</span> <span class="n">myDefine</span><span class="p">(</span><span class="s">&quot;la mia callback!&quot;</span><span class="p">)</span>
+        <span class="c"># end idle</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="saluti">
 <h2>Saluti</h2>
@@ -282,7 +316,7 @@ E&#8217; solo una scelta personale. Ognuno è libero di scegliere come lavorare 
         </div><ul class="related clearfix">
             <li class="left"></li>
             <li class="right"><a href="../18/this_is_the_first_post.html">Questo è il primo post!</a> &raquo; </li>
-        </ul></article><aside class="sidebar"><section><div class="widget">
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcim.github.io";    var disqus_identifier = "2015/08/19/il_mio_primo_template";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
             <a href="#">Il mio primo template</a>

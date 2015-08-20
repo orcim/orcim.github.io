@@ -47,7 +47,6 @@ Segue la classica **Doc string** che nel nostro caso riassume cosa contiene il n
 
 		- myDefine
 		- MyClass
-
 	"""
 
 La revisione
@@ -59,7 +58,7 @@ E' bene inoltre definire un attributo che ricordi la revisione del nostro codice
 
 	myRev = "(rev.20150811)"
 
-Il metodo che ho scelto per indicare la revisione e la data Osi che ci permette di avere un ordinamento corretto in caso di indicizzazione. 
+Il metodo che ho scelto per indicare la revisione è la data Osi che ci permette di avere un ordinamento corretto in caso di indicizzazione. 
 
 La forma è molto semplice AAAAMMGG. 
 
@@ -78,7 +77,7 @@ Questo indica al nostro interprete che questa directory diventa un package in al
 Commenti
 --------
 
-Come si diceva meglio abbondare di commenti. Questi ci aiutano sia a ricordare quello che facciamo ma anche ad aumentare la leggibilità. Come avrete potuto notare nell'esempio precedente io uso separare o meglio raggruppare zone di codice antecedendo
+Come si diceva meglio abbondare di commenti. Questi ci aiutano sia a ricordare quello che facciamo ma anche ad aumentare la leggibilità. Come avrete potuto notare nell' esempio precedente io uso separare o meglio raggruppare zone di codice antecedendo
 una intestazione che richiama a prima vista di cosa tratta il codice seguente.
 
 .. code-block:: python
@@ -135,25 +134,63 @@ Questo mi permette a distanza di tempo:
 * di vedere come utilizzare il codice 
 * copiare e incollare le linee di codice come fosse un template.
 
-Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri possibili. Ricordate cosa dice il buon programmatore:
+Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri che si possono passare. Ricordate cosa dice il buon programmatore:
 
 * meglio esplicito che implicito.
 
 Try
 ---
 
-Nella sezione **try** scrivo dei metodi che simulano dei test più complessi dell'uso dei vari oggetti definiti. In questo caso nel nostro file campione gli oggetti definiti sono molto semplici e può risultare ridondante il codice scritto. Ma per un template questo va benissimo.
+Nella sezione **try** scrivo dei metodi che simulano dei test più complessi dell' uso dei vari oggetti definiti. In questo caso nel nostro file campione gli oggetti definiti sono molto semplici e può risultare ridondante il codice scritto. Ma per un template questo va benissimo.
 
+.. code-block:: python
+
+	#-----------------------------------------------------------------------------
+	# myTry
+	#-----------------------------------------------------------------------------
+	def myTry01():
+		""" test myDefine
+		"""
+		testMyDefine()
 
 Labels
 ------
 
-Come avrete notato le **labels** che utilizzo sono acronimi composti. Se la definizione è un metodo o un attributo inizia sempre in minuscolo mentre se è una classe inizia con una maiuscola. Ogni acronimo inizia con una maiuscola per enfatizzare la composizione della label.
+Come avrete notato le **labels** che utilizzo sono acronimi composti. Se la definizione è un metodo o un attributo inizia sempre in minuscolo 
+
+.. code-block:: python
+
+	def myDefine(name=""):
+
+mentre se è una classe inizia con una maiuscola. 
+
+.. code-block:: python
+
+	class MyClass(object):
+
+Ogni acronimo inizia con una maiuscola per enfatizzare la composizione della label.
 
 Tendo ad accorciare le parole quasi sempre con 4 lettere mentre la finale la lascio integra se non troppo lunga. 
 
-Le variabili locali interne a dei metodi sono lunghe 3 lettere mentre quelle di passaggio 4 lettere per distinguerle meglio. 
+.. code-block:: python
 
+	#-----------------------------------------------------------------------------
+	def testMyDefine():
+
+Le variabili locali interne sono lunghe 3 lettere mentre quelle di passaggio 4 lettere per distinguerle meglio. 
+
+.. code-block:: python
+
+	#-----------------------------------------------------------------------------
+	def myDefine(name=""):
+		return name
+	#-----------------------------------------------------------------------------
+	def testMyDefine():
+		# (name="")
+		for ind in xrange(3):
+			print ind, myDefine("la mia callback!")
+		# end idle
+		return False
 
 Saluti
 ------
