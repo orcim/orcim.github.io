@@ -8,7 +8,9 @@ Ciao a tutti. Mi chiamo Loris nella rete sono conosciuto come Orcim e sono appas
 
 Normalmente sviluppo in C a basso livello e in Python ad alto livello. Adoro **Linux** e tutto il mondo dell' **Open Source**.
 
-In questo blog parleremo di programmazione **Python** in ambiente grafico **Gtk**.
+In questo blog parleremo principalmente di programmazione.
+
+Iniziamo con **Python** in ambiente grafico **Gtk**.
 
 .. more::
 
