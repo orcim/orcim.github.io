@@ -10,10 +10,10 @@ import tinkerer.paths
 # **************************************************************
 
 # Change this to the name of your blog
-project = 'myGtk'
+project = 'myBlog'
 
 # Change this to the tagline of your blog
-tagline = 'python'
+tagline = 'programming'
 
 # Change this to the description of your blog
 description = 'my notes of pyGtk'
