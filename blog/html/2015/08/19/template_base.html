@@ -190,7 +190,8 @@
 20150811b
 </pre></div>
 </div>
-<p>Si perchè in python ogni file puo&#8217; diventare un modulo ed essere raggruppato in package inserendolo in una directory dove sarà prensente il file col nome <strong>__init__.py</strong>.</p>
+<p>Qui una domanda sorge spontanea. Perchè mettere una revisione su singolo file?</p>
+<p>Si perchè in python ogni file puo&#8217; diventare un modulo ed essere raggruppato in un package inserendolo in una directory dove sarà prensente il file col nome <strong>__init__.py</strong>.</p>
 <p>Questo indica al nostro interprete che questa directory diventa un package in altre parole una libreria.</p>
 </div>
 <div class="section" id="commenti">
@@ -244,7 +245,8 @@ E&#8217; solo una scelta personale. Ognuno è libero di scegliere come lavorare 
 <li>di vedere come utilizzare il codice</li>
 <li>copiare e incollare le linee di codice come fosse un template.</li>
 </ul>
-<p>Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri che si possono passare. Ricordate cosa dice il buon programmatore:</p>
+<p>Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri che si possono passare.</p>
+<p>Ricordate cosa dicono le regole di un buon programmatore:</p>
 <ul class="simple">
 <li>meglio esplicito che implicito.</li>
 </ul>
@@ -264,21 +266,22 @@ E&#8217; solo una scelta personale. Ognuno è libero di scegliere come lavorare 
 </div>
 <div class="section" id="labels">
 <h2>Labels</h2>
-<p>Come avrete notato le <strong>labels</strong> che utilizzo sono acronimi composti. Se la definizione è un metodo o un attributo inizia sempre in minuscolo</p>
+<p>Come avrete notato le <strong>labels</strong> che utilizzo sono acronimi composti.</p>
+<p>Se la definizione è un <strong>metodo</strong> o un <strong>attributo</strong> deve iniziare sempre in minuscolo.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">myDefine</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
 </pre></div>
 </div>
-<p>mentre se è una classe inizia con una maiuscola.</p>
+<p>mentre se è una <strong>classe</strong> inizia sempre con una maiuscola.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 </pre></div>
 </div>
-<p>Ogni acronimo inizia con una maiuscola per enfatizzare la composizione della label.</p>
+<p>Le lables composte da più acronimi seguono la regola di enfatizzare con una lettera maiuscola l&#8217; inizio di ogni acronimo a meno del primo che deve sottostare alle regole viste precedentemente.</p>
 <p>Tendo ad accorciare le parole quasi sempre con 4 lettere mentre la finale la lascio integra se non troppo lunga.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">testMyDefine</span><span class="p">():</span>
 </pre></div>
 </div>
-<p>Le variabili locali interne sono lunghe 3 lettere mentre quelle di passaggio 4 lettere per distinguerle meglio.</p>
+<p>Le variabili locali interne sono lunghe 3 lettere, esempio <strong>ind</strong>,  mentre quelle di passaggio 4 lettere, esempio <strong>name</strong>,  per distinguerle meglio.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">myDefine</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">name</span>

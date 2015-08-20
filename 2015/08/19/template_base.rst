@@ -69,7 +69,9 @@ Se si avesse la necessità di avere più granularità nello stesso giorno io di 
 	20150811a
 	20150811b
 
-Si perchè in python ogni file puo' diventare un modulo ed essere raggruppato in package inserendolo in una directory dove sarà prensente il file col nome **__init__.py**.
+Qui una domanda sorge spontanea. Perchè mettere una revisione su singolo file?
+
+Si perchè in python ogni file puo' diventare un modulo ed essere raggruppato in un package inserendolo in una directory dove sarà prensente il file col nome **__init__.py**.
 
 Questo indica al nostro interprete che questa directory diventa un package in altre parole una libreria.
 
@@ -134,7 +136,9 @@ Questo mi permette a distanza di tempo:
 * di vedere come utilizzare il codice 
 * copiare e incollare le linee di codice come fosse un template.
 
-Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri che si possono passare. Ricordate cosa dice il buon programmatore:
+Normalmente nel codice di prova scrivo un commento prima della chiamata dove riporto i vari parametri che si possono passare. 
+
+Ricordate cosa dicono le regole di un buon programmatore:
 
 * meglio esplicito che implicito.
 
@@ -156,19 +160,21 @@ Nella sezione **try** scrivo dei metodi che simulano dei test più complessi del
 Labels
 ------
 
-Come avrete notato le **labels** che utilizzo sono acronimi composti. Se la definizione è un metodo o un attributo inizia sempre in minuscolo 
+Come avrete notato le **labels** che utilizzo sono acronimi composti. 
+
+Se la definizione è un **metodo** o un **attributo** deve iniziare sempre in minuscolo.
 
 .. code-block:: python
 
 	def myDefine(name=""):
 
-mentre se è una classe inizia con una maiuscola. 
+mentre se è una **classe** inizia sempre con una maiuscola. 
 
 .. code-block:: python
 
 	class MyClass(object):
 
-Ogni acronimo inizia con una maiuscola per enfatizzare la composizione della label.
+Le lables composte da più acronimi seguono la regola di enfatizzare con una lettera maiuscola l' inizio di ogni acronimo a meno del primo che deve sottostare alle regole viste precedentemente.
 
 Tendo ad accorciare le parole quasi sempre con 4 lettere mentre la finale la lascio integra se non troppo lunga. 
 
@@ -177,7 +183,7 @@ Tendo ad accorciare le parole quasi sempre con 4 lettere mentre la finale la las
 	#-----------------------------------------------------------------------------
 	def testMyDefine():
 
-Le variabili locali interne sono lunghe 3 lettere mentre quelle di passaggio 4 lettere per distinguerle meglio. 
+Le variabili locali interne sono lunghe 3 lettere, esempio **ind**,  mentre quelle di passaggio 4 lettere, esempio **name**,  per distinguerle meglio. 
 
 .. code-block:: python
 
