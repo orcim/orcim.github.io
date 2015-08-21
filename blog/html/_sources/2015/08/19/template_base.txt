@@ -109,6 +109,10 @@ La prima grande suddivisione separa i richiami dei moduli dalle definizioni di m
 			# get first argument (scelta esterna)
 			choi = int(sys.argv[1])
 
+		if choi == 1:
+			"test myDefine"
+			myTry01()
+
 E qui si scatenerà una guerra. Perchè non usare **unitest** con i metodi **assert** o **fail**.
 E' solo una scelta personale. Ognuno è libero di scegliere come lavorare se non si hanno dei vincoli imposti ovvio.
 

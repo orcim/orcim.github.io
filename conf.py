@@ -41,7 +41,10 @@ disqus_shortname = 'orcimgithubio'
 html_favicon = '_static/tinkerer.ico'
 
 # Pick another Tinkerer theme or use your own
-html_theme = 'flat'
+#html_theme = 'flat'
+#             0,         1,          2,            3,      4,             5
+lisThem=["flat", "modern5", "minimal5", "responsive", "dark", "boilerplate"]
+html_theme = lisThem[0]
 
 # Theme-specific options, see docs
 html_theme_options = {}
@@ -70,7 +73,10 @@ first_page_title = None
 # **************************************************************
 
 # Add other Sphinx extensions here
-extensions = ['tinkerer.ext.blog', 'tinkerer.ext.disqus']
+extensions = [
+	'tinkerer.ext.blog', 
+	'tinkerer.ext.disqus',
+	]
 
 # Add other template paths here
 templates_path = ['_templates']

@@ -139,3 +139,60 @@ div.year h2 { margin-bottom: 20px; margin-top: 0; }
     div.year div.timestamp { float: left; margin-left: 20%; }
     div.year h2 { margin-left: 40%; }
 }
+
+/* -- Loris --------------------------------------------------------------*/
+div.note {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+}
+div.note p.admonition-title {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    background-color: #eeeeee;
+    border-bottom: 1px solid;
+}
+
+div.seealso {
+    background-color: #ffffee;
+    border: 1px solid #fc6;
+}
+div.seealso p.admonition-title {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    background-color: #ffffaa;
+    border-bottom: 1px solid;
+}
+
+div.warning {
+    background-color: #ffe4e4;
+    border: 1px solid #f66;
+}
+div.warning p.admonition-title {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    background-color: #ffc4c4;
+    border-bottom: 1px solid #900000;
+}
+
+div.topic {
+    background-color: #ddd;
+    border: 1px solid #ccc;
+}
+
+pre {
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    /*
+    margin: 0 0 0 0;
+    padding: 10px;
+    overflow: auto;
+    background-color: #eeeeee;
+    color: #000;
+    line-height: 120%;
+    border: 1px solid #ac9;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    */
+}
