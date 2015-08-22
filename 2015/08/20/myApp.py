@@ -8,7 +8,8 @@
 	- myFrame1 		(150807)
 """
 
-myRev = "(rev.150820)"
+myRev = "(rev.150822)"
+# modificato deb in show
 #-----------------------------------------------------------------------------
 # Modules
 #-----------------------------------------------------------------------------
@@ -43,7 +44,7 @@ def myFrame1(name='myFrame', obje=None, colo='blue',
 			bord=2, shad=Gtk.SHADOW_ETCHED_OUT, 
 			tBox='v', aBox=[False, False, 1],
 			xtBox='', xaBox=[False, False, 1],
-			deb=False ):
+			show=False ):
 	""" crea una cornice con un titolo
 	
 		-> name nome associato alla label della cornice
@@ -57,13 +58,14 @@ def myFrame1(name='myFrame', obje=None, colo='blue',
 		-> aBox attributi del contenitore interno
 		-> xtBox tipo di contenitore v/h esterno 
 		-> xaBox attributi del contenitore esterno
+		-> show abilita la visione della cornice
 	"""
 #frame
 	if name != "":
 		name = " "+name+" "
 
 	# nasconde il bordo e il nome del frame
-	if not deb:
+	if show==False:
 		bord=0
 		aBox=[False, False, 0]
 		name = ""
@@ -87,13 +89,12 @@ def myFrame1(name='myFrame', obje=None, colo='blue',
 	fram.add(xBox)
 #object
 	if obje != None:
-		#child, expand=True, fill=True, padding=1
+		#(child, expand=False, fill=False, padding=1)
 		xBox.pack_start(obje, *aBox)
-
 #myBox (esterno)
 	if (xtBox == 'v') or (xtBox == 'h'):  
 		yBox = myBox1(xtBox)
-		#child, expand=True, fill=True, padding=1
+		#(child, expand=False, fill=False, padding=1)
 		yBox.pack_start(fram, *xaBox)
 # <-
 		return yBox, [labe, xBox, fram]
@@ -179,7 +180,7 @@ def myTry01():
 	expa=False
 	fill=False
 	padd=1 			# internal
-	deb=True
+	show=True
 
 #aBox (application)
 	# fram,[labe,xBox]
@@ -187,7 +188,7 @@ def myTry01():
 						bord=bord, shad=Gtk.SHADOW_IN,
 						tBox='h', aBox=[expa, fill, padd],
 						#xtBox='h', xaBox=[expa, fill, padd],
-						deb=deb )
+						show=show )
 	self.aBox = oth1[1]
 
 	# inserimento nel contenitore
@@ -199,7 +200,7 @@ def myTry01():
 						bord=bord, shad=Gtk.SHADOW_IN,
 						tBox='h', aBox=[expa, fill, padd],
 						#xtBox='h', xaBox=[expa, fill, padd],
-						deb=deb )
+						show=show )
 	self.gBox = oth1[1]
 
 	# inserimento nel contenitore

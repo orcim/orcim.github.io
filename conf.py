@@ -92,10 +92,11 @@ exclude_patterns = ['drafts/*', '_templates/*']
 
 # Add templates to be rendered in sidebar here
 html_sidebars = {
-    '**': [ 'recent.html', 
+    '**': [ 
     		'searchbox.html', 
-    		'categories.html', 
-    		#'tags.html', 
+    		'recent.html', 
+    		# 'categories.html', 
+    		# 'tags.html', 
     		'tags_cloud.html',
     		]
 }

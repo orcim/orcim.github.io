@@ -28,7 +28,7 @@
         <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="../../../_static/plugins.js"></script>
         <script src="../../../_static/main.js"></script>
-        <link rel="next" title="Template base" href="../19/template_base.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+        <link rel="next" title="Template base" href="../19/template_base.html" /><link rel="prev" title="Contenitori" href="../21/box.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '1.5',
@@ -380,7 +380,8 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 <span class="sd">	- myFrame1 		(150807)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.150820)&quot;</span>
+<span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.150822)&quot;</span>
+<span class="c"># modificato deb in show</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># Modules</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
@@ -415,7 +416,7 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 			<span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
 			<span class="n">tBox</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
 			<span class="n">xtBox</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">xaBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-			<span class="n">deb</span><span class="o">=</span><span class="bp">False</span> <span class="p">):</span>
+			<span class="n">show</span><span class="o">=</span><span class="bp">False</span> <span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot; crea una cornice con un titolo</span>
 <span class="sd">	</span>
 <span class="sd">		-&gt; name nome associato alla label della cornice</span>
@@ -429,13 +430,14 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 <span class="sd">		-&gt; aBox attributi del contenitore interno</span>
 <span class="sd">		-&gt; xtBox tipo di contenitore v/h esterno </span>
 <span class="sd">		-&gt; xaBox attributi del contenitore esterno</span>
+<span class="sd">		-&gt; show abilita la visione della cornice</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 <span class="c">#frame</span>
 	<span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
 		<span class="n">name</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">&quot; &quot;</span>
 
 	<span class="c"># nasconde il bordo e il nome del frame</span>
-	<span class="k">if</span> <span class="ow">not</span> <span class="n">deb</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">show</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
 		<span class="n">bord</span><span class="o">=</span><span class="mi">0</span>
 		<span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 		<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
@@ -459,13 +461,12 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 	<span class="n">fram</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">xBox</span><span class="p">)</span>
 <span class="c">#object</span>
 	<span class="k">if</span> <span class="n">obje</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="c">#child, expand=True, fill=True, padding=1</span>
+		<span class="c">#(child, expand=False, fill=False, padding=1)</span>
 		<span class="n">xBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="o">*</span><span class="n">aBox</span><span class="p">)</span>
-
 <span class="c">#myBox (esterno)</span>
 	<span class="k">if</span> <span class="p">(</span><span class="n">xtBox</span> <span class="o">==</span> <span class="s">&#39;v&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">xtBox</span> <span class="o">==</span> <span class="s">&#39;h&#39;</span><span class="p">):</span>  
 		<span class="n">yBox</span> <span class="o">=</span> <span class="n">myBox1</span><span class="p">(</span><span class="n">xtBox</span><span class="p">)</span>
-		<span class="c">#child, expand=True, fill=True, padding=1</span>
+		<span class="c">#(child, expand=False, fill=False, padding=1)</span>
 		<span class="n">yBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">fram</span><span class="p">,</span> <span class="o">*</span><span class="n">xaBox</span><span class="p">)</span>
 <span class="c"># &lt;-</span>
 		<span class="k">return</span> <span class="n">yBox</span><span class="p">,</span> <span class="p">[</span><span class="n">labe</span><span class="p">,</span> <span class="n">xBox</span><span class="p">,</span> <span class="n">fram</span><span class="p">]</span>
@@ -551,7 +552,7 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 	<span class="n">expa</span><span class="o">=</span><span class="bp">False</span>
 	<span class="n">fill</span><span class="o">=</span><span class="bp">False</span>
 	<span class="n">padd</span><span class="o">=</span><span class="mi">1</span> 			<span class="c"># internal</span>
-	<span class="n">deb</span><span class="o">=</span><span class="bp">True</span>
+	<span class="n">show</span><span class="o">=</span><span class="bp">True</span>
 
 <span class="c">#aBox (application)</span>
 	<span class="c"># fram,[labe,xBox]</span>
@@ -559,7 +560,7 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 						<span class="n">bord</span><span class="o">=</span><span class="n">bord</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_IN</span><span class="p">,</span>
 						<span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="n">expa</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">padd</span><span class="p">],</span>
 						<span class="c">#xtBox=&#39;h&#39;, xaBox=[expa, fill, padd],</span>
-						<span class="n">deb</span><span class="o">=</span><span class="n">deb</span> <span class="p">)</span>
+						<span class="n">show</span><span class="o">=</span><span class="n">show</span> <span class="p">)</span>
 	<span class="bp">self</span><span class="o">.</span><span class="n">aBox</span> <span class="o">=</span> <span class="n">oth1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 	<span class="c"># inserimento nel contenitore</span>
@@ -571,7 +572,7 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 						<span class="n">bord</span><span class="o">=</span><span class="n">bord</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_IN</span><span class="p">,</span>
 						<span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="n">expa</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">padd</span><span class="p">],</span>
 						<span class="c">#xtBox=&#39;h&#39;, xaBox=[expa, fill, padd],</span>
-						<span class="n">deb</span><span class="o">=</span><span class="n">deb</span> <span class="p">)</span>
+						<span class="n">show</span><span class="o">=</span><span class="n">show</span> <span class="p">)</span>
 	<span class="bp">self</span><span class="o">.</span><span class="n">gBox</span> <span class="o">=</span> <span class="n">oth1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 	<span class="c"># inserimento nel contenitore</span>
@@ -678,11 +679,19 @@ alto a destra della finestra stessa.</p>
         
         
         </div><ul class="related clearfix">
-            <li class="left"></li>
+            <li class="left"> &laquo; <a href="../21/box.html">Contenitori</a></li>
             <li class="right"><a href="../19/template_base.html">Template base</a> &raquo; </li>
-        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/08/20/gtk";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget">
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/08/20/gtk";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Cerca</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
+            <a href="../21/box.html">Contenitori</a>
+        </li><li>
             <a href="#">Gtk</a>
         </li><li>
             <a href="../19/template_base.html">Template base</a>
@@ -690,16 +699,7 @@ alto a destra della finestra stessa.</p>
             <a href="../18/presentazioni.html">Presentazioni</a>
         </li></ul>
 </div>
-</section><section><div class="widget" id="searchbox" role="search">
-    <h1><a href="#searchbox">Cerca</a></h1>
-    <form action="../../../search.html" method="get">
-        <input type="text" name="q" />
-        <button type="submit"><span class="fa fa-search"></span></button>
-    </form>
-</div></section><section><div class="widget">
-    <h1>Categorie</h1>
-    <ul><li><a href="../../../categories/programming.html">programming</a> (2)</li></ul>
-</div></section><section><div class="widget">
+</section><section><div class="widget">
     <h1>Tag Cloud</h1>
       <a href="../../../tags/programming.html" style="font-size: 20pt">programming</a>&nbsp;&nbsp;
       <a href="../../../tags/python.html" style="font-size: 8pt">python</a>
