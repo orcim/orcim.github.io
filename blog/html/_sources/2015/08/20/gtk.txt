@@ -59,9 +59,9 @@ Windows
 
 Bene ora che abbiamo il nostro **init** passiamo alla prima applicazione.
 
-Esempio: **myApp.py**
+Esempio: **myWind.py**
 
-.. literalinclude:: myApp.py
+.. literalinclude:: myWind.py
     :language: python
 
 Per creare un' applicazione grafica di solito si parte ereditando dalla classe madre:
