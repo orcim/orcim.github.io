@@ -2,10 +2,9 @@
 # -*- coding: utf-8 -*-
 """ lista degli oggetti definiti:
 
+	- myBox1
+	- myFrame1
 	- myWind
-	- myApp 		(150807)
-	- myBox1 		(150807)
-	- myFrame1 		(150807)
 """
 
 myRev = "(rev.150822)"
