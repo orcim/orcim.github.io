@@ -168,7 +168,7 @@ Per finire ho inserito l' attributo **show** che serve ad abilitare la visualizz
 
 **myWind**
 
-Se proviamo ad avviare lo script **myApp.py** vediamo la nostra prima applicazione con i contenitori visibili e riconoscibili dalla loro label.
+Se proviamo ad avviare lo script **myWind.py** vediamo la nostra prima applicazione con i contenitori visibili e riconoscibili dalla loro label.
 
 Saluti
 ------
