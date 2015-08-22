@@ -164,11 +164,8 @@ class MyWind(Gtk.Window):
 			if keyname == "Escape":
 				# richiesta di uscita dal programma
 				Gtk.main_quit()
-
 #-----------------------------------------------------------------------------
-# myTry
-#-----------------------------------------------------------------------------
-def myTry01():
+def testMyWind():
 	# istanza l'applicazione 
 	#  (width=None, height=400, title="myWind", center=True, color="")
 	self = MyWind(title="myWind", color="#aaa")
@@ -204,6 +201,12 @@ def myTry01():
 
 	# inserimento nel contenitore
 	self.vBox.pack_start(child=gObj, expand=False, fill=False, padding=0)
+
+#-----------------------------------------------------------------------------
+# myTry
+#-----------------------------------------------------------------------------
+def myTry01():
+	testMyWind()
 
 #-----------------------------------------------------------------------------
 # Main

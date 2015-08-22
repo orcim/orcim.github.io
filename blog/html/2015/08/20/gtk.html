@@ -536,11 +536,8 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 			<span class="k">if</span> <span class="n">keyname</span> <span class="o">==</span> <span class="s">&quot;Escape&quot;</span><span class="p">:</span>
 				<span class="c"># richiesta di uscita dal programma</span>
 				<span class="n">Gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">()</span>
-
 <span class="c">#-----------------------------------------------------------------------------</span>
-<span class="c"># myTry</span>
-<span class="c">#-----------------------------------------------------------------------------</span>
-<span class="k">def</span> <span class="nf">myTry01</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">testMyWind</span><span class="p">():</span>
 	<span class="c"># istanza l&#39;applicazione </span>
 	<span class="c">#  (width=None, height=400, title=&quot;myWind&quot;, center=True, color=&quot;&quot;)</span>
 	<span class="bp">self</span> <span class="o">=</span> <span class="n">MyWind</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;myWind&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;#aaa&quot;</span><span class="p">)</span>
@@ -576,6 +573,12 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 
 	<span class="c"># inserimento nel contenitore</span>
 	<span class="bp">self</span><span class="o">.</span><span class="n">vBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="n">gObj</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myTry</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry01</span><span class="p">():</span>
+	<span class="n">testMyWind</span><span class="p">()</span>
 
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># Main</span>
