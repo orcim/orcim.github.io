@@ -1,7 +1,26 @@
 About
 =====
 
-In questa pagina vi sono i links di alcune mie presentazioni fatte negli anni passati:
+Ciao a tutti. 
+
+Mi chiamo **Loris** nella rete sono conosciuto come **orcim** e sono appassionato e lavoro da diversi anni in ambito di programmazione embedded.
+
+Normalmente sviluppo in C a basso livello e in Python ad alto livello. Adoro **Linux** e tutto il mondo dell' **Open Source**.
+
+.. note:: Questa pagina verrà aggiornata via via nel tempo per aggiungere dei link interessanti. Nei **post** del blog i files linkati potranno cambiare per essere aggiornati per adattarli a miglioramenti. Comunque sarà sempre riportato al loro interno la data dell' ultima revisione.
+
+Questo sito è stato costruito e viene manutenuto con strumenti **Open Source** quali:
+
+* **Tinkerer** 
+* **Sphinx**
+* **Github**
+* **Pyhton**
+
+Tramite un semplice script viene aggiornato con il classico comando **git push**.
+
+Se volete potete tranquillamente copiarlo dal sito di github come partenza di base al seguente link: `orcim.github.io <https://github.com/orcim/>`_ eliminando i contenuti e mantenendo la struttura di base che potete anche tranquillamente scaricare direttamente dal sito di **Tinkerer** dove troverete delle ottime indicazioni.
+
+In questa pagina vi sono i links di alcune mie **Presentazioni** fatte durante dei **talks** negli anni passati:
 
 * :download:`py01Intro <py01Intro.pdf>`
 * :download:`py02Base <py02Base.pdf>`
