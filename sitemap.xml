@@ -8,47 +8,62 @@
 
 <url>
   <loc>http://orcim.github.io/</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://orcim.github.io/blog/html/index.html</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://orcim.github.io/blog/html/pages/about.html</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://orcim.github.io/blog/html/2015/08/22/applicazione_base.html</loc>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://orcim.github.io/blog/html/2015/08/21/box.html</loc>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://orcim.github.io/blog/html/2015/08/20/gtk.html</loc>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://orcim.github.io/blog/html/2015/08/19/template_base.html</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://orcim.github.io/blog/html/categories/programming.html</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://orcim.github.io/blog/html/tags/programming.html</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://orcim.github.io/blog/html/tags/python.html</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://orcim.github.io/blog/html/2015/08/18/presentazioni.html</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 <url>
   <loc>http://orcim.github.io/blog/html/archive.html</loc>
-  <lastmod>2015-08-20T08:13:07+00:00</lastmod>
+  <lastmod>2015-08-23T07:49:24+00:00</lastmod>
   <changefreq>daily</changefreq>
 </url>
 </urlset>
