@@ -16,6 +16,10 @@ Vediamo un esempio concreto **l00_start.py**
 .. literalinclude:: l00_start.py
     :language: python
 
+**link**
+
+	:download:`download <l00_start.py>`
+
 Descrizione
 -----------
 

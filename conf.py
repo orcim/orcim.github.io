@@ -13,7 +13,7 @@ import tinkerer.paths
 project = 'myBlog'
 
 # Change this to the tagline of your blog
-tagline = 'programming'
+tagline = 'by Orcim'
 
 # Change this to the description of your blog
 description = 'my notes of pyGtk'

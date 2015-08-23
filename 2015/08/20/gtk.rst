@@ -31,6 +31,10 @@ Esempio: **my00init.py**
 .. literalinclude:: my00init.py
     :language: python
 
+**link**
+
+	:download:`download <my00init.py>`
+
 Dopo di che non faccio altro che inserire la direttiva in tutti i miei files:
 
 .. code-block:: python
@@ -63,6 +67,10 @@ Esempio: **myWind.py**
 
 .. literalinclude:: myWind.py
     :language: python
+
+**link**
+
+	:download:`download <myWind.py>`
 
 Per creare un' applicazione grafica di solito si parte ereditando dalla classe madre:
 
