@@ -87,6 +87,7 @@ footer { margin-bottom: 20px; padding: 20px; text-align: center; }
     footer { padding: 10px 40px; }
 }
 
+/* mmm
 @media only screen and (min-width: 900px) {
     header { left: 0; top: 0; position: fixed; width: 26%; }
 
@@ -102,6 +103,24 @@ footer { margin-bottom: 20px; padding: 20px; text-align: center; }
     div.footer-container { max-width: 48%; }
 
     aside.sidebar { left: 74%; top: 0; position: absolute;  width: 26%; } 
+}
+*/
+
+@media only screen and (min-width: 900px) {
+    header { left: 0; top: 0; position: fixed; width: 20%; }
+
+    nav { left: 0; top: 40%; position: fixed; width: 20%; }
+    nav li { display: block; text-align: center; width: 100%; }
+
+    div.main-container { margin-left: 20%; }
+    div.footer-container { margin-left: 20%; }
+}
+
+@media only screen and (min-width: 1200px) {
+    div.main-container { max-width: 56%; }
+    div.footer-container { max-width: 56%; }
+
+    aside.sidebar { left: 74%; top: 0; position: absolute;  width: 20%; } 
 }
 
 /* Palette */body { background-color: #f8fafb; }
