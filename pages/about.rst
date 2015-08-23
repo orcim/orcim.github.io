@@ -57,6 +57,9 @@ blog
 Gtk
 ---
 
+* `pyGtk <http://www.pygtk.org/>`_
+* `Gnome <https://www.gnome.org/>`_
+
 pyGtk2
 ~~~~~~
 
@@ -88,8 +91,6 @@ language tutorials
 others
 ~~~~~~
 
-* `pyGtk <http://www.pygtk.org/>`_
-* `Gnome <https://www.gnome.org/>`_
 * `... </>`_
 
 
