@@ -7,8 +7,7 @@
 	- myWind
 """
 
-myRev = "(rev.150820)"
-# modificato deb in show
+myRev = "(rev.150822)"
 #-----------------------------------------------------------------------------
 # Modules
 #-----------------------------------------------------------------------------
@@ -126,31 +125,37 @@ class MyWind(Gtk.Window):
 		# imposta il titolo dell'applicazione
 		self.set_title(self.title)
 
-		# dimensiono se viene passato almeno l'ampiezza
+		# ridimensiono se viene passato almeno l'ampiezza
 		if width != None:
 			self.resize(width, height)
 		# se richiesto centro la posizione
 		if center:
 			self.set_position(Gtk.WindowPosition.CENTER)
 
-		# callback di uscita da envento
+		# callbacks di uscita da eventi
 		self.connect("delete-event", Gtk.main_quit)
 		# intercettiamo la tastiera
 		self.connect("key_press_event", self.doKeyPress)
-
-		#vBox (istanza un contenitore verticale)
-		self.vBox = Gtk.VBox(homogeneous=False, spacing=0)
-		self.add(self.vBox)
-		#hBox (istanza un contenitore orizzontale)
-		self.hBox = Gtk.HBox(homogeneous=False, spacing=0)
-		self.vBox.pack_start(child=self.hBox, expand=False, fill=False, padding=0)
 
 		# se passato cambio colore
 		if color:
 			# change background color to Class
 			chaBackColor(obj=self, css=title, col=color)
-		# visualizza il tutto
-		self.show_all()
+
+		# abilita la propria visualizzazione
+		self.show()
+
+#vBox (istanza un contenitore verticale)
+		# self.vBox = Gtk.VBox(homogeneous=False, spacing=0)
+		# self.vBox.show()
+		self.vBox = myBox1('v')
+		self.add(self.vBox)
+
+#hBox (istanza un contenitore orizzontale)
+		# self.hBox = Gtk.HBox(homogeneous=False, spacing=0)
+		# self.vBox.show()
+		self.hBox = myBox1('h')
+		self.vBox.pack_start(child=self.hBox, expand=False, fill=False, padding=0)
 
 	def doKeyPress(self, widget, event):
 		# intercetto tasto speciale ctrl

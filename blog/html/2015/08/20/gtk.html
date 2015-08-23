@@ -382,8 +382,7 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 <span class="sd">	- myWind</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.150820)&quot;</span>
-<span class="c"># modificato deb in show</span>
+<span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.150822)&quot;</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># Modules</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
@@ -501,31 +500,37 @@ In particolare le <strong>dialogs</strong> servono quando dobbiamo interagire co
 		<span class="c"># imposta il titolo dell&#39;applicazione</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
 
-		<span class="c"># dimensiono se viene passato almeno l&#39;ampiezza</span>
+		<span class="c"># ridimensiono se viene passato almeno l&#39;ampiezza</span>
 		<span class="k">if</span> <span class="n">width</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
 		<span class="c"># se richiesto centro la posizione</span>
 		<span class="k">if</span> <span class="n">center</span><span class="p">:</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">WindowPosition</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
 
-		<span class="c"># callback di uscita da envento</span>
+		<span class="c"># callbacks di uscita da eventi</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;delete-event&quot;</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">)</span>
 		<span class="c"># intercettiamo la tastiera</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;key_press_event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">doKeyPress</span><span class="p">)</span>
-
-		<span class="c">#vBox (istanza un contenitore verticale)</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">vBox</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">homogeneous</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vBox</span><span class="p">)</span>
-		<span class="c">#hBox (istanza un contenitore orizzontale)</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">hBox</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">HBox</span><span class="p">(</span><span class="n">homogeneous</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">vBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hBox</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 		<span class="c"># se passato cambio colore</span>
 		<span class="k">if</span> <span class="n">color</span><span class="p">:</span>
 			<span class="c"># change background color to Class</span>
 			<span class="n">chaBackColor</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-		<span class="c"># visualizza il tutto</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+
+		<span class="c"># abilita la propria visualizzazione</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c">#vBox (istanza un contenitore verticale)</span>
+		<span class="c"># self.vBox = Gtk.VBox(homogeneous=False, spacing=0)</span>
+		<span class="c"># self.vBox.show()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">vBox</span> <span class="o">=</span> <span class="n">myBox1</span><span class="p">(</span><span class="s">&#39;v&#39;</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vBox</span><span class="p">)</span>
+
+<span class="c">#hBox (istanza un contenitore orizzontale)</span>
+		<span class="c"># self.hBox = Gtk.HBox(homogeneous=False, spacing=0)</span>
+		<span class="c"># self.vBox.show()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">hBox</span> <span class="o">=</span> <span class="n">myBox1</span><span class="p">(</span><span class="s">&#39;h&#39;</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">vBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hBox</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 	<span class="k">def</span> <span class="nf">doKeyPress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 		<span class="c"># intercetto tasto speciale ctrl</span>
@@ -698,7 +703,7 @@ alto a destra della finestra stessa.</p>
 </div></section><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
-            <a href="../22/applicazione.html">Applicazione</a>
+            <a href="../22/applicazione_base.html">Applicazione Base</a>
         </li><li>
             <a href="../21/box.html">Contenitori</a>
         </li><li>

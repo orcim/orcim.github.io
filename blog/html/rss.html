@@ -8,13 +8,28 @@
         <pubDate>Sat, 22 Aug 2015 00:00:00 +0200</pubDate>
         
         <item>
-            <link>http://orcim.github.io/blog/html/2015/08/22/applicazione.html</link>
-            <guid>http://orcim.github.io/blog/html/2015/08/22/applicazione.html</guid>
-            <title><![CDATA[Applicazione]]></title>
+            <link>http://orcim.github.io/blog/html/2015/08/22/applicazione_base.html</link>
+            <guid>http://orcim.github.io/blog/html/2015/08/22/applicazione_base.html</guid>
+            <title><![CDATA[Applicazione Base]]></title>
             <description><![CDATA[
-<h1>Applicazione</h1>
+<h1>Applicazione Base</h1>
 <p>Oggi vedremo una struttura di una applicazione base.</p>
-<p class="readmorewrapper"><a class="readmore" href="http://orcim.github.io/blog/html/2015/08/22/applicazione.html#more">Continua a leggere...</a></p>]]></description>
+<p>In pratica creiamo un template di contenitori per separare le varie aree dove andremo successivamente ad inserire i nostri <strong>widgets</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">"""</span>
+<span class="sd">"conf                                       .------------------------.</span>
+<span class="sd">"0001 - aBox            (h application)     | application            |</span>
+<span class="sd">"0002   - gBox            (h global)        |   .--------------------.</span>
+<span class="sd">"0004   - mBox            (v main)          |   | g | m | menu       |</span>
+<span class="sd">"0008     - uBox            (h menu)        |   | l | a .------------.</span>
+<span class="sd">"0010     - bBox            (v body)        |   | o | i | body       |</span>
+<span class="sd">"0020     - sBox            (h status)      |   | b | n |            |</span>
+<span class="sd">"                                           |   | a |   .------------.</span>
+<span class="sd">"                                           |   | l |   | status     |</span>
+<span class="sd">"                                           .---.---.----------------.</span>
+<span class="sd">"""</span>
+</pre></div>
+</div>
+<p class="readmorewrapper"><a class="readmore" href="http://orcim.github.io/blog/html/2015/08/22/applicazione_base.html#more">Continua a leggere...</a></p>]]></description>
              <pubDate>Sat, 22 Aug 2015 00:00:00 +0200</pubDate>
         </item>
     

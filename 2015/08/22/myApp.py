@@ -5,8 +5,7 @@
 	- myApp
 """
 
-myRev = "(rev.150821)"
-# modificato deb in show
+myRev = "(rev.150822)"
 #-----------------------------------------------------------------------------
 # Modules
 #-----------------------------------------------------------------------------
@@ -15,7 +14,7 @@ from my00init import *
 #-----------------------------------------------------------------------------
 # myModules
 #-----------------------------------------------------------------------------
-from myWind import MyWind, myBox1, myFrame1
+from myWind import myBox1, myFrame1
 
 #-----------------------------------------------------------------------------
 # myDefines
@@ -40,33 +39,45 @@ class MyApp(Gtk.Window):
 	def __init__(self, width=None, height=400, title="myApp", 
 					center=True, color="#bbbbbb", conf=0x003f, show=0):
 		super(MyApp, self).__init__()
+
+		# referenzio gli attributi passati
+		self.title = title
+		self.width = width
+		self.height = height
+
 		# imposto il nome dell'oggetto uguale al titolo
 		self.set_name(title)
 		# imposto il titolo dell'applicazione
 		self.set_title(title)
 
-		self.width = width
-		self.height = height
-		# dimensione
+		# ridimensiono se viene passato almeno l'ampiezza
 		if width != None:
 			self.resize(width, height)
-		# posizione
+		# se richiesto centro la posizione
 		if center:
 			self.set_position(Gtk.WindowPosition.CENTER)
 
-		# callback di uscita
+		# callbacks di uscita da eventi
 		self.connect("delete-event", Gtk.main_quit)
 		# intercettiamo la tastiera
 		self.connect("key_press_event", self.doKeyPress)
 
-		# attributes
-		homo=False
-		spac=0 
-		expa=False
-		fill=False
-		padd=1
-		bord=2
-		colo="#333333"
+		# se passato cambio colore
+		if color:
+			# change background color to Class
+			chaBackColor(obj=self, css=title, col=color)
+
+		# abilita la propria visualizzazione
+		self.show()
+
+		# attributi comuni ai vari contenitori
+		homo = False
+		spac = 0 
+		expa = False
+		fill = False
+		padd = 1
+		bord = 2
+		colo = "#333333"
 
 #aBox (application)
 		# fram,[labe,xBox]
@@ -122,6 +133,7 @@ class MyApp(Gtk.Window):
 							 show=show )
 		self.sBox = oth1[1]
 
+# scelta della configurazione desiderata
 		if conf == 0x003f: # all
 			self.xBox = myBox1("v")
 			self.add(self.xBox)
@@ -192,12 +204,6 @@ class MyApp(Gtk.Window):
 			self.bBox = myBox1("v")
 			self.add(self.bBox)
 			# insert object in application ()
-
-		if color:
-			# change background color to Class
-			chaBackColor(obj=self, css=title, col=color)
-		# visualizza il tutto
-		self.show_all()
 
 	def doKeyPress(self, widget, event):
 		# intercetto ctrl

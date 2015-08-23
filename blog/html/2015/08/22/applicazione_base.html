@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="my notes of pyGtk">
         <meta name="viewport" content="width=device-width">
-        <title>Applicazione &mdash; myBlog</title>
+        <title>Applicazione Base &mdash; myBlog</title>
             <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
             <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
             <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
@@ -67,9 +67,24 @@
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
             <span>agosto 22, 2015</span>
         </div>
-    <div class="section" id="applicazione">
-<h1>Applicazione</h1>
+    <div class="section" id="applicazione-base">
+<h1>Applicazione Base</h1>
 <p>Oggi vedremo una struttura di una applicazione base.</p>
+<p>In pratica creiamo un template di contenitori per separare le varie aree dove andremo successivamente ad inserire i nostri <strong>widgets</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;conf                                       .------------------------.</span>
+<span class="sd">&quot;0001 - aBox            (h application)     | application            |</span>
+<span class="sd">&quot;0002   - gBox            (h global)        |   .--------------------.</span>
+<span class="sd">&quot;0004   - mBox            (v main)          |   | g | m | menu       |</span>
+<span class="sd">&quot;0008     - uBox            (h menu)        |   | l | a .------------.</span>
+<span class="sd">&quot;0010     - bBox            (v body)        |   | o | i | body       |</span>
+<span class="sd">&quot;0020     - sBox            (h status)      |   | b | n |            |</span>
+<span class="sd">&quot;                                           |   | a |   .------------.</span>
+<span class="sd">&quot;                                           |   | l |   | status     |</span>
+<span class="sd">&quot;                                           .---.---.----------------.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
 <div id="more"> </div></div>
 <div class="section" id="myapp">
 <h1>myApp</h1>
@@ -81,8 +96,7 @@
 <span class="sd">	- myApp</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.150821)&quot;</span>
-<span class="c"># modificato deb in show</span>
+<span class="n">myRev</span> <span class="o">=</span> <span class="s">&quot;(rev.150822)&quot;</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># Modules</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
@@ -91,7 +105,7 @@
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># myModules</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">myWind</span> <span class="kn">import</span> <span class="n">MyWind</span><span class="p">,</span> <span class="n">myBox1</span><span class="p">,</span> <span class="n">myFrame1</span>
+<span class="kn">from</span> <span class="nn">myWind</span> <span class="kn">import</span> <span class="n">myBox1</span><span class="p">,</span> <span class="n">myFrame1</span>
 
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># myDefines</span>
@@ -116,33 +130,45 @@
 	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;myApp&quot;</span><span class="p">,</span> 
 					<span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;#bbbbbb&quot;</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="mh">0x003f</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 		<span class="nb">super</span><span class="p">(</span><span class="n">MyApp</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
+		<span class="c"># referenzio gli attributi passati</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+
 		<span class="c"># imposto il nome dell&#39;oggetto uguale al titolo</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
 		<span class="c"># imposto il titolo dell&#39;applicazione</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
 
-		<span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
-		<span class="c"># dimensione</span>
+		<span class="c"># ridimensiono se viene passato almeno l&#39;ampiezza</span>
 		<span class="k">if</span> <span class="n">width</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-		<span class="c"># posizione</span>
+		<span class="c"># se richiesto centro la posizione</span>
 		<span class="k">if</span> <span class="n">center</span><span class="p">:</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">WindowPosition</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
 
-		<span class="c"># callback di uscita</span>
+		<span class="c"># callbacks di uscita da eventi</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;delete-event&quot;</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">)</span>
 		<span class="c"># intercettiamo la tastiera</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;key_press_event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">doKeyPress</span><span class="p">)</span>
 
-		<span class="c"># attributes</span>
-		<span class="n">homo</span><span class="o">=</span><span class="bp">False</span>
-		<span class="n">spac</span><span class="o">=</span><span class="mi">0</span> 
-		<span class="n">expa</span><span class="o">=</span><span class="bp">False</span>
-		<span class="n">fill</span><span class="o">=</span><span class="bp">False</span>
-		<span class="n">padd</span><span class="o">=</span><span class="mi">1</span>
-		<span class="n">bord</span><span class="o">=</span><span class="mi">2</span>
-		<span class="n">colo</span><span class="o">=</span><span class="s">&quot;#333333&quot;</span>
+		<span class="c"># se passato cambio colore</span>
+		<span class="k">if</span> <span class="n">color</span><span class="p">:</span>
+			<span class="c"># change background color to Class</span>
+			<span class="n">chaBackColor</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+		<span class="c"># abilita la propria visualizzazione</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+		<span class="c"># attributi comuni ai vari contenitori</span>
+		<span class="n">homo</span> <span class="o">=</span> <span class="bp">False</span>
+		<span class="n">spac</span> <span class="o">=</span> <span class="mi">0</span> 
+		<span class="n">expa</span> <span class="o">=</span> <span class="bp">False</span>
+		<span class="n">fill</span> <span class="o">=</span> <span class="bp">False</span>
+		<span class="n">padd</span> <span class="o">=</span> <span class="mi">1</span>
+		<span class="n">bord</span> <span class="o">=</span> <span class="mi">2</span>
+		<span class="n">colo</span> <span class="o">=</span> <span class="s">&quot;#333333&quot;</span>
 
 <span class="c">#aBox (application)</span>
 		<span class="c"># fram,[labe,xBox]</span>
@@ -198,6 +224,7 @@
 							 <span class="n">show</span><span class="o">=</span><span class="n">show</span> <span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">sBox</span> <span class="o">=</span> <span class="n">oth1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
+<span class="c"># scelta della configurazione desiderata</span>
 		<span class="k">if</span> <span class="n">conf</span> <span class="o">==</span> <span class="mh">0x003f</span><span class="p">:</span> <span class="c"># all</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">xBox</span> <span class="o">=</span> <span class="n">myBox1</span><span class="p">(</span><span class="s">&quot;v&quot;</span><span class="p">)</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xBox</span><span class="p">)</span>
@@ -269,12 +296,6 @@
 			<span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bBox</span><span class="p">)</span>
 			<span class="c"># insert object in application ()</span>
 
-		<span class="k">if</span> <span class="n">color</span><span class="p">:</span>
-			<span class="c"># change background color to Class</span>
-			<span class="n">chaBackColor</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-		<span class="c"># visualizza il tutto</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
-
 	<span class="k">def</span> <span class="nf">doKeyPress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 		<span class="c"># intercetto ctrl</span>
 		<span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">ModifierType</span><span class="o">.</span><span class="n">CONTROL_MASK</span><span class="p">):</span>
@@ -337,14 +358,39 @@
 <p><strong>link</strong></p>
 <blockquote>
 <div><a class="reference download internal" href="../../../_downloads/myApp.py"><span class="xref download docutils literal"><span class="pre">download</span></span></a></div></blockquote>
+<p>Come potete vedere ho preferito riscrivere l&#8217; intera classe invece di derivarla da <strong>MyWind</strong>.</p>
+<p>Mywind è servita, nel precedente post, solo come esempio di utilizzo.</p>
+<p><strong>MyApp</strong> cerca di suddividere le aree di inserimento per creare un framework omogeneo.</p>
+<ul class="simple">
+<li><strong>Application</strong> e&#8217; il contenitore di tutta la struttura.</li>
+<li><strong>Global</strong> contiene la struttura principale dove risiedono il menù, il corpo e la barra di stato.</li>
+</ul>
+<p>Serve a inserire, in futuro dei <strong>widgets</strong> sul lato Dx della nostra applicazione.</p>
+<p>Gli altri contenitori si commentano da soli.</p>
+<p>Nei parametri di inizializzazione è presente <strong>conf</strong> che serve a poter decidere quali contenitori devono essere presenti sulla nostra applicazione. E&#8217; un flag che di default abilita tutti i contenitori.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">conf</span> <span class="o">==</span> <span class="mh">0x003f</span><span class="p">:</span> <span class="c"># all</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xBox</span> <span class="o">=</span> <span class="n">myBox1</span><span class="p">(</span><span class="s">&quot;v&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xBox</span><span class="p">)</span>
+        <span class="c"># insert object in application (app, glo, mai, men, bod, sta)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="n">aObj</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padd</span><span class="p">)</span> <span class="c"># 0001</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="n">gObj</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="n">expa</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padd</span><span class="p">)</span> <span class="c"># 0002</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="n">mObj</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padd</span><span class="p">)</span> <span class="c"># 0004</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="n">uObj</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="n">expa</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padd</span><span class="p">)</span> <span class="c"># 0008</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="n">bObj</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padd</span><span class="p">)</span> <span class="c"># 0010</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="n">sObj</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="n">expa</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padd</span><span class="p">)</span> <span class="c"># 0020</span>
+</pre></div>
+</div>
+<p>L&#8217;introduzione di questo parametro mi è risultato utile solo in alcuni casi eccezionali dove dovevo recuperare spazio ed estetica.</p>
 <p><strong>myApp</strong></p>
 <div class="figure align-right">
 <img alt="../../../_images/myApp.png" src="../../../_images/myApp.png" />
 </div>
 <p>Se proviamo ad avviare lo script <strong>myApp.py</strong> vediamo la nostra applicazione.</p>
+<p>Come potete notare dalla figura della nostra applicazione lo spazio occupato dai contenitori <strong>global</strong> e <strong>body</strong> e&#8217; espanso per tutta l&#8217; area possibile. Per raggiungere questo scopo bisogna impostare gli attributi <strong>expand</strong> e <strong>fill</strong> con il valore <strong>True</strong>.</p>
+<p>Vi suggerisco di giocare un pò con questi attributi per comprendere meglio il loro funzionamento.</p>
 <div class="section" id="saluti">
 <h2>Saluti</h2>
-<p>Nel prossimo post vedremo ...</p>
+<p>Nel prossimo post inizieremo a creare il nostro primo package per organizzare il nostro codice ad affrontare lo sviluppo dei nostri <strong>widgets</strong> futuri.</p>
 <p>Ciao alla prossima. (stay tune!)</p>
 </div>
 </div>
@@ -358,7 +404,7 @@
         </div><ul class="related clearfix">
             <li class="left"></li>
             <li class="right"><a href="../21/box.html">Contenitori</a> &raquo; </li>
-        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/08/22/applicazione";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/08/22/applicazione_base";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
     <h1><a href="#searchbox">Cerca</a></h1>
     <form action="../../../search.html" method="get">
         <input type="text" name="q" />
@@ -367,7 +413,7 @@
 </div></section><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
-            <a href="#">Applicazione</a>
+            <a href="#">Applicazione Base</a>
         </li><li>
             <a href="../21/box.html">Contenitori</a>
         </li><li>

@@ -68,10 +68,25 @@
             <span>agosto 22, 2015</span>
         </div>
         <div class="section">
-            <div class="section" id="applicazione">
-<h1><a href="2015/08/22/applicazione.html">Applicazione</a></h1>
+            <div class="section" id="applicazione-base">
+<h1><a href="2015/08/22/applicazione_base.html">Applicazione Base</a></h1>
 <p>Oggi vedremo una struttura di una applicazione base.</p>
-<p class="readmorewrapper"><a class="readmore" href="2015/08/22/applicazione.html#more">Continua a leggere...</a></p></div>
+<p>In pratica creiamo un template di contenitori per separare le varie aree dove andremo successivamente ad inserire i nostri <strong>widgets</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">"""</span>
+<span class="sd">"conf                                       .------------------------.</span>
+<span class="sd">"0001 - aBox            (h application)     | application            |</span>
+<span class="sd">"0002   - gBox            (h global)        |   .--------------------.</span>
+<span class="sd">"0004   - mBox            (v main)          |   | g | m | menu       |</span>
+<span class="sd">"0008     - uBox            (h menu)        |   | l | a .------------.</span>
+<span class="sd">"0010     - bBox            (v body)        |   | o | i | body       |</span>
+<span class="sd">"0020     - sBox            (h status)      |   | b | n |            |</span>
+<span class="sd">"                                           |   | a |   .------------.</span>
+<span class="sd">"                                           |   | l |   | status     |</span>
+<span class="sd">"                                           .---.---.----------------.</span>
+<span class="sd">"""</span>
+</pre></div>
+</div>
+<p class="readmorewrapper"><a class="readmore" href="2015/08/22/applicazione_base.html#more">Continua a leggere...</a></p></div>
  
 
         </div>
@@ -82,7 +97,7 @@
         
         
         <div class="comments">
-            <a href="http://orcim.github.io/blog/html/2015/08/22/applicazione.html#disqus_thread" data-disqus-identifier="2015/08/22/applicazione">Leave a comment</a>
+            <a href="http://orcim.github.io/blog/html/2015/08/22/applicazione_base.html#disqus_thread" data-disqus-identifier="2015/08/22/applicazione_base">Leave a comment</a>
         </div></div><div class="separator post_separator"></div><div class="timestamp postmeta">
             <span>agosto 21, 2015</span>
         </div>
@@ -237,7 +252,7 @@
 </div></section><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
-            <a href="2015/08/22/applicazione.html">Applicazione</a>
+            <a href="2015/08/22/applicazione_base.html">Applicazione Base</a>
         </li><li>
             <a href="2015/08/21/box.html">Contenitori</a>
         </li><li>
