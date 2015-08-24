@@ -25,7 +25,7 @@ La struttura è cambiata come segue:
 	  myWind.py
 	  myApp.py
 
-Il motivo del non funzionamento su **Windows** era dovuto che non supporta l' import diretto
+Il motivo del non funzionamento su **Windows** era dovuto che non supporta l' import diretto a causa del modo differente tra **Linux** e **Windows** di gestite il percorso dei files.
 
 .. code-block:: python
 
