@@ -1,0 +1,181 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="my notes of pyGtk">
+        <meta name="viewport" content="width=device-width">
+        <title>Windows &mdash; myBlog</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="Package" href="../23/package.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script><script type="text/javascript" src="../../../_static/google_analytics.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">myBlog</a></h1><h2>by Orcim</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Pagina iniziale</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/about.html">About</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>agosto 24, 2015</span>
+        </div>
+    <div class="section" id="windows">
+<h1>Windows</h1>
+<p>Per scrupolo ho provato ad eseguire gli scripts in <strong>Windows</strong> ma mi sono accorto che c&#8217; era qualche problema. Così ho preso l&#8217;occasione per suddividere ulteriormente il file <strong>my00init.py</strong> per aumentare la leggibilità.</p>
+<div id="more"> </div><p>Visto che ci sono spiego velocemente come installare le <strong>GTK3</strong> in <em>Windows</em>.</p>
+<p>Scaricate dal seguente <a class="reference external" href="http://sourceforge.net/projects/pygobjectwin32/files/latest/download?source=files">link</a>  che punta all&#8217; ultima versione dell&#8217; installer. Attende qualche secondo che vi appaia la dialog di download.</p>
+<p>Avviate l&#8217; eseguibile e seguite le istruzioni; vi ritroverete <strong>Python GTK3</strong> installato.</p>
+<p>La struttura è cambiata come segue:</p>
+<div class="highlight-rest"><div class="highlight"><pre>l00_start.py
+l01_startGtk.py
+my00init.py
+myWidg/
+  __init__.py
+  my00init.py
+  my00initGtk.py
+  myWind.py
+  myApp.py
+</pre></div>
+</div>
+<p>Il motivo del non funzionamento su <strong>Windows</strong> era dovuto che non supporta l&#8217; import diretto</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">myWidg.my00init</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">myWidg.myApp</span> <span class="kn">import</span> <span class="n">MyApp</span>
+</pre></div>
+</div>
+<p>Perciò l&#8217; ho modificato in</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">my00init</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">myApp</span> <span class="kn">import</span> <span class="n">MyApp</span>
+</pre></div>
+</div>
+<p>Dando il compito al seguente codice, che si trova in <strong>my00init.py</strong>, di risolvere il percorso assoluto di dove si trovano i files del nostro <strong>package</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># ricavo l&#39;ambiente</span>
+<span class="n">myRoot</span> <span class="o">=</span> <span class="n">module_path</span><span class="p">()</span>
+<span class="n">myFath</span><span class="p">,</span> <span class="n">myHome</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">myRoot</span><span class="p">)</span>
+<span class="c"># inseriamo i nostri packages che vogliamo usare</span>
+<span class="n">insLib</span><span class="p">(</span><span class="n">myRoot</span><span class="o">+</span><span class="s">&#39;/myWidg&#39;</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Per scaricare la nuova versione seguite i <strong>links:</strong></p>
+<blockquote>
+<div><a class="reference download internal" href="../../../_downloads/l00_start1.py"><span class="xref download docutils literal"><span class="pre">l00_start</span></span></a>
+<a class="reference download internal" href="../../../_downloads/l01_startGtk1.py"><span class="xref download docutils literal"><span class="pre">l01_startGtk</span></span></a>
+<a class="reference download internal" href="../../../_downloads/my00init4.py"><span class="xref download docutils literal"><span class="pre">my00init</span></span></a>
+<a class="reference download internal" href="../../../_downloads/__init__1.py"><span class="xref download docutils literal"><span class="pre">myWidg__init__</span></span></a>
+<a class="reference download internal" href="../../../_downloads/my00init5.py"><span class="xref download docutils literal"><span class="pre">my00init</span></span></a>
+<a class="reference download internal" href="../../../_downloads/my00initGtk.py"><span class="xref download docutils literal"><span class="pre">my00initGtk</span></span></a>
+<a class="reference download internal" href="../../../_downloads/myWind3.py"><span class="xref download docutils literal"><span class="pre">myWind</span></span></a>
+<a class="reference download internal" href="../../../_downloads/myApp2.py"><span class="xref download docutils literal"><span class="pre">myApp</span></span></a></div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Avvertimento</p>
+<p class="last">Durante il download, non sono riuscito a capire il motivo, i nomi potrebbero cambiare. Dovete rinominarli come da struttura sopra!</p>
+</div>
+<div class="section" id="saluti">
+<h2>Saluti</h2>
+<p>Se vi fossero errori fatemelo sapere.</p>
+<p>Nel prossimo post inizieremo a creare il template dei contenitori.</p>
+<p>Ciao alla prossima. (stay tune!)</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Scritto da Orcim</span>
+        </div>
+        
+        
+        </div><ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="../23/package.html">Package</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/08/24/windows";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Cerca</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section><div class="widget">
+    <h1>Articoli Recenti</h1>
+    <ul><li>
+            <a href="#">Windows</a>
+        </li><li>
+            <a href="../23/package.html">Package</a>
+        </li><li>
+            <a href="../22/applicazione_base.html">Applicazione Base</a>
+        </li><li>
+            <a href="../21/box.html">Contenitori</a>
+        </li><li>
+            <a href="../20/gtk.html">Gtk</a>
+        </li><li>
+            <a href="../19/template_base.html">Template base</a>
+        </li><li>
+            <a href="../18/presentazioni.html">Presentazioni</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Tag Cloud</h1>
+      <a href="../../../tags/programming.html" style="font-size: 20pt">programming</a>&nbsp;&nbsp;
+      <a href="../../../tags/python.html" style="font-size: 8pt">python</a>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2015, Orcim. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

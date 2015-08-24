@@ -125,9 +125,9 @@ if 0:
 	print "myHome", myHome
 if 0:
 	# aggiungo il path delle mie librerie
-	insLib(myRoot+'/myLib',True)
+	# insLib(myRoot+'/myLib',True)
 	#insLib(myRoot+'/myLib/myGtk',True)
-	insLib(myRoot+'/myLib/myProtocol',True)
+	# insLib(myRoot+'/myLib/myProtocol',True)
 	#insLib(myRoot+'/myLib/myUtilities',True)
 	# insLib(myRoot+'/myWidg',True)
 

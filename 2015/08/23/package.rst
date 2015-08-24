@@ -15,7 +15,16 @@ In pratica dobbiamo creare una directory a cui assegneremo il nome **myWidg** ed
 
 Inoltre creiamo un file vuoto **__init__.py** che indica a python di gestire questa directory come un **package**. 
 
-Bene torniamo su di un livello e creiamo la nostra applicazione di partenza.
+Bene torniamo su di un livello e copiamo anche qui **my00init.py**
+
+Modifichiamo solo questo file in modo da attivare il caricamento delle nostre librerie nella root di lavoro.
+
+.. code-block:: python
+
+	if 1:
+		insLib(myRoot+'/myWidg',True)
+
+Creiamo la nostra applicazione di partenza.
 
 **l01_startGtk.py**
 
@@ -29,16 +38,17 @@ Quello che è cambiato è il modo di importare i nostri moduli.
 .. code-block:: python
 
 	#-----------------------------------------------------------------------------
-	from myWidg.my00init import *
+	from my00init import *
 
 	#-----------------------------------------------------------------------------
-	from myWidg.myApp import MyApp
+	from myApp import MyApp
 
 Alla fine dovremo ritrovarci con la seguente struttura:
 
 .. code-block:: rest
 
 	l01_startGtk.py
+	my00init.py
 	myWidg/
 	  __init__.py
 	  my00init.py
@@ -48,7 +58,8 @@ Alla fine dovremo ritrovarci con la seguente struttura:
 **links:** 
 
 	:download:`l01_startGtk </_static/20150823/l01_startGtk.py>`
-	:download:`__init__ </_static/20150823/myWidg/__init__.py>`
+	:download:`my00init </_static/20150823/my00init.py>`
+	:download:`myWidg__init__ </_static/20150823/myWidg/__init__.py>`
 	:download:`my00init </_static/20150823/myWidg/my00init.py>`
 	:download:`myWind </_static/20150823/myWidg/myWind.py>`
 	:download:`myApp </_static/20150823/myWidg/myApp.py>`

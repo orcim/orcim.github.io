@@ -28,7 +28,7 @@
         <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="../../../_static/plugins.js"></script>
         <script src="../../../_static/main.js"></script>
-        <link rel="next" title="Applicazione Base" href="../22/applicazione_base.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+        <link rel="next" title="Applicazione Base" href="../22/applicazione_base.html" /><link rel="prev" title="Windows" href="../24/windows.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '1.5',
@@ -77,7 +77,13 @@
 <li><strong>myApp.py</strong></li>
 </ul>
 <p>Inoltre creiamo un file vuoto <strong>__init__.py</strong> che indica a python di gestire questa directory come un <strong>package</strong>.</p>
-<p>Bene torniamo su di un livello e creiamo la nostra applicazione di partenza.</p>
+<p>Bene torniamo su di un livello e copiamo anche qui <strong>my00init.py</strong></p>
+<p>Modifichiamo solo questo file in modo da attivare il caricamento delle nostre librerie nella root di lavoro.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">insLib</span><span class="p">(</span><span class="n">myRoot</span><span class="o">+</span><span class="s">&#39;/myWidg&#39;</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creiamo la nostra applicazione di partenza.</p>
 <p><strong>l01_startGtk.py</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="c"># -*- coding: utf-8 -*-</span>
@@ -90,12 +96,12 @@
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># Modules</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">myWidg.my00init</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">my00init</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># myModules</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">myWidg.myApp</span> <span class="kn">import</span> <span class="n">MyApp</span>
+<span class="kn">from</span> <span class="nn">myApp</span> <span class="kn">import</span> <span class="n">MyApp</span>
 
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="c"># myDefines</span>
@@ -152,14 +158,15 @@
 <p>Come potete vedere dal codice non c&#8217; è nulla di nuovo ma è servito solo come esercizio per capire come usare il <strong>package</strong> <em>myWidg</em>.</p>
 <p>Quello che è cambiato è il modo di importare i nostri moduli.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">myWidg.my00init</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">my00init</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">myWidg.myApp</span> <span class="kn">import</span> <span class="n">MyApp</span>
+<span class="kn">from</span> <span class="nn">myApp</span> <span class="kn">import</span> <span class="n">MyApp</span>
 </pre></div>
 </div>
 <p>Alla fine dovremo ritrovarci con la seguente struttura:</p>
 <div class="highlight-rest"><div class="highlight"><pre>l01_startGtk.py
+my00init.py
 myWidg/
   __init__.py
   my00init.py
@@ -170,8 +177,9 @@ myWidg/
 <p><strong>links:</strong></p>
 <blockquote>
 <div><a class="reference download internal" href="../../../_downloads/l01_startGtk.py"><span class="xref download docutils literal"><span class="pre">l01_startGtk</span></span></a>
-<a class="reference download internal" href="../../../_downloads/__init__.py"><span class="xref download docutils literal"><span class="pre">__init__</span></span></a>
 <a class="reference download internal" href="../../../_downloads/my00init2.py"><span class="xref download docutils literal"><span class="pre">my00init</span></span></a>
+<a class="reference download internal" href="../../../_downloads/__init__.py"><span class="xref download docutils literal"><span class="pre">myWidg__init__</span></span></a>
+<a class="reference download internal" href="../../../_downloads/my00init3.py"><span class="xref download docutils literal"><span class="pre">my00init</span></span></a>
 <a class="reference download internal" href="../../../_downloads/myWind2.py"><span class="xref download docutils literal"><span class="pre">myWind</span></span></a>
 <a class="reference download internal" href="../../../_downloads/myApp1.py"><span class="xref download docutils literal"><span class="pre">myApp</span></span></a></div></blockquote>
 <div class="admonition warning">
@@ -196,7 +204,7 @@ myWidg/
         
         
         </div><ul class="related clearfix">
-            <li class="left"></li>
+            <li class="left"> &laquo; <a href="../24/windows.html">Windows</a></li>
             <li class="right"><a href="../22/applicazione_base.html">Applicazione Base</a> &raquo; </li>
         </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/08/23/package";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
     <h1><a href="#searchbox">Cerca</a></h1>
@@ -207,6 +215,8 @@ myWidg/
 </div></section><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
+            <a href="../24/windows.html">Windows</a>
+        </li><li>
             <a href="#">Package</a>
         </li><li>
             <a href="../22/applicazione_base.html">Applicazione Base</a>
