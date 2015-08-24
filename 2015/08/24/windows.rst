@@ -56,18 +56,7 @@ Dando il compito al seguente codice, che si trova in **my00init.py**, di risolve
 	# inseriamo i nostri packages che vogliamo usare
 	insLib(myRoot+'/myWidg',True)
 
-Per scaricare la nuova versione seguite i **links:** 
-
-	:download:`l00_start </_static/20150824/l00_start.py>`
-	:download:`l01_startGtk </_static/20150824/l01_startGtk.py>`
-	:download:`my00init </_static/20150824/my00init.py>`
-	:download:`myWidg__init__ </_static/20150824/myWidg/__init__.py>`
-	:download:`my00init </_static/20150824/myWidg/my00init.py>`
-	:download:`my00initGtk </_static/20150824/myWidg/my00initGtk.py>`
-	:download:`myWind </_static/20150824/myWidg/myWind.py>`
-	:download:`myApp </_static/20150824/myWidg/myApp.py>`
-
-.. warning:: Durante il download, non sono riuscito a capire il motivo, i nomi potrebbero cambiare. Dovete rinominarli come da struttura sopra!
+Per scaricare la nuova versione :download:`20150824.zip </_static/20150824.zip>`
 
 Saluti
 ------
