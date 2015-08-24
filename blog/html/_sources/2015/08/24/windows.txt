@@ -1,7 +1,7 @@
 Windows
 =======
 
-Per scrupolo ho provato ad eseguire gli scripts in **Windows** ma mi sono accorto che c' era qualche problema. Così ho preso l'occasione per suddividere ulteriormente il file **my00init.py** per aumentare la leggibilità. 
+Per scrupolo ho provato ad eseguire gli scripts in **Windows** ma mi sono accorto che c' era qualche problema. Così ho preso l' occasione per suddividere ulteriormente il file **my00init.py** per aumentare la leggibilità. 
 
 .. more::
 
