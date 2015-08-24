@@ -71,6 +71,7 @@ pyGtk3
 ~~~~~~
 
 * `readthedocs <http://python-gtk-3-tutorial.readthedocs.org/en/latest/index.html/>`_
+* `Gtk-3.0 <http://lazka.github.io/pgi-docs/#Gtk-3.0/classes/>`_
 
 tutorial
 ~~~~~~~~

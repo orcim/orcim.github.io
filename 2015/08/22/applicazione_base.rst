@@ -22,7 +22,7 @@ In pratica creiamo un template di contenitori per separare le varie aree dove an
 
 .. more::
 
-myApp
+myApp 
 =====
 
 Esempio
@@ -30,9 +30,11 @@ Esempio
 .. literalinclude:: myApp.py
     :language: python
 
-**link**
+**links:**
 
-	:download:`download <myApp.py>`
+	* :download:`my00init </_static/20150822/my00init.py>`
+	* :download:`myWind </_static/20150822/myWind.py>`
+	* :download:`myApp </_static/20150822/myApp.py>`
 
 Come potete vedere ho preferito riscrivere l' intera classe invece di derivarla da **MyWind**. 
 
