@@ -180,6 +180,6 @@ Nel prossimo post vedremo la struttura completa di una applicazione base.
 Ciao alla prossima. (stay tune!)
 
 .. author:: default
-.. categories:: none
-.. tags:: none
+.. categories:: programming
+.. tags:: programming, python, gtk
 .. comments::

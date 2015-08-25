@@ -69,6 +69,6 @@ Ciao alla prossima. (stay tune!)
 
 
 .. author:: default
-.. categories:: none
-.. tags:: none
+.. categories:: programming
+.. tags:: programming, python, gtk
 .. comments::

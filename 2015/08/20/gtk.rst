@@ -166,6 +166,6 @@ I commenti di **Box** e **Frame** li vediamo alla prossima**
 Ciao alla prossima. (stay tune!)
 
 .. author:: default
-.. categories:: none
-.. tags:: none
+.. categories:: programming
+.. tags:: programming, python, gtk
 .. comments::

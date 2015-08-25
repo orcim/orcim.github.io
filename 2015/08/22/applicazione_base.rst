@@ -85,6 +85,6 @@ Nel prossimo post inizieremo a creare il nostro primo package per organizzare il
 Ciao alla prossima. (stay tune!)
 
 .. author:: default
-.. categories:: none
-.. tags:: none
+.. categories:: programming
+.. tags:: programming, python, gtk
 .. comments::

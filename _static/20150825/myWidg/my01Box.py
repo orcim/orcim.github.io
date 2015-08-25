@@ -3,9 +3,9 @@
 """ lista degli oggetti definiti:
 
 	- myViewObject
-	- myBox     - myBoxList
-	- myFrame   - myFraList
-	- myEvent   - myEveList
+	- myBox     	- myBoxList
+	- myFrame   	- myFraList
+	- myBoxEvent 	- myBoxEveList
 """
 
 myRev = "(rev.150824)"
@@ -24,6 +24,7 @@ from myWind import MyWind #(contiene my00initGtk)
 # myDefines
 #-----------------------------------------------------------------------------
 def myViewObject(obje, othe):
+	"visualizza le istanze degli oggetti nel contenitore"
 	print " obje:", obje
 	# view objects
 	for ind, ele in enumerate(othe):
@@ -194,7 +195,7 @@ def testFrame():
 		# imposto il colore
 		lab1.modify_fg(Gtk.STATE_NORMAL, Gdk.color_parse('blue'))
 #myFrame    
-	# fram,[labe,xBox]
+	# <- fram,[labe,xBox]
 	obje, othe = myFrame(name='myFrame', obje=lab1, colo='#f000f0',
 						bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
 						tBox='v', aBox=[False, False, 10])
@@ -211,8 +212,7 @@ def myFrameList(name=["frame00","frame01"], colo='black',
 	# funzione che istanzia oggetti tipo
 	def myList(ind):
 #myFrame
-		#fram,[labe,xBox]
-		print "=>", colo[ind]
+		# <- fram,[labe,xBox]
 		return myFrame(name[ind], oFra, colo, bFra, sFra, tFra)
 #myBoxList
 	# xBox, [fram,[labe,xBox]] * N
@@ -223,7 +223,7 @@ def myFrameList(name=["frame00","frame01"], colo='black',
 #-----------------------------------------------------------------------------
 def testFraList():
 #myFraList
-	# xBox, [fram,[labe,xBox]] * N
+	# <- xBox, [fram,[labe,xBox]] * N
 	obje, othe = myFrameList(name=["frame00","frame01"], colo='black',
 							oFra=None, bFra=2, sFra=Gtk.SHADOW_ETCHED_OUT, 
 							tFra='v', aFra=[False, False, 1],
@@ -234,9 +234,9 @@ def testFraList():
 	return obje
 
 #-----------------------------------------------------------------------------
-# myEvent
+# myBoxEvent
 #-----------------------------------------------------------------------------
-def myEvent(name="myEvent", 
+def myBoxEvent(name="myBoxEvent", 
 			colo='yellow', font='Courier 10', 
 			call=None, data=[]):
 	""" crea un contenitore sensibile agli eventi con una label al suo interno
@@ -278,7 +278,7 @@ def myEvent(name="myEvent",
 # <-
 	return eBox, [labe, call]
 #-----------------------------------------------------------------------------
-def testEvent():
+def testBoxEvent():
 	# ridefinisco la callback 
 	def on_clicked(widg, *data):
 		msg = widg.get_child().get_text()
@@ -291,22 +291,22 @@ def testEvent():
 			widg.get_child().set_text('statusOn_')
 			widg.status[0] = 1
 		print ("Off","On")[widg.status[0]]
-	# eBox,[labe,call]
-	obje, othe = myEvent(name="statusOn_", 
+	# <- eBox,[labe,call]
+	obje, othe = myBoxEvent(name="statusOn_", 
 						 colo='yellow', font='Courier 10', 
 						 call=on_clicked, data=[])
 #myFrame    
-	# fram,[labe,xBox]
-	obj1, oth1 = myFrame(name='myEvent', obje=obje, colo='black',
+	# <- ram,[labe,xBox]
+	obj1, oth1 = myFrame(name='myBoxEvent', obje=obje, colo='black',
 						bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
 						tBox='v' )
 # <-
 	return obj1
 
 #-----------------------------------------------------------------------------
-# myEveList
+# myBoxEveList
 #-----------------------------------------------------------------------------
-def myEveList(name=["event00","event01"], 
+def myBoxEveList(name=["event00","event01"], 
 			  cEve='yellow', fEve='Courier 10',
 			  call=None, data=[],
 			  tBox='v', aBox=[False, False, 1]):
@@ -321,26 +321,26 @@ def myEveList(name=["event00","event01"],
 	def myList(ind):
 #myEvent
 		# eBox, [labe,call]
-		return myEvent(name[ind], 
+		return myBoxEvent(name[ind], 
 					   cEve, fEve, call, [ind, data])
 #myBoxList
-	# xBox, [eBox, [labe,call]] * N
+	# <- xBox, [eBox, [labe,call]] * N
 	obje, othe = myBoxList(name=name, tBox=tBox, 
 						   aBox=aBox, func=myList)
 # <-
 	return obje, othe
 #-----------------------------------------------------------------------------
-def testEveList():
+def testBoxEveList():
 #myEvent
 	# xBox, [eBox, [labe,call]] * N
-	obje, othe = myEveList(name=["event00","event01","event02"], 
+	obje, othe = myBoxEveList(name=["event00","event01","event02"], 
 						   cEve='yellow', fEve='Courier 10',
 						   call=None, data=[],
 						   tBox='v', aBox=[False, False, 1])
 	# cambio colore di fondo della seconda riga
 	othe[1][0].modify_bg(Gtk.STATE_NORMAL, Gdk.color_parse("green"))
 #myFrame    
-	# fram,[labe,xBox]
+	# <- fram,[labe,xBox]
 	obj1, oth1 = myFrame(name='myEvent', obje=obje, colo='black',
 						bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
 						tBox='v' )
@@ -363,7 +363,7 @@ if __name__ == "__main__":
 	# test arguments
 	if len(sys.argv) == 1:
 		# no arguments (scelgo io)
-		choi = 1
+		choi = 13
 	else:
 		# get first argument (scelta esterna)
 		choi = int(sys.argv[1])
@@ -374,7 +374,7 @@ if __name__ == "__main__":
 	elif choi == 2:
 		obje = testFrame()
 	elif choi == 3:
-		obje = testEvent()
+		obje = testBoxEvent()
 
 	# lista di oggetti
 	elif choi == 11:
@@ -382,7 +382,7 @@ if __name__ == "__main__":
 	elif choi == 12:
 		obje = testFraList()
 	elif choi == 13:
-		obje = testEveList()
+		obje = testBoxEveList()
 
 	# istanza l'applicazione principale
 	self = MyWind(width=None, height=800, title="myBox", center=True, color="#aaaaaa")
