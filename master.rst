@@ -4,7 +4,6 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
-   2015/08/25/mybox
    2015/08/24/windows
    2015/08/23/package
    2015/08/22/applicazione_base
