@@ -363,7 +363,7 @@ if __name__ == "__main__":
 	# test arguments
 	if len(sys.argv) == 1:
 		# no arguments (scelgo io)
-		choi = 13
+		choi = 3
 	else:
 		# get first argument (scelta esterna)
 		choi = int(sys.argv[1])

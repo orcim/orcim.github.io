@@ -4,6 +4,7 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
+   2015/08/26/boxevent
    2015/08/25/myBox
    2015/08/24/windows
    2015/08/23/package
