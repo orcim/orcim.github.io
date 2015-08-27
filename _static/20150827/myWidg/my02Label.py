@@ -1,20 +1,25 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-15 -*-
-""" widgets definiti:
+# -*- coding: utf-8 -*-
+""" lista degli oggetti definiti:
 
     - myLabel
     - myLabList
     - myLabFrame
 """
-myRev = "(rev.140525)"
+
+myRev = "(rev.150827)"
 #-----------------------------------------------------------------------------
-# myModules
+# Modules
 #-----------------------------------------------------------------------------
 from my00init import *
 from gi.repository import Pango
 
-from myApp import MyWind
+#-----------------------------------------------------------------------------
+# myModules
+#-----------------------------------------------------------------------------
+from myWind import MyWind #(contiene my00initGtk)
 from my01Box import myViewObject, myBoxList, myFrame
+
 #-----------------------------------------------------------------------------
 # myLabel
 #-----------------------------------------------------------------------------
@@ -22,7 +27,7 @@ def myLabel(name='myLabel',
             leng=0, prea=' ', post='', 
             font='Curier 10', 
             colo='black'):
-    """ crea una label con attributi stabilit
+    """ crea una label con attributi stabiliti
     
         -> name nome associato alla label
         -> leng lunghezza di formattazione
@@ -60,7 +65,7 @@ def testLabel():
     return labe
 
 #-----------------------------------------------------------------------------
-# myButton List
+# myLabel List
 #-----------------------------------------------------------------------------
 def myLabList(name=["_Read","_Write","_Defau"], 
               leng=0, prea=' ', post='', 
@@ -85,7 +90,7 @@ def testLabList():
 #myLabList    
     # xBox, [labe, None] * N
     obje, othe = myLabList(name=["Read","Write","Default"], 
-                           leng=7, prea=' ', post='', 
+                           leng=7, prea=' ', post=':', 
                            font='Courier 10', 
                            colo='brown',
                            tBox='v', aBox=[False, False, 1])
@@ -149,16 +154,24 @@ def testLabFrame():
 # <-
     return obje
 
-
+#-----------------------------------------------------------------------------
+# myTry
 #-----------------------------------------------------------------------------
 def myTry01():
     sys.exit()
-
+        
 #-----------------------------------------------------------------------------
 # Main
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
-    choi = 3
+
+    # test arguments
+    if len(sys.argv) == 1:
+        # no arguments (scelgo io)
+        choi = 2
+    else:
+        # get first argument (scelta esterna)
+        choi = int(sys.argv[1])
 
     if choi == 1:
         obje = testLabel()
@@ -168,7 +181,8 @@ if __name__ == "__main__":
         obje = testLabFrame()
 
     # istanza l'applicazione principale
-    self = MyWind(width=None, height=800, title="myBox\ %s" %myRev, center=True, color="#b0b0b0")
+    self = MyWind(width=None, height=800, title="myBox %s" %myRev, center=True, color="#b0b0b0")
     self.vBox.pack_start(child=obje, expand=False, fill=False, padding=0)
+
     # cediamo il controllo alle gtk
     Gtk.main()

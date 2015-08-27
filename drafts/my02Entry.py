@@ -1,20 +1,26 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-15 -*-
-""" widgets definiti:
+# -*- coding: utf-8 -*-
+""" lista degli oggetti definiti:
 
     - myEntry        - myEntList
     - myEntLabel     - myEntLabList
     - myEntFrame     - myEntFraList
 """
-myRev = "(rev.140525)"
+
+myRev = "(rev.150527)"
+#-----------------------------------------------------------------------------
+# Modules
+#-----------------------------------------------------------------------------
+from my00init import *
+from my00initGtk import *
+
 #-----------------------------------------------------------------------------
 # myModules
 #-----------------------------------------------------------------------------
-from my00init import *
-
-from myApp import MyWind
+from myWind import MyWind #(contiene my00initGtk)
 from my01Box import myViewObject, myBox, myBoxList, myFrame
-from my02Label import myLabel, myLabList
+from my02Label import myLabel
+
 #-----------------------------------------------------------------------------
 # myEntry
 #-----------------------------------------------------------------------------
@@ -389,15 +395,25 @@ def testEntFraList(debu=0):
     return obj1
 
 #-----------------------------------------------------------------------------
+# myTry
+#-----------------------------------------------------------------------------
 def myTry01():
-    sys.exit()
-        
+  sys.exit()
+    
 #-----------------------------------------------------------------------------
 # Main
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
-    choi = 13
-    
+
+  # test arguments
+  if len(sys.argv) == 1:
+    # no arguments (scelgo io)
+    choi = 1
+  else:
+    # get first argument (scelta esterna)
+    choi = int(sys.argv[1])
+
+  # oggetti singoli 
     if choi == 1:
         obje = testEntry()
         #obje = testEntryDoubleClick()
