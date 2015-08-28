@@ -181,7 +181,7 @@ if __name__ == "__main__":
         obje = testLabFrame()
 
     # istanza l'applicazione principale
-    self = MyWind(width=None, height=800, title="myBox %s" %myRev, center=True, color="#b0b0b0")
+    self = MyWind(width=None, height=800, title="myLabel %s" %myRev, center=True, color="#b0b0b0")
     self.vBox.pack_start(child=obje, expand=False, fill=False, padding=0)
 
     # cediamo il controllo alle gtk
