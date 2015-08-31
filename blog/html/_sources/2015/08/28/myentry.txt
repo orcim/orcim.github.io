@@ -161,6 +161,7 @@ Saluti
 ------
 
 Bene anche questo post è finito. Spero di esservi stato utile.
+Se c' è qualcosa che non va non esitate a segnalarlo.
 
 Nel prossimo post vedremo gli oggetti **txtView**.
 

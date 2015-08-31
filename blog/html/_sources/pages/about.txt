@@ -63,7 +63,7 @@ Gtk
 pyGtk2
 ~~~~~~
 
-* `reference <http://www.pygtk.org/pygtk2reference/index.html/>`_
+* `reference <http://www.pygtk.org/pygtk2reference/index.html>`_
 * `faq <http://faq.pygtk.org/index.py?req=index/>`_
 * `pygtk2tutorial <http://www.pygtk.org/pygtk2tutorial/index.html/>`_
 

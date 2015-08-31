@@ -1,27 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-""" widgets definiti:
+""" lista degli oggetti definiti:
 
 	- myScrolled
-	- myScrTexVieFrame
+	- myTxtView
 """
-myRev = "(rev.140525)"
+
+myRev = "(rev.150831)"
 #-----------------------------------------------------------------------------
 # Modules
-#-----------------------------------------------------------------------------
-import cairo
-
-#-----------------------------------------------------------------------------
-# myModules
 #-----------------------------------------------------------------------------
 from my00init import *
 from gi.repository import Pango
 
-from myApp import MyWind
-from my01Box import myFrame
 #-----------------------------------------------------------------------------
-# myDefines
+# myModules
 #-----------------------------------------------------------------------------
+from myWind import MyWind #(contiene my00initGtk)
+from my01Box import myViewObject, myBox, myFrame
 
 #-----------------------------------------------------------------------------
 # myScrolled
@@ -62,9 +58,9 @@ def myScrolled(obje=None, bord=1,
 	return scro    
 
 #-----------------------------------------------------------------------------
-# myFrameScrolledTextView
+# myTextView
 #-----------------------------------------------------------------------------
-def myScrTexVieFrame(name='myScrTexVieFrame', colo='black',
+def myTxtView(name='myTxtView', colo='black',
 					widt=300, heig=70, 
 					font="courier 9", edit=False, 
 					left=1, righ=1, bord=3,
@@ -176,11 +172,11 @@ def myScrTexVieFrame(name='myScrTexVieFrame', colo='black',
 	# fram,[labe,xBox,buff,text,cTag,clear,write,writeTag]
 	return fram,[othe[0],othe[1],buff,text,cTag,clear,write,writeTag] #,cursor]
 #-----------------------------------------------------------------------------
-def testScrTexVieFrame(self):
-#myFraScrTexView
+def testTxtView(self):
+#myTxtView
 	#          0,   1,   2,   3,   4,    5,    6,       7 
 	# fram,[labe,xBox,buff,text,cTag,clear,write,writeTag]
-	fram,othe = myScrTexVieFrame(name='myScrTexVieFrame', colo='blue',
+	fram,othe = myTxtView(name='myTxtView', colo='blue',
 								widt=400, heig=200, 
 								font="courier 9", edit=True, 
 								left=1, righ=1, bord=3,
@@ -209,12 +205,11 @@ def testScrTexVieFrame(self):
 	# self.curs()
 	self.write('uffi')
 	
-	if 0:
+	if 1:
 		# chiamo la pulizia del buffText dopo N sec
 		# reference del Tick (time out every mSec)
-		GObject.timeout_add(2000, self.clear)
+		GObject.timeout_add(3000, self.clear)
 		#GObject.timeout_add(2000, call[2], "io sono una print\n")
-
 # <-
 	return fram
 
@@ -226,17 +221,22 @@ def myTry01():
 # Main
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
-	# istanza l'applicazione principale
-	self = MyWind(width=None, height=800, title="myIsoBus %s" %myRev, center=True, color="#b0b0b0")
 
-	choi = 1
-	
-	if choi == 0:
-		sys.exit()
-	elif choi == 1:
+	# test arguments
+	if len(sys.argv) == 1:
+		# no arguments (scelgo io)
+		choi = 1
+	else:
+		# get first argument (scelta esterna)
+		choi = int(sys.argv[1])
+
+	# istanza l'applicazione principale
+	self = MyWind(width=None, height=800, title="myTxtView %s" %myRev, center=True, color="#b0b0b0")
+
+	if choi == 1:
 		#          0,   1,   2,   3,   4,    5,    6,       7 
 		# fram,[labe,xBox,buff,text,cTag,clear,write,writeTag]
-		testScrTexVieFrame(self)
+		testTxtView(self)
 
 	# cediamo il controllo alle Gtk
 	Gtk.main()

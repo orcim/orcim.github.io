@@ -1,0 +1,436 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="my notes of pyGtk">
+        <meta name="viewport" content="width=device-width">
+        <title>myTextView &mdash; myBlog</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="myEntry" href="../28/myentry.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script><script type="text/javascript" src="../../../_static/google_analytics.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">myBlog</a></h1><h2>by Orcim</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Pagina iniziale</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/about.html">About</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>agosto 31, 2015</span>
+        </div>
+    <div class="section" id="mytextview">
+<h1>myTextView</h1>
+<p>Il widget <strong>myTxtView</strong> serve a visualizzare il contenuto del widget <strong>TextBuffer</strong> che memorizza del testo con attributi associati. In altre parole la base di un editor di testo.</p>
+<div id="more"> </div><div class="section" id="mytxtview">
+<h2>myTxtView</h2>
+<p>Oltre ai soliti attributi come dimensioni, tipo caratteri, viene istanziato il <strong>TextBuffer</strong> che è la base del nostro <strong>TextView</strong> e anche <strong>myScrolled</strong> che vedremo dopo.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myTextView</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTxtView</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;myTxtView&#39;</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+					<span class="n">widt</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">heig</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> 
+					<span class="n">font</span><span class="o">=</span><span class="s">&quot;courier 9&quot;</span><span class="p">,</span> <span class="n">edit</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> 
+					<span class="n">left</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">righ</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bord</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+					<span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+					<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span><span class="bp">False</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot; crea una textView all&#39;interno di un frame</span>
+<span class="sd">		</span>
+<span class="sd">		-&gt; name nome assegnato alla label del Frame</span>
+<span class="sd">		-&gt; widt larghezza da assegnare allo Scrolled</span>
+<span class="sd">		-&gt; heig altezza da assegnare allo Scrolled</span>
+<span class="sd">		-&gt; font font da utilizzare</span>
+<span class="sd">		-&gt; edit abilta la modifica</span>
+<span class="sd">		-&gt; left margine sinistro sul textView</span>
+<span class="sd">		-&gt; righ margine destro sul textView</span>
+<span class="sd">		-&gt; bord margine esterno dello scroolbar</span>
+<span class="sd">		-&gt; bFra bordo riservato all&#39;esterno</span>
+<span class="sd">		-&gt; sFra tipo di cornice</span>
+<span class="sd">		-&gt; tFra tipo di contenitore v/h </span>
+<span class="sd">		-&gt; aFra attributi contenitore </span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<span class="c">#textBuffer</span>
+	<span class="n">buff</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">TextBuffer</span><span class="p">()</span>
+<span class="c">#textView</span>
+	<span class="c"># istanzio un TextView</span>
+	<span class="n">text</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">TextView</span><span class="p">(</span><span class="nb">buffer</span><span class="o">=</span><span class="n">buff</span><span class="p">)</span>
+	<span class="n">text</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+	<span class="n">text</span><span class="o">.</span><span class="n">modify_font</span><span class="p">(</span><span class="n">Pango</span><span class="o">.</span><span class="n">FontDescription</span><span class="p">(</span><span class="n">font</span><span class="p">))</span>
+	<span class="n">text</span><span class="o">.</span><span class="n">set_property</span> <span class="p">(</span><span class="s">&#39;can-focus&#39;</span><span class="p">,</span> <span class="n">edit</span><span class="p">)</span>
+	<span class="n">text</span><span class="o">.</span><span class="n">set_editable</span><span class="p">(</span><span class="n">edit</span><span class="p">)</span>
+	<span class="n">text</span><span class="o">.</span><span class="n">set_cursor_visible</span><span class="p">(</span><span class="n">edit</span><span class="p">)</span>
+	<span class="c"># text.set_sensitive(edit)</span>
+	<span class="c"># text.set_overwrite (True)</span>
+	<span class="c"># text.set_wrap_mode(True)</span>
+	<span class="n">text</span><span class="o">.</span><span class="n">set_left_margin</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+	<span class="n">text</span><span class="o">.</span><span class="n">set_right_margin</span><span class="p">(</span><span class="n">righ</span><span class="p">)</span>
+	<span class="c">#  blocca il size visibile con lo scroll</span>
+	<span class="c">#(width, higth)</span>
+	<span class="c">#text.set_size_request(100,100)</span>
+<span class="c">#myScrolled</span>
+	<span class="n">scro</span> <span class="o">=</span> <span class="n">myScrolled</span><span class="p">(</span><span class="n">obje</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">bord</span><span class="o">=</span><span class="n">bord</span><span class="p">,</span> 
+					  <span class="n">widt</span><span class="o">=</span><span class="n">widt</span><span class="p">,</span> <span class="n">heig</span><span class="o">=</span><span class="n">heig</span><span class="p">,</span> 
+					  <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_IN</span><span class="p">,</span> 
+					  <span class="n">poli</span><span class="o">=</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">POLICY_AUTOMATIC</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">POLICY_AUTOMATIC</span><span class="p">))</span>
+<span class="c">#tag</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;blaWhi&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;redWhi&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;greWhi&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;bluWhi&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;redBla&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;whiBlu&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+	<span class="n">cTag</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;blaWhi&quot;</span><span class="p">,]</span>
+	<span class="c"># curs = buff.get_end_iter()</span>
+<span class="c">#myFrame</span>
+	<span class="c"># fram, [labe, xBox]</span>
+	<span class="n">fram</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">scro</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="n">colo</span><span class="p">,</span> 
+						 <span class="n">bord</span><span class="o">=</span><span class="n">bFra</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">sFra</span><span class="p">,</span> <span class="n">tBox</span><span class="o">=</span><span class="n">tFra</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="n">aFra</span><span class="p">)</span>
+<span class="c">#callback</span>
+	<span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; pulitura del textBuffer &quot;&quot;&quot;</span>
+		<span class="n">sta</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">buff</span><span class="o">.</span><span class="n">get_bounds</span><span class="p">()</span>
+		<span class="n">buff</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">sta</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+		<span class="c"># curs = buff.get_end_iter()</span>
+	<span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+		<span class="s">&quot;funzione di lettura dell&#39;intero buffer&quot;</span>
+		<span class="n">sta</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">buff</span><span class="o">.</span><span class="n">get_bounds</span><span class="p">()</span>
+		<span class="k">return</span> <span class="n">buff</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">sta</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+	<span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="o">*</span><span class="n">msg</span><span class="p">):</span>
+		<span class="s">&quot;funzione di scrittura per il redirect&quot;</span>
+		<span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ele</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+				<span class="n">writeTag</span><span class="p">(</span><span class="n">ele</span><span class="p">,</span> <span class="n">cTag</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+	<span class="k">def</span> <span class="nf">writeTag</span><span class="p">(</span><span class="nb">str</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s">&quot;blkWhi&quot;</span><span class="p">):</span>
+		<span class="s">&quot;inserisco la stringa nel buffer&quot;</span>
+		<span class="c">#ite = curs</span>
+		<span class="n">ite</span> <span class="o">=</span> <span class="n">buff</span><span class="o">.</span><span class="n">get_end_iter</span><span class="p">()</span>
+		<span class="c"># printD(&quot;\nite: %d %d&quot; %(ite.get_line(), ite.get_line_offset()))</span>
+
+		<span class="c"># inserisco testo con tag</span>
+		<span class="n">buff</span><span class="o">.</span><span class="n">insert_with_tags_by_name</span><span class="p">(</span><span class="n">ite</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span>
+		<span class="c"># aggiorno lo scrollbar</span>
+		<span class="n">text</span><span class="o">.</span><span class="n">scroll_mark_onscreen</span><span class="p">(</span><span class="n">buff</span><span class="o">.</span><span class="n">get_insert</span><span class="p">())</span>
+		<span class="c"># risolve il bug della prima scrittura</span>
+		<span class="c"># text.grab_focus()</span>
+
+		<span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">if</span> <span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">:</span>
+				<span class="n">ite</span><span class="o">.</span><span class="n">backward_line</span><span class="p">()</span>
+
+		<span class="c"># # aggiorno le linee acquisite</span>
+		<span class="c"># num = buff.get_line_count()</span>
+		<span class="c"># printD(&quot;%s(%d)&quot; %(str, num), &#39;&#39;)</span>
+
+	<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">msg</span><span class="p">):</span>
+		<span class="c"># sovrascrittura del metodo per permettere la scrittura con i colori</span>
+		<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">write</span>
+		<span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">msg</span>
+		<span class="c"># torno al default</span>
+		<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">__stdout__</span>
+
+	<span class="c"># def cursor(*args):</span>
+	<span class="c"># 	x, y = text.get_pointer()</span>
+	<span class="c"># 	printD(&quot;\na) %d %d&quot; %(x,y)) </span>
+	<span class="c"># 	x, y = text.window_to_buffer_coords(Gtk.TEXT_WINDOW_WIDGET, x, y)</span>
+	<span class="c"># 	printD(&quot;\nb) %d %d&quot; %(x,y)) </span>
+	<span class="c"># 	# if text.get_iter_at_location(x, y).has_tag(errTag):</span>
+	<span class="c"># 	# # Code here</span>
+<span class="c"># &lt;-</span>
+	<span class="c">#          0,   1,   2,   3,   4,    5,    6,       7 </span>
+	<span class="c"># fram,[labe,xBox,buff,text,cTag,clear,write,writeTag]</span>
+	<span class="k">return</span> <span class="n">fram</span><span class="p">,[</span><span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">buff</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">cTag</span><span class="p">,</span><span class="n">clear</span><span class="p">,</span><span class="n">write</span><span class="p">,</span><span class="n">writeTag</span><span class="p">]</span> <span class="c">#,cursor]</span>
+</pre></div>
+</div>
+<p>Notate che nell&#8217;istanza del <strong>TextBuffer</strong> definiamo dei <strong>tags</strong> che altro non sono degli attributi che possiamo associare a delle aree del buffer. In questo caso servono a cambiare i colori di fondo e del testo.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#tag</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;blaWhi&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;redWhi&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;greWhi&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;bluWhi&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;redBla&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
+	<span class="n">buff</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s">&quot;whiBlu&quot;</span><span class="p">,</span><span class="n">foreground</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="n">background</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+	<span class="n">cTag</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;blaWhi&quot;</span><span class="p">,]</span>
+</pre></div>
+</div>
+<p>Interessante notare le <strong>callbacks</strong> definite che ci aiuteranno nelle operazioni di</p>
+<p><em>Pulisci il buffer</em></p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; pulitura del textBuffer &quot;&quot;&quot;</span>
+		<span class="n">sta</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">buff</span><span class="o">.</span><span class="n">get_bounds</span><span class="p">()</span>
+		<span class="n">buff</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">sta</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Leggi il buffer</em></p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+		<span class="s">&quot;funzione di lettura dell&#39;intero buffer&quot;</span>
+		<span class="n">sta</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">buff</span><span class="o">.</span><span class="n">get_bounds</span><span class="p">()</span>
+		<span class="k">return</span> <span class="n">buff</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">sta</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Scrivi nel buffer</em></p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="o">*</span><span class="n">msg</span><span class="p">):</span>
+		<span class="s">&quot;funzione di scrittura per il redirect&quot;</span>
+		<span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ele</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+				<span class="n">writeTag</span><span class="p">(</span><span class="n">ele</span><span class="p">,</span> <span class="n">cTag</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><em>Scrivi nel buffer assegnando il tag</em></p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="k">def</span> <span class="nf">writeTag</span><span class="p">(</span><span class="nb">str</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s">&quot;blkWhi&quot;</span><span class="p">):</span>
+		<span class="s">&quot;inserisco la stringa nel buffer&quot;</span>
+		<span class="c">#ite = curs</span>
+		<span class="n">ite</span> <span class="o">=</span> <span class="n">buff</span><span class="o">.</span><span class="n">get_end_iter</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testtxtview">
+<h2>testTxtView</h2>
+<p>Come possiamo vedere dal test la cosa importante e&#8217; dare una referenza agli oggetti che ritorna la nostra istanza.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">testTxtView</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="c">#myTxtView</span>
+	<span class="c">#          0,   1,   2,   3,   4,    5,    6,       7 </span>
+	<span class="c"># fram,[labe,xBox,buff,text,cTag,clear,write,writeTag]</span>
+	<span class="n">fram</span><span class="p">,</span><span class="n">othe</span> <span class="o">=</span> <span class="n">myTxtView</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;myTxtView&#39;</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span>
+								<span class="n">widt</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">heig</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> 
+								<span class="n">font</span><span class="o">=</span><span class="s">&quot;courier 9&quot;</span><span class="p">,</span> <span class="n">edit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+								<span class="n">left</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">righ</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bord</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+								<span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in apllication</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">vBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">fram</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+	
+	<span class="c"># referenzio gli attributi</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">cTag</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+	<span class="c"># referenzio i metodi</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="c"># *msg</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">wriTg</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="c"># str=&quot;&quot;, tag=&quot;blaWhi&quot;</span>
+	<span class="c"># self.curs  = othe[8]</span>
+	
+	<span class="c">#self.clear()</span>
+	<span class="c"># imposto colore di default</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">cTag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;greWhi&quot;</span>
+	<span class="c"># scrivo qualcosa col colore di default</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;ciao mondo&#39;</span><span class="p">)</span>
+	<span class="c"># cambio colore al volo</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">wriTg</span><span class="p">(</span><span class="s">&#39; crudele</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&quot;redWhi&quot;</span><span class="p">)</span>    
+	<span class="c"># self.write(&#39; crudele\n&#39;)    </span>
+	<span class="c"># self.curs()</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;by Orcim...</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">)</span>
+	<span class="c"># self.curs()</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;uffi&#39;</span><span class="p">)</span>
+	
+	<span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="c"># chiamo la pulizia del buffText dopo N sec</span>
+		<span class="c"># reference del Tick (time out every mSec)</span>
+		<span class="n">GObject</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">)</span>
+		<span class="c">#GObject.timeout_add(2000, call[2], &quot;io sono una print\n&quot;)</span>
+<span class="c"># &lt;-</span>
+	<span class="k">return</span> <span class="n">fram</span>
+</pre></div>
+</div>
+<p>Solo quelli che vogliamo usare successivamente.</p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="c"># referenzio gli attributi</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">cTag</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+	<span class="c"># referenzio i metodi</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="c"># *msg</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">wriTg</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="c"># str=&quot;&quot;, tag=&quot;blaWhi&quot;</span>
+</pre></div>
+</div>
+<p>Se proviamo ad avviare il <strong>test</strong> otterremo quanto segue.</p>
+<div class="figure align-center" id="id1">
+<img alt="alternate text" src="../../../_images/testTxtView.png" />
+<p class="caption"><span class="caption-text"><em>testTxtView in esecuzione</em>.</span></p>
+</div>
+</div>
+<div class="section" id="timeout">
+<h2>timeout</h2>
+<p>Per arricchire il nostro test ho voluto inserire un pezzo di codice che viene molto utile quando si vuol eseguire qualche metodo in modo differito.</p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="c"># chiamo la pulizia del buffText dopo N sec</span>
+		<span class="c"># reference del Tick (time out every mSec)</span>
+		<span class="n">GObject</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="myscrolled">
+<h2>myScrolled</h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myScrolled</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myScrolled</span><span class="p">(</span><span class="n">obje</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bord</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+			   <span class="n">widt</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">heig</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+			   <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_IN</span><span class="p">,</span> 
+			   <span class="n">poli</span><span class="o">=</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">POLICY_AUTOMATIC</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">POLICY_AUTOMATIC</span><span class="p">)):</span>
+	<span class="sd">&quot;&quot;&quot; crea un scroller con gli attributi passati</span>
+<span class="sd">		</span>
+<span class="sd">		-&gt; obje oggetto da inserire</span>
+<span class="sd">		-&gt; bord margine esterno dello scroolbar</span>
+<span class="sd">		-&gt; widt ampiezza</span>
+<span class="sd">		-&gt; heig altezza</span>
+<span class="sd">		-&gt; shad tipo di cornice</span>
+<span class="sd">			Gtk.SHADOW_NONE, Gtk.SHADOW_IN, Gtk.SHADOW_OUT, </span>
+<span class="sd">			Gtk.SHADOW_ETCHED_IN, Gtk.SHADOW_ETCHED_OUT</span>
+<span class="sd">		-&gt; poli politiche di visibilita delle barre di scorrimento</span>
+<span class="sd">			(horizontal,vertical)</span>
+<span class="sd">			POLICY_AUTOMATIC whether you need</span>
+<span class="sd">			POLICY_ALWAYS leave the scrollbars</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<span class="c">#scrolledWindow</span>
+	<span class="c"># create a new scrolled window.</span>
+	<span class="n">scro</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ScrolledWindow</span><span class="p">()</span>
+	<span class="n">scro</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+	<span class="n">scro</span><span class="o">.</span><span class="n">set_border_width</span><span class="p">(</span><span class="n">bord</span><span class="p">)</span>
+	<span class="c"># width, height</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">widt</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">heig</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="mi">1</span><span class="p">)):</span>
+		<span class="n">scro</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="n">widt</span><span class="p">,</span> <span class="n">heig</span><span class="p">)</span>
+	<span class="c"># shadow</span>
+	<span class="n">scro</span><span class="o">.</span><span class="n">set_shadow_type</span> <span class="p">(</span><span class="n">shad</span><span class="p">)</span>
+	<span class="c"># police</span>
+	<span class="n">scro</span><span class="o">.</span><span class="n">set_policy</span><span class="p">(</span><span class="o">*</span><span class="n">poli</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">obje</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+		<span class="n">scro</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">obje</span><span class="p">)</span>
+<span class="c"># &lt;-</span>
+	<span class="k">return</span> <span class="n">scro</span>    
+</pre></div>
+</div>
+<p>Questo è un oggetto per semplicare l&#8217;istanza e l&#8217;applicazione delle barre di scorrimento. Potete notare la sua applicazione nel codice precedente in <strong>myTxView</strong>. Funge da contenitore!</p>
+</div>
+<div class="section" id="package">
+<h2>Package</h2>
+<p>La struttura aggiornata del nostro package è la seguente:</p>
+<div class="highlight-rest"><div class="highlight"><pre>l00_start.py
+l01_startGtk.py
+my00init.py
+myWidg/
+  __init__.py
+  my00init.py
+  my00initGtk.py
+  my01Box.py
+  my02Label.py
+  my02Entry.py
+  my02TxtView.py
+  myWind.py
+  myApp.py
+</pre></div>
+</div>
+<p>Per scaricare la nuova versione <a class="reference download internal" href="../../../_downloads/20150831.zip"><span class="xref download docutils literal"><span class="pre">20150831.zip</span></span></a></p>
+</div>
+<div class="section" id="saluti">
+<h2>Saluti</h2>
+<p>Bene anche questo post è finito.</p>
+<p>Nel prossimo post vedremo gli oggetti <strong>button</strong>.</p>
+<p>Ciao alla prossima. (stay tune!)</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Scritto da Orcim</span>
+        </div>
+        <div class="categories">
+            <span>
+                Pubblicato in:
+                <a href="../../../categories/programming.html">programming</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tag:
+                <a href="../../../tags/programming.html">programming</a>, <a href="../../../tags/python.html">python</a>, <a href="../../../tags/gtk.html">gtk</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="../28/myentry.html">myEntry</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/08/31/mytxtview";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Cerca</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section><div class="widget">
+    <h1>Articoli Recenti</h1>
+    <ul><li>
+            <a href="#">myTextView</a>
+        </li><li>
+            <a href="../28/myentry.html">myEntry</a>
+        </li><li>
+            <a href="../27/mylabel.html">myLabel</a>
+        </li><li>
+            <a href="../26/boxevent.html">boxEvent</a>
+        </li><li>
+            <a href="../25/myBox.html">myBox</a>
+        </li><li>
+            <a href="../24/windows.html">Windows</a>
+        </li><li>
+            <a href="../23/package.html">Package</a>
+        </li><li>
+            <a href="../22/applicazione_base.html">Applicazione Base</a>
+        </li><li>
+            <a href="../21/box.html">Contenitori</a>
+        </li><li>
+            <a href="../20/gtk.html">Gtk</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Tag Cloud</h1>
+      <a href="../../../tags/gtk.html" style="font-size: 17pt">gtk</a>&nbsp;&nbsp;
+      <a href="../../../tags/programming.html" style="font-size: 20pt">programming</a>&nbsp;&nbsp;
+      <a href="../../../tags/python.html" style="font-size: 18pt">python</a>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2015, Orcim. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>
