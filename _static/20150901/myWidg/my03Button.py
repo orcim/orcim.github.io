@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-15 -*-
-""" widgets definiti:
+# -*- coding: utf-8 -*-
+""" lista degli oggetti definiti:
 
     - myButton       - myButList
     - myButFrame     - myButFraList
@@ -8,15 +8,20 @@
     - myButSwiFrame  - myButSwiFraList    
     
 """
-myRev = "(rev.140525)"
+
+myRev = "(rev.140901)"
 #-----------------------------------------------------------------------------
-# myModules
+# Modules
 #-----------------------------------------------------------------------------
 from my00init import *
 from gi.repository import Pango
 
-from myApp import MyWind
-from my01Box import myViewObject, myBoxList, myFrame
+#-----------------------------------------------------------------------------
+# myModules
+#-----------------------------------------------------------------------------
+from myWind import MyWind #(contiene my00initGtk)
+from my01Box import myViewObject, myBox, myBoxList, myFrame
+
 #-----------------------------------------------------------------------------
 # myButton
 #-----------------------------------------------------------------------------
@@ -41,7 +46,7 @@ def myButton(name='my_Button',
     butt.show()
     # confermo l'immagine attuale
     butt.props.image = butt.get_image()
-    # modifico la label passata
+    # assegno il nome alla label del bottone
     butt.props.label = name
     
     # in assenza di callback usa quella di debug
@@ -60,6 +65,8 @@ def testButton():
     obje, othe = myButton(name='my_Button', 
                           icon=Gtk.STOCK_YES, 
                           call=on_clicked, data=[])
+    # abilito la vista dell'icona che di default è nascosta
+    obje.set_always_show_image (True)    
 # <-
     return obje
 
@@ -96,12 +103,17 @@ def testButList():
     def on_clicked(widg, ind, *data):
         print "b", ind, data
     # xBox, [butt,call] * N
-    obje, othe = myButList(name=["_Read","_Write","_Defau"], 
+    obje, othe = myButList(name=["_Read","_Write","_Default"], 
                            icon=Gtk.STOCK_NO,
                            call=on_clicked, data=[],
                            tBox='v', aBox=[False, False, 1])
-    # cambio icona al primo bottone
+    # abilito la vista dell'icona che di default è nascosta
+    othe[0][0].set_always_show_image (True)    
+    othe[1][0].set_always_show_image (True)    
+    othe[2][0].set_always_show_image (True)    
+    # cambio icona ad alcuni bottoni
     othe[0][0].props.image = Gtk.Image.new_from_stock(Gtk.STOCK_YES, Gtk.ICON_SIZE_BUTTON)
+    othe[1][0].props.image = Gtk.Image.new_from_stock(Gtk.STOCK_STOP, Gtk.ICON_SIZE_BUTTON)
 #myFrame    
     # fram,[labe,xBox]
     obj1, oth1 = myFrame(name='myButton', obje=obje, colo='black',
@@ -115,7 +127,8 @@ def testButList():
 #-----------------------------------------------------------------------------
 # myButFrame
 #-----------------------------------------------------------------------------
-def myButFrame(name='my_Button', 
+def myButFrame(name='my_Button',
+               nBut='myButton',  
                icon=Gtk.STOCK_OK, 
                call=None, data=['dati'],
                bFra=1, sFra=Gtk.SHADOW_ETCHED_OUT, 
@@ -124,6 +137,7 @@ def myButFrame(name='my_Button',
         alla premuta del bottone viene eseguita la funzione associata
     
         -> name nome associato al frame label
+        -> nBut nome associato al button label
         -> icon tipo di icona associata
         -> call funzione da eseguire su evento
         -> data dati da passare alla funzione
@@ -142,8 +156,8 @@ def myButFrame(name='my_Button',
     butt.show()
     # confermo l'immagine attuale
     butt.props.image = butt.get_image()
-    # elimino la label del bottone
-    butt.props.label = ""
+    # assegno il nome alla label del bottone
+    butt.props.label = nBut
 #myFrame
     #fram, [labe, xBox]
     obje, othe = myFrame(name, butt, 'black', bFra, sFra, tFra, aFra)
@@ -163,6 +177,7 @@ def testButFrame():
         print "b", data
     # fram, [labe, xBox, butt, call]
     obje, othe = myButFrame(name='myButFrame', 
+                            nBut='myButton',
                             icon=Gtk.STOCK_OK, 
                             call=on_clicked, data=[],
                             bFra=1, sFra=Gtk.SHADOW_ETCHED_OUT, 
@@ -174,6 +189,7 @@ def testButFrame():
 # myButFraList
 #-----------------------------------------------------------------------------
 def myButFraList(name=["Read","Write","Default"], 
+                 nBut=["","",""], 
                  icon=Gtk.STOCK_YES,
                  call=None, data=['dati'],
                  bFra=1, sFra=Gtk.SHADOW_ETCHED_OUT, 
@@ -190,7 +206,7 @@ def myButFraList(name=["Read","Write","Default"],
     def myList(ind):
 #myButFrame
         # fram, [labe, xBox, butt, call]
-        return myButFrame(name[ind], icon,
+        return myButFrame(name[ind], nBut[ind], icon,
                           call, [ind, data],
                           bFra, sFra, tFra, aFra)
 #myBoxList
@@ -207,13 +223,20 @@ def testButFraList():
         print "b", ind, data
     # xBox, [fram, [labe, xBox, butt, call]] * N
     obje, othe = myButFraList(name=["Read","Write","Default"], 
+                              nBut=["","",""], 
                               icon=Gtk.STOCK_NO,
                               call=on_clicked, data=[],
                               bFra=1, sFra=Gtk.SHADOW_ETCHED_OUT, 
                               tFra='v', aFra=[False, False, 1],
                               tBox='h', aBox=[False, False, 1])
-    # cambio icona al primo bottone
+    # abilito la vista dell'icona che di default è nascosta
+    othe[0][1][2].set_always_show_image (True)    
+    othe[1][1][2].set_always_show_image (True)    
+    othe[2][1][2].set_always_show_image (True)    
+    # cambio icona ad alcuni bottoni
     othe[0][1][2].props.image = Gtk.Image.new_from_stock(Gtk.STOCK_YES, Gtk.ICON_SIZE_BUTTON)
+    othe[1][1][2].props.image = Gtk.Image.new_from_stock(Gtk.STOCK_YES, Gtk.ICON_SIZE_BUTTON)
+    othe[2][1][2].props.image = Gtk.Image.new_from_stock(Gtk.STOCK_YES, Gtk.ICON_SIZE_BUTTON)
 
     #debug
     myViewObject(obje, othe)
@@ -491,7 +514,14 @@ def myTry01():
 # Main
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
-    choi = 11
+
+    # test arguments
+    if len(sys.argv) == 1:
+        # no arguments (scelgo io)
+        choi = 3
+    else:
+        # get first argument (scelta esterna)
+        choi = int(sys.argv[1])
     
     if choi == 1:
         obje = testButton()
@@ -512,7 +542,7 @@ if __name__ == "__main__":
         obje = testButSwiFraList()
         
     # istanza l'applicazione principale
-    self = MyWind(width=None, height=800, title="myBox\ %s" %myRev, center=True, color="#b0b0b0")
+    self = MyWind(width=None, height=800, title="myButton %s" %myRev, center=True, color="#b0b0b0")
     self.vBox.pack_start(child=obje, expand=False, fill=False, padding=0)
     # cediamo il controllo alle gtk
     Gtk.main()

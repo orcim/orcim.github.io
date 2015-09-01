@@ -4,6 +4,7 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
+   2015/09/01/mybutton
    2015/08/31/mytxtview
    2015/08/28/myentry
    2015/08/27/mylabel
