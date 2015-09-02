@@ -28,7 +28,7 @@
         <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="../../../_static/plugins.js"></script>
         <script src="../../../_static/main.js"></script>
-        <link rel="next" title="myTextView" href="../../08/31/mytxtview.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+        <link rel="next" title="myTextView" href="../../08/31/mytxtview.html" /><link rel="prev" title="myButton (il seguito)" href="../02/mybutton1.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '1.5',
@@ -77,35 +77,35 @@
 <span class="c"># myButton</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">myButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;my_Button&#39;</span><span class="p">,</span> 
-             <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_OK</span><span class="p">,</span> 
-             <span class="n">call</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dati&#39;</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot; crea un bottone con associato una icona e una etichetta</span>
-<span class="sd">        alla premuta del bottone viene eseguita la callback associata</span>
-<span class="sd">    </span>
-<span class="sd">        -&gt; name nome associato alla label</span>
-<span class="sd">        -&gt; icon tipo di icona associata</span>
-<span class="sd">        -&gt; call funzione da eseguire su evento</span>
-<span class="sd">        -&gt; data dati da passare alla funzione</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c">#callback debug    </span>
-    <span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">widg</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">data</span>
+			 <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_OK</span><span class="p">,</span> 
+			 <span class="n">call</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dati&#39;</span><span class="p">]):</span>
+	<span class="sd">&quot;&quot;&quot; crea un bottone con associato una icona e una etichetta</span>
+<span class="sd">		alla premuta del bottone viene eseguita la callback associata</span>
+<span class="sd">	</span>
+<span class="sd">		-&gt; name nome associato alla label</span>
+<span class="sd">		-&gt; icon tipo di icona associata</span>
+<span class="sd">		-&gt; call funzione da eseguire su evento</span>
+<span class="sd">		-&gt; data dati da passare alla funzione</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="c">#callback debug    </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">widg</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">data</span>
 <span class="c">#button</span>
-    <span class="c"># istanzio un bottone</span>
-    <span class="n">butt</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">stock</span><span class="o">=</span><span class="n">icon</span><span class="p">)</span>
-    <span class="c"># lo rendo visibile</span>
-    <span class="n">butt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    <span class="c"># confermo l&#39;immagine attuale</span>
-    <span class="n">butt</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">butt</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
-    <span class="c"># assegno il nome alla label del bottone</span>
-    <span class="n">butt</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">name</span>
-    
-    <span class="c"># in assenza di callback usa quella di debug</span>
-    <span class="k">if</span> <span class="n">call</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">call</span> <span class="o">=</span> <span class="n">on_clicked</span>
-    <span class="n">butt</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;clicked&#39;</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+	<span class="c"># istanzio un bottone</span>
+	<span class="n">butt</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">stock</span><span class="o">=</span><span class="n">icon</span><span class="p">)</span>
+	<span class="c"># lo rendo visibile</span>
+	<span class="n">butt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+	<span class="c"># confermo l&#39;immagine attuale</span>
+	<span class="n">butt</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">butt</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
+	<span class="c"># assegno il nome alla label del bottone</span>
+	<span class="n">butt</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">name</span>
+	
+	<span class="c"># in assenza di callback usa quella di debug</span>
+	<span class="k">if</span> <span class="n">call</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+		<span class="n">call</span> <span class="o">=</span> <span class="n">on_clicked</span>
+	<span class="n">butt</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;clicked&#39;</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
 <span class="c"># &lt;-        </span>
-    <span class="k">return</span> <span class="n">butt</span><span class="p">,</span> <span class="n">call</span>
+	<span class="k">return</span> <span class="n">butt</span><span class="p">,</span> <span class="n">call</span>
 </pre></div>
 </div>
 </div>
@@ -115,17 +115,17 @@
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">testButton</span><span class="p">():</span>
 <span class="c">#myButton</span>
-    <span class="c"># ridefinisco la callback        </span>
-    <span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">widg</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">data</span>
-    <span class="c"># butt, call</span>
-    <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;my_Button&#39;</span><span class="p">,</span> 
-                          <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> 
-                          <span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[])</span>
-    <span class="c"># abilito la vista dell&#39;icona che di default è nascosta</span>
-    <span class="n">obje</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">widg</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">data</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;my_Button&#39;</span><span class="p">,</span> 
+						  <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> 
+						  <span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[])</span>
+	<span class="c"># abilito la vista dell&#39;icona che di default è nascosta</span>
+	<span class="n">obje</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
 <span class="c"># &lt;-</span>
-    <span class="k">return</span> <span class="n">obje</span>
+	<span class="k">return</span> <span class="n">obje</span>
 </pre></div>
 </div>
 <p>Se proviamo ad avviare il <strong>test</strong> otterremo quanto segue.</p>
@@ -141,28 +141,28 @@
 <span class="c"># myButton List</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">myButList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;_Read&quot;</span><span class="p">,</span><span class="s">&quot;_Write&quot;</span><span class="p">,</span><span class="s">&quot;_Defau&quot;</span><span class="p">],</span> 
-              <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_NO</span><span class="p">,</span>
-              <span class="n">call</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dati&#39;</span><span class="p">],</span>
-              <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
-    <span class="c">#callback debug</span>
-    <span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">data</span>
-    <span class="c"># in assenza di callback uso quella di debug</span>
-    <span class="k">if</span> <span class="n">call</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">call</span> <span class="o">=</span> <span class="n">on_clicked</span>
+			  <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_NO</span><span class="p">,</span>
+			  <span class="n">call</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dati&#39;</span><span class="p">],</span>
+			  <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+	<span class="c">#callback debug</span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">data</span>
+	<span class="c"># in assenza di callback uso quella di debug</span>
+	<span class="k">if</span> <span class="n">call</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+		<span class="n">call</span> <span class="o">=</span> <span class="n">on_clicked</span>
 
-    <span class="c"># funzione che istanzia oggetti tipo</span>
-    <span class="k">def</span> <span class="nf">myList</span><span class="p">(</span><span class="n">ind</span><span class="p">):</span>
+	<span class="c"># funzione che istanzia oggetti tipo</span>
+	<span class="k">def</span> <span class="nf">myList</span><span class="p">(</span><span class="n">ind</span><span class="p">):</span>
 <span class="c">#myButton        </span>
-        <span class="c"># butt,call</span>
-        <span class="k">return</span> <span class="n">myButton</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">icon</span><span class="p">,</span> 
-                        <span class="n">call</span><span class="p">,</span> <span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="n">data</span><span class="p">])</span>
+		<span class="c"># butt,call</span>
+		<span class="k">return</span> <span class="n">myButton</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">icon</span><span class="p">,</span> 
+						<span class="n">call</span><span class="p">,</span> <span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="n">data</span><span class="p">])</span>
 <span class="c">#myBoxList</span>
-    <span class="c"># xBox, [butt,call] * N</span>
-    <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myBoxList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">tBox</span><span class="o">=</span><span class="n">tBox</span><span class="p">,</span> 
-                           <span class="n">aBox</span><span class="o">=</span><span class="n">aBox</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">myList</span><span class="p">)</span>
+	<span class="c"># xBox, [butt,call] * N</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myBoxList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">tBox</span><span class="o">=</span><span class="n">tBox</span><span class="p">,</span> 
+						   <span class="n">aBox</span><span class="o">=</span><span class="n">aBox</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">myList</span><span class="p">)</span>
 <span class="c"># &lt;-</span>
-    <span class="k">return</span> <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span>
+	<span class="k">return</span> <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span>
 </pre></div>
 </div>
 </div>
@@ -172,30 +172,30 @@
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">testButList</span><span class="p">():</span>
 <span class="c">#myButList    </span>
-    <span class="c"># ridefinisco la callback</span>
-    <span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">data</span>
-    <span class="c"># xBox, [butt,call] * N</span>
-    <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;_Read&quot;</span><span class="p">,</span><span class="s">&quot;_Write&quot;</span><span class="p">,</span><span class="s">&quot;_Default&quot;</span><span class="p">],</span> 
-                           <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_NO</span><span class="p">,</span>
-                           <span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
-                           <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="c"># abilito la vista dell&#39;icona che di default è nascosta</span>
-    <span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
-    <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
-    <span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
-    <span class="c"># cambio icona ad alcuni bottoni</span>
-    <span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
-    <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_STOP</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
+	<span class="c"># ridefinisco la callback</span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">data</span>
+	<span class="c"># xBox, [butt,call] * N</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;_Read&quot;</span><span class="p">,</span><span class="s">&quot;_Write&quot;</span><span class="p">,</span><span class="s">&quot;_Default&quot;</span><span class="p">],</span> 
+						   <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_NO</span><span class="p">,</span>
+						   <span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
+						   <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># abilito la vista dell&#39;icona che di default è nascosta</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
+	<span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
+	<span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
+	<span class="c"># cambio icona ad alcuni bottoni</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_STOP</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
 <span class="c">#myFrame    </span>
-    <span class="c"># fram,[labe,xBox]</span>
-    <span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;myButton&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
-                         <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
-                         <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;v&#39;</span> <span class="p">)</span>
-    <span class="c">#debug</span>
-    <span class="n">myViewObject</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="n">othe</span><span class="p">)</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;myButton&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;v&#39;</span> <span class="p">)</span>
+	<span class="c">#debug</span>
+	<span class="n">myViewObject</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="n">othe</span><span class="p">)</span>
 <span class="c"># &lt;-</span>
-    <span class="k">return</span> <span class="n">obj1</span>
+	<span class="k">return</span> <span class="n">obj1</span>
 </pre></div>
 </div>
 <p>La lista delle icone predefinite la potete trovare al seguente link: <a class="reference external" href="http://www.pygtk.org/pygtk2reference/gtk-stock-items.html">icons</a></p>
@@ -212,47 +212,47 @@
 <span class="c"># myButFrame</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">myButFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;my_Button&#39;</span><span class="p">,</span>
-               <span class="n">nBut</span><span class="o">=</span><span class="s">&#39;myButton&#39;</span><span class="p">,</span>  
-               <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_OK</span><span class="p">,</span> 
-               <span class="n">call</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dati&#39;</span><span class="p">],</span>
-               <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
-               <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot; crea un bottone con associato una icona in un frame con etichetta</span>
-<span class="sd">        alla premuta del bottone viene eseguita la funzione associata</span>
-<span class="sd">    </span>
-<span class="sd">        -&gt; name nome associato al frame label</span>
-<span class="sd">        -&gt; nBut nome associato al button label</span>
-<span class="sd">        -&gt; icon tipo di icona associata</span>
-<span class="sd">        -&gt; call funzione da eseguire su evento</span>
-<span class="sd">        -&gt; data dati da passare alla funzione</span>
-<span class="sd">        -&gt; bFra bordo riservato all&#39;esterno</span>
-<span class="sd">        -&gt; sFra tipo di cornice</span>
-<span class="sd">        -&gt; tFra tipo di contenitore v/h </span>
-<span class="sd">        -&gt; aFra attributi del contenitore</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c">#callback debug    </span>
-    <span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">data</span>
+			   <span class="n">nBut</span><span class="o">=</span><span class="s">&#39;myButton&#39;</span><span class="p">,</span>  
+			   <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_OK</span><span class="p">,</span> 
+			   <span class="n">call</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dati&#39;</span><span class="p">],</span>
+			   <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+			   <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+	<span class="sd">&quot;&quot;&quot; crea un bottone con associato una icona in un frame con etichetta</span>
+<span class="sd">		alla premuta del bottone viene eseguita la funzione associata</span>
+<span class="sd">	</span>
+<span class="sd">		-&gt; name nome associato al frame label</span>
+<span class="sd">		-&gt; nBut nome associato al button label</span>
+<span class="sd">		-&gt; icon tipo di icona associata</span>
+<span class="sd">		-&gt; call funzione da eseguire su evento</span>
+<span class="sd">		-&gt; data dati da passare alla funzione</span>
+<span class="sd">		-&gt; bFra bordo riservato all&#39;esterno</span>
+<span class="sd">		-&gt; sFra tipo di cornice</span>
+<span class="sd">		-&gt; tFra tipo di contenitore v/h </span>
+<span class="sd">		-&gt; aFra attributi del contenitore</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="c">#callback debug    </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">data</span>
 <span class="c">#button</span>
-    <span class="c"># istanzio un bottone</span>
-    <span class="n">butt</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">stock</span><span class="o">=</span><span class="n">icon</span><span class="p">)</span>
-    <span class="c"># lo rendo visibile</span>
-    <span class="n">butt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    <span class="c"># confermo l&#39;immagine attuale</span>
-    <span class="n">butt</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">butt</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
-    <span class="c"># assegno il nome alla label del bottone</span>
-    <span class="n">butt</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">nBut</span>
+	<span class="c"># istanzio un bottone</span>
+	<span class="n">butt</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">stock</span><span class="o">=</span><span class="n">icon</span><span class="p">)</span>
+	<span class="c"># lo rendo visibile</span>
+	<span class="n">butt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+	<span class="c"># confermo l&#39;immagine attuale</span>
+	<span class="n">butt</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">butt</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
+	<span class="c"># assegno il nome alla label del bottone</span>
+	<span class="n">butt</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">nBut</span>
 <span class="c">#myFrame</span>
-    <span class="c">#fram, [labe, xBox]</span>
-    <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">butt</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">bFra</span><span class="p">,</span> <span class="n">sFra</span><span class="p">,</span> <span class="n">tFra</span><span class="p">,</span> <span class="n">aFra</span><span class="p">)</span>
-    
-    <span class="c"># in assenza di callback usa quella di debug</span>
-    <span class="k">if</span> <span class="n">call</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">call</span> <span class="o">=</span> <span class="n">on_clicked</span>
-    <span class="n">butt</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;clicked&#39;</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+	<span class="c">#fram, [labe, xBox]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">butt</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">bFra</span><span class="p">,</span> <span class="n">sFra</span><span class="p">,</span> <span class="n">tFra</span><span class="p">,</span> <span class="n">aFra</span><span class="p">)</span>
+	
+	<span class="c"># in assenza di callback usa quella di debug</span>
+	<span class="k">if</span> <span class="n">call</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+		<span class="n">call</span> <span class="o">=</span> <span class="n">on_clicked</span>
+	<span class="n">butt</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;clicked&#39;</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
 <span class="c"># &lt;-</span>
-    <span class="c">#fram, [labe, xBox, butt, call]        </span>
-    <span class="k">return</span> <span class="n">obje</span><span class="p">,</span> <span class="p">[</span><span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">butt</span><span class="p">,</span> <span class="n">call</span><span class="p">]</span>
+	<span class="c">#fram, [labe, xBox, butt, call]        </span>
+	<span class="k">return</span> <span class="n">obje</span><span class="p">,</span> <span class="p">[</span><span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">butt</span><span class="p">,</span> <span class="n">call</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -261,18 +261,18 @@
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">testButFrame</span><span class="p">():</span>
 <span class="c">#myButFrame</span>
-    <span class="c"># ridefinisco la callback        </span>
-    <span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">data</span>
-    <span class="c"># fram, [labe, xBox, butt, call]</span>
-    <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;myButFrame&#39;</span><span class="p">,</span> 
-                            <span class="n">nBut</span><span class="o">=</span><span class="s">&#39;myButton&#39;</span><span class="p">,</span>
-                            <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_OK</span><span class="p">,</span> 
-                            <span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
-                            <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
-                            <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">data</span>
+	<span class="c"># fram, [labe, xBox, butt, call]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;myButFrame&#39;</span><span class="p">,</span> 
+							<span class="n">nBut</span><span class="o">=</span><span class="s">&#39;myButton&#39;</span><span class="p">,</span>
+							<span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_OK</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
+							<span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="c"># &lt;-</span>
-    <span class="k">return</span> <span class="n">obje</span>
+	<span class="k">return</span> <span class="n">obje</span>
 </pre></div>
 </div>
 <p>Se proviamo ad avviare il <strong>test</strong> notiamo i 2 nomi diversi assegnati.</p>
@@ -288,32 +288,32 @@
 <span class="c"># myButFraList</span>
 <span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">myButFraList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Read&quot;</span><span class="p">,</span><span class="s">&quot;Write&quot;</span><span class="p">,</span><span class="s">&quot;Default&quot;</span><span class="p">],</span> 
-                 <span class="n">nBut</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">],</span> 
-                 <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span>
-                 <span class="n">call</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dati&#39;</span><span class="p">],</span>
-                 <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
-                 <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
-    <span class="c">#callback debug</span>
-    <span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">data</span>
-    <span class="c"># in assenza di callback uso quella di debug</span>
-    <span class="k">if</span> <span class="n">call</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">call</span> <span class="o">=</span> <span class="n">on_clicked</span>
+				 <span class="n">nBut</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">],</span> 
+				 <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span>
+				 <span class="n">call</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;dati&#39;</span><span class="p">],</span>
+				 <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+				 <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+				 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+	<span class="c">#callback debug</span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">data</span>
+	<span class="c"># in assenza di callback uso quella di debug</span>
+	<span class="k">if</span> <span class="n">call</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+		<span class="n">call</span> <span class="o">=</span> <span class="n">on_clicked</span>
 
-    <span class="c"># funzione che istanzia oggetti tipo</span>
-    <span class="k">def</span> <span class="nf">myList</span><span class="p">(</span><span class="n">ind</span><span class="p">):</span>
+	<span class="c"># funzione che istanzia oggetti tipo</span>
+	<span class="k">def</span> <span class="nf">myList</span><span class="p">(</span><span class="n">ind</span><span class="p">):</span>
 <span class="c">#myButFrame</span>
-        <span class="c"># fram, [labe, xBox, butt, call]</span>
-        <span class="k">return</span> <span class="n">myButFrame</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">nBut</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">icon</span><span class="p">,</span>
-                          <span class="n">call</span><span class="p">,</span> <span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="n">data</span><span class="p">],</span>
-                          <span class="n">bFra</span><span class="p">,</span> <span class="n">sFra</span><span class="p">,</span> <span class="n">tFra</span><span class="p">,</span> <span class="n">aFra</span><span class="p">)</span>
+		<span class="c"># fram, [labe, xBox, butt, call]</span>
+		<span class="k">return</span> <span class="n">myButFrame</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">nBut</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">icon</span><span class="p">,</span>
+						  <span class="n">call</span><span class="p">,</span> <span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="n">data</span><span class="p">],</span>
+						  <span class="n">bFra</span><span class="p">,</span> <span class="n">sFra</span><span class="p">,</span> <span class="n">tFra</span><span class="p">,</span> <span class="n">aFra</span><span class="p">)</span>
 <span class="c">#myBoxList</span>
-    <span class="c"># xBox, [fram, [labe, xBox, butt, call]] * N</span>
-    <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myBoxList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">tBox</span><span class="o">=</span><span class="n">tBox</span><span class="p">,</span> 
-                           <span class="n">aBox</span><span class="o">=</span><span class="n">aBox</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">myList</span><span class="p">)</span>
+	<span class="c"># xBox, [fram, [labe, xBox, butt, call]] * N</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myBoxList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">tBox</span><span class="o">=</span><span class="n">tBox</span><span class="p">,</span> 
+						   <span class="n">aBox</span><span class="o">=</span><span class="n">aBox</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">myList</span><span class="p">)</span>
 <span class="c"># &lt;-</span>
-    <span class="k">return</span> <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span>
+	<span class="k">return</span> <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span>
 </pre></div>
 </div>
 </div>
@@ -323,30 +323,30 @@
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">testButFraList</span><span class="p">():</span>
 <span class="c">#myButFraList    </span>
-    <span class="c"># ridefinisco la callback</span>
-    <span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">data</span>
-    <span class="c"># xBox, [fram, [labe, xBox, butt, call]] * N</span>
-    <span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButFraList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Read&quot;</span><span class="p">,</span><span class="s">&quot;Write&quot;</span><span class="p">,</span><span class="s">&quot;Default&quot;</span><span class="p">],</span> 
-                              <span class="n">nBut</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">],</span> 
-                              <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_NO</span><span class="p">,</span>
-                              <span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
-                              <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
-                              <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                              <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="c"># abilito la vista dell&#39;icona che di default è nascosta</span>
-    <span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
-    <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
-    <span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
-    <span class="c"># cambio icona ad alcuni bottoni</span>
-    <span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
-    <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
-    <span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
+	<span class="c"># ridefinisco la callback</span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">print</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">data</span>
+	<span class="c"># xBox, [fram, [labe, xBox, butt, call]] * N</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButFraList</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Read&quot;</span><span class="p">,</span><span class="s">&quot;Write&quot;</span><span class="p">,</span><span class="s">&quot;Default&quot;</span><span class="p">],</span> 
+							  <span class="n">nBut</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">],</span> 
+							  <span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_NO</span><span class="p">,</span>
+							  <span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
+							  <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							  <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+							  <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># abilito la vista dell&#39;icona che di default è nascosta</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
+	<span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
+	<span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_always_show_image</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>    
+	<span class="c"># cambio icona ad alcuni bottoni</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_YES</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ICON_SIZE_BUTTON</span><span class="p">)</span>
 
-    <span class="c">#debug</span>
-    <span class="n">myViewObject</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="n">othe</span><span class="p">)</span>
+	<span class="c">#debug</span>
+	<span class="n">myViewObject</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="n">othe</span><span class="p">)</span>
 <span class="c"># &lt;-</span>
-    <span class="k">return</span> <span class="n">obje</span>
+	<span class="k">return</span> <span class="n">obje</span>
 </pre></div>
 </div>
 <p>Se proviamo ad avviare il <strong>test</strong> otterremo quanto segue.</p>
@@ -399,7 +399,7 @@ myWidg/
                 <a href="../../../tags/programming.html">programming</a>, <a href="../../../tags/python.html">python</a>, <a href="../../../tags/gtk.html">gtk</a></span>
         </div>
         </div><ul class="related clearfix">
-            <li class="left"></li>
+            <li class="left"> &laquo; <a href="../02/mybutton1.html">myButton (il seguito)</a></li>
             <li class="right"><a href="../../08/31/mytxtview.html">myTextView</a> &raquo; </li>
         </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/09/01/mybutton";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
     <h1><a href="#searchbox">Cerca</a></h1>
@@ -410,6 +410,8 @@ myWidg/
 </div></section><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
+            <a href="../02/mybutton1.html">myButton (il seguito)</a>
+        </li><li>
             <a href="#">myButton</a>
         </li><li>
             <a href="../../08/31/mytxtview.html">myTextView</a>
@@ -427,8 +429,6 @@ myWidg/
             <a href="../../08/23/package.html">Package</a>
         </li><li>
             <a href="../../08/22/applicazione_base.html">Applicazione Base</a>
-        </li><li>
-            <a href="../../08/21/box.html">Contenitori</a>
         </li></ul>
 </div>
 </section><section><div class="widget">
