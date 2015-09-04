@@ -4,6 +4,7 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
+   2015/09/04/myradbutton
    2015/09/03/mychkbutton
    2015/09/02/mybutton1
    2015/09/01/mybutton

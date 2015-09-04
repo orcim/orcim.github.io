@@ -8,7 +8,7 @@ Il widget **radio button** viene usato quando si ha la necessità di selezionare
 myRadButton
 -----------
 
-Per dover di cronaca il widget **myRadButton** come definito qui sotto a poco senso, visto che ha una sola scelta. L' ho fatto per mantenere una certa omogenità nelle definizioni rispetto agli altri oggetti.
+Per dover di cronaca il widget **myRadButton** come definito qui sotto a poco senso, visto che ha una sola scelta. L' ho fatto per mantenere una certa omogeneità nelle definizioni rispetto agli altri oggetti.
 
 .. literalinclude:: /_static/20150904/myWidg/my03RadButton.py
 	:language: python
@@ -25,8 +25,6 @@ Questo è il primo **widget** utile di questo modulo. L' attributo **valu** dura
 
 testRadButList
 --------------
-
-Anche qui ho aggiunto del codice di esempio. In questo caso vediamo come poter cambiare l' icona già assegnata di default.
 
 .. literalinclude:: /_static/20150904/myWidg/my03RadButton.py
 	:language: python
@@ -96,7 +94,7 @@ Saluti
 
 Per oggi mi fermo qui. 
 
-Nel prossimo post vedremo i ****.
+Nel prossimo post vedremo **la nostra prima applicazione reale**.
 
 Ciao alla prossima. (stay tune!)
 
