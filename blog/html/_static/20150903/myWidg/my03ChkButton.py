@@ -1,21 +1,26 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-15 -*-
-""" widgets definiti:
+# -*- coding: utf-8 -*-
+""" lista degli oggetti definiti:
 
 	- myChkButton      
 	- myChkButList
 	- myChkButLisLabel
 """
-myRev = "(rev.140525)"
+
+myRev = "(rev.150903)"
 #-----------------------------------------------------------------------------
-# myModules
+# Modules
 #-----------------------------------------------------------------------------
 from my00init import *
 from gi.repository import Pango
 
-from myApp import MyWind
+#-----------------------------------------------------------------------------
+# myModules
+#-----------------------------------------------------------------------------
+from myWind import MyWind #(contiene my00initGtk)
 from my01Box import myViewObject, myBoxList, myFrame
 from my02Label import myLabel
+
 #-----------------------------------------------------------------------------
 # myCheckButton
 #-----------------------------------------------------------------------------
@@ -52,8 +57,8 @@ def myChkButton(name='my_ChkButton',
 	butt.show()
 	# assegno il valore
 	butt.set_active(valu)
-	butt.colo = colo
 	# assegno colore
+	butt.colo = colo
 	if colo != None:
 		butt.modify_fg(Gtk.STATE_NORMAL, Gdk.color_parse(colo))
 		
@@ -71,12 +76,13 @@ def testChkButton():
 		ena = widg.get_active()
 		print "b) %s is %s" % (name, ("OFF", "ON")[ena])
 	# butt, call
-	obje, othe = myChkButton(name='my_ChkButton', 
-							 valu=True, colo='gray', 
-							 call= on_clicked, data=['myCheck',])
+	obje, othe = myChkButton(name='Abilita', 
+							 valu=False, colo='black', 
+							# call= on_clicked, data=['myCheck',])
+							 call= None, data=['myCheck',])
 #myFrame    
 	# fram,[labe,xBox]
-	obj1, oth1 = myFrame(name='enable', obje=obje, colo='black',
+	obj1, oth1 = myFrame(name='myChkButton', obje=obje, colo='black',
 						 bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
 						 tBox='v' )
 	#debug
@@ -87,7 +93,7 @@ def testChkButton():
 #-----------------------------------------------------------------------------
 # myCheckButtonList
 #-----------------------------------------------------------------------------
-def myChkButList(name=["_One","_Two","T_hree"], 
+def myChkButList(name=["One","Two","Three"], 
 				 valu=False, colo=None, 
 				 call=None, data=['dati'],
 				 tBox='h', aBox=[False, False, 1]):
@@ -125,7 +131,7 @@ def testChkButList():
 	obje, othe = myChkButList(name=["Uno","Due","Tre"], 
 							  valu=False, colo=None, 
 							  call=on_clicked1, data=['uffi'],
-							  tBox='h', aBox=[False, False, 1])
+							  tBox='v', aBox=[False, False, 1])
 #myFrame    
 	# fram,[labe,xBox]
 	obj1, oth1 = myFrame(name='myButton', obje=obje, colo='black',
@@ -139,7 +145,7 @@ def testChkButList():
 #-----------------------------------------------------------------------------
 # myCheckButtonListLabel
 #-----------------------------------------------------------------------------
-def myChkButLisLabel(name=["_One","_Two","T_hree"], 
+def myChkButLisLabel(name=["One","Two","Three"], 
 					 valu=False, colo=None, 
 					 call=None, data=['dati'],
 					 nLab='Label', cLab=None,
@@ -170,7 +176,7 @@ def myChkButLisLabel(name=["_One","_Two","T_hree"],
 						   aBox=aBox, func=myList)
 #myLabel
 	if cLab == None:
-		cLab=Gdk.color_parse('blue')
+		cLab= 'blue'
 	#name='myLabel', leng=0, prea=' ', post='', font='Arial 10', colo=Gdk.color_parse('black')
 	labe = myLabel(name=nLab, 
 				   leng=len(nLab)+1, prea=' ', post=' ', 
@@ -193,7 +199,7 @@ def testChkButLisLabel():
 		#print "b", widg, ind, idata
 		print "%05s" %widg.props.label.replace('_',''), "is", ("OFF", "ON")[ena]
 	# xBox, [labe, [butt, call] * N]
-	obje, othe = myChkButLisLabel(name=["_One","_Two","T_hree"], 
+	obje, othe = myChkButLisLabel(name=["One","Two","Three"], 
 								  valu=False, colo=None, 
 								  call=on_clicked, data=[],
 								  nLab='Label', cLab=None,
@@ -216,7 +222,14 @@ def myTry01():
 # Main
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
-	choi = 2
+
+	# test arguments
+	if len(sys.argv) == 1:
+		# no arguments (scelgo io)
+		choi = 3
+	else:
+		# get first argument (scelta esterna)
+		choi = int(sys.argv[1])
 
 	if choi == 1:
 		obje = testChkButton()
@@ -226,7 +239,7 @@ if __name__ == "__main__":
 		obje = testChkButLisLabel()
 		
 	# istanza l'applicazione principale
-	self = MyWind(width=None, height=800, title="myBox\ %s" %myRev, center=True, color="#b0b0b0")
+	self = MyWind(width=None, height=800, title="myChkButton %s" %myRev, center=True, color="#b0b0b0")
 	self.vBox.pack_start(child=obje, expand=False, fill=False, padding=0)
 	# cediamo il controllo alle gtk
 	Gtk.main()

@@ -1,53 +1,67 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-15 -*-
-""" widgets definiti:
+# -*- coding: utf-8 -*-
+""" lista degli oggetti definiti:
 
-	- myRadButton      
-	- myRadButList
-	- myRadButLisLabel
+	- myChkButton      
+	- myChkButList
+	- myChkButLisLabel
 """
-myRev = "(rev.120515)"
-myRev = "(rev.140525)"
+
+myRev = "(rev.150903)"
 #-----------------------------------------------------------------------------
-# myModules
+# Modules
 #-----------------------------------------------------------------------------
 from my00init import *
 from gi.repository import Pango
 
-from myApp import MyWind
+#-----------------------------------------------------------------------------
+# myModules
+#-----------------------------------------------------------------------------
+from myWind import MyWind #(contiene my00initGtk)
 from my01Box import myViewObject, myBoxList, myFrame
 from my02Label import myLabel
-#-----------------------------------------------------------------------------
-# myRadioButton
-#-----------------------------------------------------------------------------
-def myRadButton(name='my_RadButton', 
-				chil=None, valu=False, 
-				call=None, data=['dati']):
-	""" crea un bottone di tipo radio
-		alla premuta del bottone viene eseguita la callback associata
 
+#-----------------------------------------------------------------------------
+# myCheckButton
+#-----------------------------------------------------------------------------
+def myChkButton(name='my_ChkButton', 
+				valu=True, colo=None, 
+				call=None, data=['dati']):
+	""" crea un bottone di tipo check
+		alla premuta del bottone viene eseguita la callback associata
+	
 		-> name nome associato alla label
-		-> chil widget di riferimento
-		-> valu valore per attivare la selezione
+		-> valu valore da associare
+		-> colo colore assegnato al bottone
 		-> call funzione da eseguire su evento
-		-> data dati da passare alla funzione        
+		-> data dati da passare alla funzione
 	"""
-	#callback debug    
+	#callback debug
 	def on_clicked(widg, *data):
-		# descrivo solo quello attivato
-		try:
-			if widg.get_active():
-				print data[0]
-		except:
-			pass
-#radioButton
-	# istanzio un bottone
-	butt = Gtk.RadioButton(chil, name)
+		ena = widg.get_active()
+		print "a) %s is %s" % (data, ("OFF", "ON")[ena])
+		# change color
+		#labe = widg.get_child()
+		if widg.colo != None:
+			if ena:
+				widg.modify_fg(Gtk.STATE_NORMAL, Gdk.color_parse('green'))
+				#labe.modify_fg(Gtk.STATE_NORMAL, Gdk.color_parse('green'))
+			else:
+				widg.modify_fg(Gtk.STATE_NORMAL, Gdk.color_parse('red'))
+				#labe.modify_fg(Gtk.STATE_NORMAL, Gdk.color_parse('red'))
+
+#chkButton    
+	# istanzio l'oggetto
+	butt = Gtk.CheckButton(name)
 	# lo rendo visibile
 	butt.show()
-	# attivo il button
+	# assegno il valore
 	butt.set_active(valu)
-
+	# assegno colore
+	butt.colo = colo
+	if colo != None:
+		butt.modify_fg(Gtk.STATE_NORMAL, Gdk.color_parse(colo))
+		
 	# in assenza di callback usa quella di debug
 	if call == None:
 		call = on_clicked
@@ -55,23 +69,20 @@ def myRadButton(name='my_RadButton',
 # <-
 	return butt, call
 #-----------------------------------------------------------------------------
-def testRadButton():
-#radButton
+def testChkButton():
+#myChkButton
 	# ridefinisco la callback        
-	def on_clicked(widg, *data):
-		# descrivo solo quello attivato
-		try:
-			if widg.get_active():
-				print data[0]
-		except:
-			pass
+	def on_clicked(widg, name, *data):
+		ena = widg.get_active()
+		print "b) %s is %s" % (name, ("OFF", "ON")[ena])
 	# butt, call
-	obje, othe = myRadButton(name='my_RadButton', 
-							chil=None, valu=False, 
-							call= on_clicked, data=['myRadio',])
+	obje, othe = myChkButton(name='Abilita', 
+							 valu=False, colo='black', 
+							# call= on_clicked, data=['myCheck',])
+							 call= None, data=['myCheck',])
 #myFrame    
 	# fram,[labe,xBox]
-	obj1, oth1 = myFrame(name='enable', obje=obje, colo='black',
+	obj1, oth1 = myFrame(name='myChkButton', obje=obje, colo='black',
 						 bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
 						 tBox='v' )
 	#debug
@@ -80,18 +91,17 @@ def testRadButton():
 	return obj1
 
 #-----------------------------------------------------------------------------
-# myRadioButtonList
+# myCheckButtonList
 #-----------------------------------------------------------------------------
-def myRadButList(name=["_One","_Two","T_hree"], 
-				 chil=None, valu=False, 
+def myChkButList(name=["One","Two","Three"], 
+				 valu=False, colo=None, 
 				 call=None, data=['dati'],
 				 tBox='h', aBox=[False, False, 1]):
 	#callback debug
 	def on_clicked(widg, ind, *data):
 		ena = widg.get_active()
-		if ena:
-			print "a", "%05s" %widg.props.label.replace('_',''), 
-			print ind, data 
+		print "a",
+		print ind, data, ("OFF", "ON")[ena]
 		
 	# in assenza di callback uso quella di debug
 	if call == None:
@@ -99,42 +109,32 @@ def myRadButList(name=["_One","_Two","T_hree"],
 
 	# funzione che istanzia oggetti tipo
 	def myList(ind):
-#myRadButton
-		# butt,[call,]
-		return myRadButton(name=name[ind], 
-						   chil=chil, valu=False, 
-						   call=call, data=[ind, data])
+#myChkButton        
+		# butt, [call,]
+		return myChkButton(name=name[ind], 
+							valu=False, colo=None, 
+							call=call, data=[ind, data])
 #myBoxList
-	# xBox, [butt,call] * N
+	# xBox, [butt, call] * N
 	obje, othe = myBoxList(name=name, tBox=tBox, 
 						   aBox=aBox, func=myList)
-	# prendo come capogruppo la prima istanza
-	gro = othe[0][0].get_group()
-	for ele in othe[1:]:
-		# imposto il capogruppo alle altre istanze
-		ele[0].join_group(gro[0])
-	# rendo attivo il button
-	if type(valu) == type(1):
-		othe[valu][0].set_active(True)
 # <-
 	return obje, othe
 #-----------------------------------------------------------------------------
-def testRadButList():
-#myRadButton    
+def testChkButList():
+#myChkButton    
 	# ridefinisco la callback
-	def on_clicked(widg, ind, *data):
+	def on_clicked1(widg, ind, *data):
 		ena = widg.get_active()
-		if ena:
-			print "b", "%05s" %widg.props.label.replace('_',''), 
-			print ind, data 
-	# xBox, [butt,call] * N
-	obje, othe = myRadButList(name=["_One","_Two","T_hree"], 
-							  chil=None, valu=1, 
-							  call=on_clicked, data=[],
-							  tBox='h', aBox=[False, False, 1])
+		print "%05s" %widg.props.label.replace('_',''), "is", ("OFF", "ON")[ena]
+	# xBox, [butt, call] * N
+	obje, othe = myChkButList(name=["Uno","Due","Tre"], 
+							  valu=False, colo=None, 
+							  call=on_clicked1, data=['uffi'],
+							  tBox='v', aBox=[False, False, 1])
 #myFrame    
 	# fram,[labe,xBox]
-	obj1, oth1 = myFrame(name='select', obje=obje, colo='black',
+	obj1, oth1 = myFrame(name='myButton', obje=obje, colo='black',
 						 bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
 						 tBox='v' )
 	#debug
@@ -143,10 +143,10 @@ def testRadButList():
 	return obj1
 
 #-----------------------------------------------------------------------------
-# myRadioButtonListLabel
+# myCheckButtonListLabel
 #-----------------------------------------------------------------------------
-def myRadButLisLabel(name=["_One","_Two","T_hree"], 
-					 chil=None, valu=False, 
+def myChkButLisLabel(name=["One","Two","Three"], 
+					 valu=False, colo=None, 
 					 call=None, data=['dati'],
 					 nLab='Label', cLab=None,
 					 tBox='h', aBox=[False, False, 1]):
@@ -157,9 +157,8 @@ def myRadButLisLabel(name=["_One","_Two","T_hree"],
 	#callback debug
 	def on_clicked(widg, ind, *data):
 		ena = widg.get_active()
-		if ena:
-			print "a", "%05s" %widg.props.label.replace('_',''),
-			print ind, data 
+		print "a",
+		print ind, data, ("OFF", "ON")[ena]
 		
 	# in assenza di callback uso quella di debug
 	if call == None:
@@ -167,26 +166,17 @@ def myRadButLisLabel(name=["_One","_Two","T_hree"],
 
 	# funzione che istanzia oggetti tipo
 	def myList(ind):
-#myRadButton
+#myChkButton        
 		# butt, call
-		return myRadButton(name=name[ind], 
-						   chil=chil, valu=False, 
-						   call=call, data=[ind, data])
+		return myChkButton(name=name[ind], valu=False, colo=None, 
+							call=None, data=[ind, data])
 #myBoxList
 	# xBox, [butt, call] * N
 	obje, othe = myBoxList(name=name, tBox=tBox, 
 						   aBox=aBox, func=myList)
-	# prendo come capogruppo la prima istanza
-	gro = othe[0][0].get_group()
-	for ele in othe[1:]:
-		# imposto il capogruppo alle altre istanze
-		ele[0].join_group(gro[0])
-	# rendo attivo il button
-	if type(valu) == type(1):
-		othe[valu][0].set_active(True)
 #myLabel
 	if cLab == None:
-		cLab=Gdk.color_parse('blue')
+		cLab= 'blue'
 	#name='myLabel', leng=0, prea=' ', post='', font='Arial 10', colo=Gdk.color_parse('black')
 	labe = myLabel(name=nLab, 
 				   leng=len(nLab)+1, prea=' ', post=' ', 
@@ -201,17 +191,16 @@ def myRadButLisLabel(name=["_One","_Two","T_hree"],
 # <-
 	return obje, othe
 #-----------------------------------------------------------------------------
-def testRadButLisLabel():
-#radButton    
+def testChkButLisLabel():
+#myChkButLisLabel    
 	# ridefinisco la callback
 	def on_clicked(widg, ind, *data):
 		ena = widg.get_active()
-		if ena:
-			print "b", "%05s" %widg.props.label.replace('_',''), 
-			print ind, data 
+		#print "b", widg, ind, idata
+		print "%05s" %widg.props.label.replace('_',''), "is", ("OFF", "ON")[ena]
 	# xBox, [labe, [butt, call] * N]
-	obje, othe = myRadButLisLabel(name=["_One","_Two","T_hree"], 
-								  chil=None, valu=2, 
+	obje, othe = myChkButLisLabel(name=["One","Two","Three"], 
+								  valu=False, colo=None, 
 								  call=on_clicked, data=[],
 								  nLab='Label', cLab=None,
 								  tBox='h', aBox=[False, False, 1])
@@ -233,17 +222,24 @@ def myTry01():
 # Main
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
-	choi = 2
+
+	# test arguments
+	if len(sys.argv) == 1:
+		# no arguments (scelgo io)
+		choi = 3
+	else:
+		# get first argument (scelta esterna)
+		choi = int(sys.argv[1])
 
 	if choi == 1:
-		obje = testRadButton()
+		obje = testChkButton()
 	elif choi == 2:
-		obje = testRadButList()
+		obje = testChkButList()
 	elif choi == 3:
-		obje = testRadButLisLabel()
+		obje = testChkButLisLabel()
 		
 	# istanza l'applicazione principale
-	self = MyWind(width=None, height=800, title="myBox\ %s" %myRev, center=True, color="#b0b0b0")
+	self = MyWind(width=None, height=800, title="myChkButton %s" %myRev, center=True, color="#b0b0b0")
 	self.vBox.pack_start(child=obje, expand=False, fill=False, padding=0)
 	# cediamo il controllo alle gtk
 	Gtk.main()
