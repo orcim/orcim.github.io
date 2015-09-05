@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="my notes of pyGtk">
         <meta name="viewport" content="width=device-width">
-        <title>Windows &mdash; myBlog</title>
+        <title>in attesa del prossimo post &mdash; myBlog</title>
             <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
             <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
             <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
@@ -28,7 +28,7 @@
         <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="../../../_static/plugins.js"></script>
         <script src="../../../_static/main.js"></script>
-        <link rel="next" title="Package" href="../23/package.html" /><link rel="prev" title="myBox" href="../25/myBox.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+        <link rel="next" title="myRadioButton" href="../04/myradbutton.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '1.5',
@@ -68,57 +68,14 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
-            <span>agosto 24, 2015</span>
+            <span>settembre 05, 2015</span>
         </div>
-    <div class="section" id="windows">
-<h1>Windows</h1>
-<p>Per scrupolo ho provato ad eseguire gli scripts in <strong>Windows</strong> ma mi sono accorto che c&#8217; era qualche problema. Così ho preso l&#8217; occasione per suddividere ulteriormente il file <strong>my00init.py</strong> per aumentare la leggibilità.</p>
-<div id="more"> </div><p>Visto che ci sono spiego velocemente come installare le <strong>GTK3</strong> in <em>Windows</em>.</p>
-<p>Scaricate dal seguente <a class="reference external" href="http://sourceforge.net/projects/pygobjectwin32/files/latest/download?source=files">link</a>  che punta all&#8217; ultima versione dell&#8217; installer. Attende qualche secondo che vi appaia la dialog di download.</p>
-<p>Avviate l&#8217; eseguibile e seguite le istruzioni; vi ritroverete <strong>Python GTK3</strong> installato.</p>
-<p>La struttura è cambiata come segue:</p>
-<div class="highlight-rest"><div class="highlight"><pre>l00_start.py
-l01_startGtk.py
-my00init.py
-myWidg/
-  __init__.py
-  my00init.py
-  my00initGtk.py
-  myWind.py
-  myApp.py
-</pre></div>
-</div>
-<p>Il motivo del non funzionamento su <strong>Windows</strong> era dovuto che non supporta l&#8217; import diretto a causa del modo differente tra <strong>Linux</strong> e <strong>Windows</strong> di gestite il percorso dei files.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">myWidg.my00init</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">myWidg.myApp</span> <span class="kn">import</span> <span class="n">MyApp</span>
-</pre></div>
-</div>
-<p>Perciò l&#8217; ho modificato in</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">my00init</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="c">#-----------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">myApp</span> <span class="kn">import</span> <span class="n">MyApp</span>
-</pre></div>
-</div>
-<p>Dando il compito al seguente codice, che si trova in <strong>my00init.py</strong>, di risolvere il percorso assoluto di dove si trovano i files del nostro <strong>package</strong>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
-<span class="c"># ricavo l&#39;ambiente</span>
-<span class="n">myRoot</span> <span class="o">=</span> <span class="n">module_path</span><span class="p">()</span>
-<span class="n">myFath</span><span class="p">,</span> <span class="n">myHome</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">myRoot</span><span class="p">)</span>
-<span class="c"># inseriamo i nostri packages che vogliamo usare</span>
-<span class="n">insLib</span><span class="p">(</span><span class="n">myRoot</span><span class="o">+</span><span class="s">&#39;/myWidg&#39;</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Per scaricare la nuova versione <a class="reference download internal" href="../../../_downloads/20150824.zip"><span class="xref download docutils literal"><span class="pre">20150824.zip</span></span></a></p>
-<div class="section" id="saluti">
-<h2>Saluti</h2>
-<p>Se vi fossero errori fatemelo sapere.</p>
-<p>Nel prossimo post inizieremo a creare il template dei contenitori.</p>
-<p>Ciao alla prossima. (stay tune!)</p>
+    <div class="section" id="in-attesa-del-prossimo-post">
+<h1>in attesa del prossimo post</h1>
+<p>Oggi ho aggiunto una pagina &#8220;Python&#8221; per avere a portata di mano i <strong>links</strong> relativi alle nostre librerie.</p>
+<div class="figure align-center" id="id1">
+<img alt="alternate text" src="../../../_images/micioEnea.png" />
+<p class="caption"><span class="caption-text"><strong>Micio</strong> in attesa del prossimo post.</span></p>
 </div>
 </div>
 
@@ -126,20 +83,16 @@ myWidg/
         <div class="author">
             <span>Scritto da Orcim</span>
         </div>
-        <div class="categories">
-            <span>
-                Pubblicato in:
-                <a href="../../../categories/programming.html">programming</a></span>
-        </div>
+        
         <div class="tags">
             <span>
                 Tag:
-                <a href="../../../tags/programming.html">programming</a>, <a href="../../../tags/python.html">python</a>, <a href="../../../tags/gtk.html">gtk</a></span>
+                <a href="../../../tags/generico.html">generico</a></span>
         </div>
         </div><ul class="related clearfix">
-            <li class="left"> &laquo; <a href="../25/myBox.html">myBox</a></li>
-            <li class="right"><a href="../23/package.html">Package</a> &raquo; </li>
-        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/08/24/windows";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
+            <li class="left"></li>
+            <li class="right"><a href="../04/myradbutton.html">myRadioButton</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/09/05/in_attesa_del_prossimo_post";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
     <h1><a href="#searchbox">Cerca</a></h1>
     <form action="../../../search.html" method="get">
         <input type="text" name="q" />
@@ -148,25 +101,25 @@ myWidg/
 </div></section><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
-            <a href="../../09/05/in_attesa_del_prossimo_post.html">in attesa del prossimo post</a>
+            <a href="#">in attesa del prossimo post</a>
         </li><li>
-            <a href="../../09/04/myradbutton.html">myRadioButton</a>
+            <a href="../04/myradbutton.html">myRadioButton</a>
         </li><li>
-            <a href="../../09/03/mychkbutton.html">myCheckButton</a>
+            <a href="../03/mychkbutton.html">myCheckButton</a>
         </li><li>
-            <a href="../../09/02/mybutton1.html">myButton (il seguito)</a>
+            <a href="../02/mybutton1.html">myButton (il seguito)</a>
         </li><li>
-            <a href="../../09/01/mybutton.html">myButton</a>
+            <a href="../01/mybutton.html">myButton</a>
         </li><li>
-            <a href="../31/mytxtview.html">myTextView</a>
+            <a href="../../08/31/mytxtview.html">myTextView</a>
         </li><li>
-            <a href="../28/myentry.html">myEntry</a>
+            <a href="../../08/28/myentry.html">myEntry</a>
         </li><li>
-            <a href="../27/mylabel.html">myLabel</a>
+            <a href="../../08/27/mylabel.html">myLabel</a>
         </li><li>
-            <a href="../26/boxevent.html">boxEvent</a>
+            <a href="../../08/26/boxevent.html">boxEvent</a>
         </li><li>
-            <a href="../25/myBox.html">myBox</a>
+            <a href="../../08/25/myBox.html">myBox</a>
         </li></ul>
 </div>
 </section><section><div class="widget">
