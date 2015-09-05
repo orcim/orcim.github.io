@@ -84,6 +84,10 @@ def myNone(*args):
 	pass
 
 #-----------------------------------------------------------------------------
+# caratteri stampabili
+printable=list("'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ ")
+
+#-----------------------------------------------------------------------------
 def printD(msg, att='\n'):
 	""" forzo scrittura nella standard out
 		 server quando lo stdout e' reinderizzato e si vuole

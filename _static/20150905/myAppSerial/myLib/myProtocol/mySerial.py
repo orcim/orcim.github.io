@@ -28,6 +28,7 @@ myRev = "(rev.150525)"
 # Modules
 #-----------------------------------------------------------------------------
 from my00init import *
+import serial
 
 #------------------------------------------------------------------------------
 # myDefines
@@ -86,7 +87,7 @@ class MySerial(object):
 		self.ope = ope
 		self.par = par
 		self.por = por+par[0]
-		# Gestione collegamento
+		# Gestione apertura collegamento
 		if self.ope:
 			try:
 				# provo ad aprire la connessione
@@ -109,15 +110,14 @@ class MySerial(object):
 				# nessuna seriale presente
 				self.ser = None
 				# debug
-				print "%s not present!" %self.por
-				#sys.exit()
+				if self.deb:
+					print "%s not present!" %self.por
+					#sys.exit()
+		# nessuna verifica di presenza device!
 		else:
-			# nessuna verifica di presenza device!
 			self.ser = serial.Serial()
-			#print self.ser
-		# attributi
-		self.dlTx = 0.002    # Delay from Tx to Tx
-		#self.buf = ""
+		# ritardo tra un invio e il successivo
+		self.dlTx = 0.002    
 
 	def close(self):
 		"""Chiusura del socket"""
@@ -135,9 +135,8 @@ class MySerial(object):
 			pass
 
 	def chaSetting(self):
-		""" configurazione della connessione """
-		# uso parametri interno se non passati
-		# forzo la chiusura  della connessione
+		"""Configurazione parametri """
+		# forzo la chiusura per inizializzare i nuovi parametri
 		self.ser.close()
 		self.ser.port = self.por
 		self.ser.baudrate = atoi(self.par[1])
@@ -151,10 +150,10 @@ class MySerial(object):
 			print self.ser
 
 	def sndByte(self, byt):
-		""" Invio di 1 byte"""
+		""" Invio 1 byte"""
 		cha = "%c" %byt
 		self.ser.write(cha)
-		# ritardo tra un carattere e il successivo
+		# ritardo tra un invio e il successivo
 		sleep(self.dlTx)
 		if self.deb:
 			# rendo visibile il codice
@@ -167,17 +166,12 @@ class MySerial(object):
 		strCmd=""
 		for byt in dat:
 			strCmd+=("%c" %byt)
-		# invio diretto perche' con 38400 c'e' la pausa di circa mSec
-		#  che manda in time out il dispositivo
+		# Non uso sndByte per evitare il ritardo self.dlTx
 		self.ser.write(strCmd)
 		if self.deb:
 			for ele in dat:
 				print "\\x%02X" %ele,
 			print
-		# qui bisognerebbe attendere almeno 4 time della velocita' di 1 byte
-		#  a 9600
-		#sleep(0.004)
-		# a 38400
 		sleep(0.001)
 
 	def sndChar(self, cmd):
@@ -185,7 +179,7 @@ class MySerial(object):
 		for ele in cmd:
 			cha = "%c" %ele
 			self.ser.write(cha)
-			# ritardo tra un carattere e il successivo
+			# ritardo tra un invio e il successivo
 			sleep(self.dlTx)
 		if self.deb:
 			if cha == '\r':
@@ -195,10 +189,9 @@ class MySerial(object):
 
 	def sndString(self, str):
 		""" Invio di una stringa 'str' (stringa ascii) """
-		#printHex(str)
 		for ch in str:
 			self.ser.write(ch)
-			# ritardo tra un carattere e il successivo
+			# ritardo tra un invio e il successivo
 			sleep(self.dlTx)
 		# debug
 		if self.deb:
@@ -206,7 +199,7 @@ class MySerial(object):
 			printHex(str)
 
 	def rcvByte(self):
-		""" Ricezione di un byte (funzione non bloccante) """
+		""" Ricezione di 1 byte (funzione non bloccante) """
 		# verifico se c'e' qualcosa in ricezione
 		cou = self.ser.inWaiting()
 		if cou > 0:
@@ -215,6 +208,7 @@ class MySerial(object):
 		else:
 			return None
 
+	# alias di rcvByte
 	def rcvChar(self):
 		""" Ricezione di un carattere (funzione non bloccante) """
 		return self.rcvByte()
@@ -238,15 +232,14 @@ class MySerial(object):
 
 	def rcvDataTimeOut(self, num=1, tou=0.1):
 		""" Ricezione di una sequenza di bytes entro un certo tempo
-			Return:
-				self.buf = caratteri acquisiti
+			<- self.buf = caratteri acquisiti
 		"""
-		# svuoto buffer
+		# pilisco il buffer prima della ricezione
 		self.buf = ""
-		# conteggio caratteri da ricevere
+		# contatore caratteri da ricevere
 		self.cou = 0
 
-		# referenzio lo start
+		# referenzio lo start per il tOut
 		tim = clock()
 
 		# flag
@@ -255,9 +248,9 @@ class MySerial(object):
 			# calcolo il tempo trascorso
 			now = (clock() - tim)
 			if now > tou:
-				# forzo l'uscita
+				# forzo l'uscita (tempo scaduto)
 				flg = False
-			# verifico la ricezione
+			# verifico dati in ricezione
 			cou, dat = self.rcvString(num)
 			if cou:
 				# salvo i dati ricevuti
@@ -265,127 +258,88 @@ class MySerial(object):
 				self.cou += cou
 				if self.cou >= num:
 					flg = False
+		# ritorno False se è scaduto il tempo
 		if now > tou:
 			ret = False
+		# ritorno True se ho ricevuto tutti i dati
 		else:
 			ret = True
 		return (ret, self.buf)
 
+	# alias di rcvDataTimeOut
 	def rcvStrTimeOut(self, num=1, tou=0.1):
 		""" Ricezione di N caratteri entro un certo tempo
-			Return:
-				self.buf = caratteri acquisiti
+			<- self.buf = caratteri acquisiti
 		"""
 		return self.rcvDataTimeOut(num, tou)
 
 #------------------------------------------------------------------------------
 # myTry
 #------------------------------------------------------------------------------
-def myTry01a():
-
-	# winzoz
-	# "COM1"
-	# 
-	# Unix
-	# "/dev/ttyUSB0"
-	# "/dev/ttymxc0"
-	# "/dev/ttyS0"
-
-	por = "/dev/ttyUSB"
-	par = ['0','115200','8','N','1']
-	self = MySerial(por=por, par=par, ope=1, deb=1)
-	self.ser = serial.Serial(self.por)
-	# try:
-	# 	self.ser.open()
-	# 	print "serial opened"
-	# except:
-	# 	print "not opened!"
-
-#------------------------------------------------------------------------------
 def myTry01():
 
-	# abilito il debug
-	deb = 1
-	# inizializzazione
-	if 0:
-#        por = "/dev/ttyS"
-		por = "/dev/ttymxc"
-		par = ['4','115200','8','N','1']
+	# inizializzazione in base al S.O.
+	if sys.platform == 'win32':
+		# Windows (numerazione parte da 1)
+		por = "COM"
+		par = ['1','115200','8','N','1']
 	else:
+		# Unix  (numerazione parte da 0)	
+		#por = "/dev/ttyS"
+		#por = "/dev/ttymxc"
 		por = "/dev/ttyUSB"
-		# par = ['0','115200','8','N','1']
-		par = ['0','9600','8','N','1']
+		par = ['0','115200','8','N','1']
 
 	#  istanza di un seriale
-	self = MySerial(por=por, par=par, ope=True, deb=deb)
+	self = MySerial(por=por, par=par, ope=1, deb=1)
 	if self.ser:
-		print "serial Ok"
-
+		# init DTR/RTS
 		if 0:
-			"invio dati"
-			self.sndString("echo Ciao Mondo!\n")
-			# # attendo per un certo timeOut un numero di caratteri
-			# # (num=1, tou=0.1):
-			# res,buf = self.rcvStrTimeOut(num=50, tou=0.1)
-			# print "%s" %('timeOut:','ok:')[res], "chars receiver:",len(buf)
-			# printHex(buf)
-			# #print "%s" %buf
-		if 0:
-			# DTR -> reset
-			# RTS -> cs
-			# all high
-			self.ser.setRTS(0)
-			self.ser.setDTR(0)
-
-		if 1:
-			# reset low
+			# set to low
 			self.ser.setDTR(1)
-			sleep(0.001)
-			# reset high
+			sleep(0.01)
+			# set to high
 			self.ser.setDTR(0)
-
-		if 0:
-			# cs low
-			self.ser.setRTS(1)
-			# tx Low
-			# self.sndString("\x00")
-			sleep(0.001)
-			# cs high
 			self.ser.setRTS(0)
 
-		if 0:
-			"controllo Handshake"
-			print "Rts=1, Dtr=0"
-			self.ser.setRTS(1)
-			self.ser.setDTR(0)
-			sleep(1)
-			print "Rts=0, Dtr=1"
-			self.ser.setRTS(0)
-			self.ser.setDTR(1)
-			sleep(1)
-			print "Rts=1, Dtr=0"
-			self.ser.setRTS(1)
-			self.ser.setDTR(0)
-			sleep(1)
-			print "Rts=0, Dtr=0"
-			self.ser.setRTS(0)
-			self.ser.setDTR(0)
-			sleep(1)
-			print "Rts=1, Dtr=1"
-			self.ser.setRTS(1)
-			self.ser.setDTR(1)
-			sleep(1)
-		if 0:
-			"ricezione dati"
-			# vedi protocol
+		print "serial open: OK!"
+		return self 
+
 	else:
-		print "Serial Ko"
+		print "Serial not found!"
+		return None
 
+#------------------------------------------------------------------------------
+def myTry02():
+	self = myTry01()
+	if self:
+		# invio una stringa
+		self.sndString("Ciao mondo!\n")
+		# attendo (num) N caratteri entro (tou) un tempo
+		res,buf = self.rcvStrTimeOut(num=50, tou=0.1)
+		print "%s" %('timeOut:','ok:')[res], "chars receiver:",len(buf)
+		print "buf:",
+		# visualizza anche i caratteri speciali
+		printHex(buf)
+		# print "%s" %buf
+
+#-----------------------------------------------------------------------------
+# Main
 #------------------------------------------------------------------------------
 if __name__ == "__main__":
 
-	# provo apertura seriale
-	myTry01()
+	# test arguments
+	if len(sys.argv) == 1:
+		# no arguments (scelgo io)
+		choi = 2
+	else:
+		# get first argument (scelta esterna)
+		choi = int(sys.argv[1])
 
-	# provo modbus Atto-D4 lettura parametri
-#    myTry02()
+	if choi == 1:
+		# test apertura seriale
+		myTry01()
+	elif choi == 2:
+		# test
+		myTry02()
+

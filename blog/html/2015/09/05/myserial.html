@@ -1,0 +1,579 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="my notes of pyGtk">
+        <meta name="viewport" content="width=device-width">
+        <title>mySerial &mdash; myBlog</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="in attesa del prossimo post" href="in_attesa_del_prossimo_post.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script><script type="text/javascript" src="../../../_static/google_analytics.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">myBlog</a></h1><h2>by Orcim</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Pagina iniziale</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/python.html">Python</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/about.html">About</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>settembre 05, 2015</span>
+        </div>
+    <div class="section" id="myserial">
+<h1>mySerial</h1>
+<p>Adesso abbiamo la base di una piccola libreria di widgets <strong>GTK</strong> pronta per essere usata nelle nostre applicazioni.</p>
+<p>Andremo a realizzare la nostra prima applicazione reale!</p>
+<p>Ho scelto di realizzare un terminale seriale poichè, nelle applicazioni industriali, la comunicazione per lo sviluppo è quasi sempre basata su questo tipo di comunicazione.</p>
+<div id="more"> </div><div class="section" id="myappserial">
+<h2>myAppSerial</h2>
+<p>Creiamo la struttura della nostra applicazione.</p>
+<p>Per fare questo dobbiamo creare una <strong>directory</strong> di lavoro a cui assegneremo il nome di <strong>myAppSerial</strong>.</p>
+<p>Iniziamo col definire un nuovo <strong>package</strong> (libreria) a cui assegneremo il nome <strong>myLib</strong>.</p>
+<p>Per fare questo creiamo la directory <strong>myLib</strong>. Qui aggiungiamo un file vuoto di nome <strong>__init__.py</strong>.</p>
+<p>Ora decomprimiamo la nostro base di partenza <strong>20150904.zip</strong> dentro la directory <strong>mySerial</strong>.</p>
+<p>La libreria la trovate nel post del 4/set/2015 come si deduce anche dal nome della stessa .</p>
+<p>Alla fine dovremo la seguente struttura:</p>
+<div class="highlight-rest"><div class="highlight"><pre>myAppSerial/
+  l00_start.py
+  l01_startGtk.py
+  my00init.py
+  myLib/
+    __init__.py
+  myWidg/
+    __init__.py
+    my00init.py
+    my00initGtk.py
+    my01Box.py
+    my02Label.py
+    my02Entry.py
+    my02TxtView.py
+    my03Button.py
+    my03ChkButton.py
+    myWind.py
+    myApp.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="mylib">
+<h2>myLib</h2>
+<p>Ora iniziamo a popolare la nostra libreria. Partiamo dalle librerie di basso livello senza interfaccia grafica <strong>GUI</strong>.</p>
+<p>Creiamo un&#8217; altro package che conterrà al suo interno tutti i moduli che hanno a che fare con le comunicazioni seriali. Lo chiameremo <strong>myProtocol</strong>. Creiamo la directory di nome <strong>myProtocol</strong> e al suo interno creiamo un file vuoto di nome <strong>__init__.py</strong>.</p>
+<div class="section" id="struttura-aggiornata">
+<h3>struttura aggiornata</h3>
+<div class="highlight-rest"><div class="highlight"><pre>myAppSerial/
+  l00_start.py
+  l01_startGtk.py
+  my00init.py
+  myLib/
+    __init__.py
+    myProtocol/
+      __init__.py
+</pre></div>
+</div>
+<p>Ora copiamo dentro la directory <strong>myProtocol</strong> lo stesso file che troviamo alla base <strong>myAppSerial/my00init</strong>. Questo ci serve come init iniziale del nostro micro ambiente <strong>myProtocol</strong>. Apriamolo ed eliminiamo le linee da 24 a 33 che sono quelle che interessano le <strong>GTK</strong>. In questo micro ambiente non ne abbiamo bisogno.</p>
+<p>Inoltre aggiungiamo la variabile <strong>printable</strong> che ci sarà utile per verificare se un carattere è stampabile nel prossimo modulo che andremo a definire.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># caratteri stampabili</span>
+<span class="n">printable</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">&quot;&#39;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!</span><span class="se">\&quot;</span><span class="s">#$%&amp;</span><span class="se">\&#39;</span><span class="s">()*+,-./:;&lt;=&gt;?@[</span><span class="se">\\</span><span class="s">]^_`{|}~ &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>mySerial</h2>
+<p>Fa uso del <em>package</em> <strong>pySerial</strong> che dovrete installarlo nel vostro ambiente.
+Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.net/">link</a> del sito in cui troverete ampia documentazione.</p>
+<p>Questo modulo <strong>mySerial</strong> sarà il responsabile della gestione delle nostre <strong>seriali</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#------------------------------------------------------------------------------</span>
+<span class="c"># myClass</span>
+<span class="c">#------------------------------------------------------------------------------</span>
+<span class="k">class</span> <span class="nc">MySerial</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot; gestione di una comunicazione Seriale</span>
+<span class="sd">		Attributi:</span>
+<span class="sd">			ser</span>
+<span class="sd">				- gestione Serial</span>
+<span class="sd">			dlTx</span>
+<span class="sd">				- ritardo tra un Tx ed un&#39;altro</span>
+<span class="sd">			cou</span>
+<span class="sd">				- caratteri ricevuti</span>
+<span class="sd">			buf</span>
+<span class="sd">				- buffer di ricezione</span>
+<span class="sd">		Metodi:</span>
+<span class="sd">			close</span>
+<span class="sd">				- Chiusura del socket</span>
+<span class="sd">			chaSetting</span>
+<span class="sd">				- configurazione della connessione</span>
+<span class="sd">			sndChar</span>
+<span class="sd">				- Invio di un char espresso come stringa es: &#39;\n&#39;</span>
+<span class="sd">			sndString</span>
+<span class="sd">				- Invio di una stringa &#39;str&#39; (stringa ascii)</span>
+<span class="sd">			rcvChar</span>
+<span class="sd">				- Ricezione di un carattere (funzione non bloccante)</span>
+<span class="sd">			rcvString</span>
+<span class="sd">				- Ricezione di una N caratteri (funzione non bloccante)</span>
+<span class="sd">			rcvStrTimeOut</span>
+<span class="sd">				- Ricezione di N caratteri entro un certo tempo</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">por</span><span class="o">=</span><span class="s">&quot;/dev/ttyS&quot;</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">],</span> <span class="n">ope</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">deb</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Inizializzo il dispositivo</span>
+<span class="sd">			@par    parametri di configurazione</span>
+<span class="sd">			@ope    stabilisco se deve essere aperta la porta</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="c"># referenzio il flag di Debug</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">deb</span> <span class="o">=</span> <span class="n">deb</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ope</span> <span class="o">=</span> <span class="n">ope</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">par</span> <span class="o">=</span> <span class="n">par</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">por</span> <span class="o">=</span> <span class="n">por</span><span class="o">+</span><span class="n">par</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+		<span class="c"># Gestione apertura collegamento</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ope</span><span class="p">:</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="c"># provo ad aprire la connessione</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">por</span><span class="p">)</span>
+				<span class="c"># configuro i parametri e provo apertura</span>
+				<span class="k">try</span><span class="p">:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+					<span class="c"># set parameters</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">chaSetting</span><span class="p">()</span>
+					<span class="c"># debug</span>
+					<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deb</span><span class="p">:</span>
+						<span class="c"># ok</span>
+						<span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> now is open.&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">por</span>
+				<span class="k">except</span><span class="p">:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="bp">None</span>
+					<span class="c"># seriale gia&#39; aperta</span>
+					<span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> port not opened!&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">por</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="c"># nessuna seriale presente</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="bp">None</span>
+				<span class="c"># debug</span>
+				<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deb</span><span class="p">:</span>
+					<span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> not present!&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">por</span>
+					<span class="c">#sys.exit()</span>
+		<span class="c"># nessuna verifica di presenza device!</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">()</span>
+		<span class="c"># ritardo tra un invio e il successivo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dlTx</span> <span class="o">=</span> <span class="mf">0.002</span>    
+
+	<span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Chiusura del socket&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="c"># debug</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deb</span><span class="p">:</span>
+			<span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> now is close.&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">por</span>
+
+	<span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Distruzione dell&#39;oggetto&quot;&quot;&quot;</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+			<span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">pass</span>
+
+	<span class="k">def</span> <span class="nf">chaSetting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Configurazione parametri &quot;&quot;&quot;</span>
+		<span class="c"># forzo la chiusura per inizializzare i nuovi parametri</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">por</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">baudrate</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">bytesize</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">parity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">stopbits</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">par</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">print</span> <span class="s">&quot;Problem to open the connection!!!&quot;&quot;&quot;</span>
+			<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span>
+
+	<span class="k">def</span> <span class="nf">sndByte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">byt</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Invio 1 byte&quot;&quot;&quot;</span>
+		<span class="n">cha</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%c</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">byt</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cha</span><span class="p">)</span>
+		<span class="c"># ritardo tra un invio e il successivo</span>
+		<span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlTx</span><span class="p">)</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deb</span><span class="p">:</span>
+			<span class="c"># rendo visibile il codice</span>
+			<span class="n">cod</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">x</span><span class="si">%02X</span><span class="s">&quot;</span> <span class="o">%</span><span class="nb">ord</span><span class="p">(</span><span class="n">cha</span><span class="p">)</span>
+			<span class="k">print</span> <span class="n">cod</span><span class="p">,</span>
+
+	<span class="k">def</span> <span class="nf">sndData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dat</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Invio di sequenza di bytes&quot;&quot;&quot;</span>
+		<span class="c"># comando da inviare</span>
+		<span class="n">strCmd</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+		<span class="k">for</span> <span class="n">byt</span> <span class="ow">in</span> <span class="n">dat</span><span class="p">:</span>
+			<span class="n">strCmd</span><span class="o">+=</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%c</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">byt</span><span class="p">)</span>
+		<span class="c"># Non uso sndByte per evitare il ritardo self.dlTx</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">strCmd</span><span class="p">)</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deb</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="n">dat</span><span class="p">:</span>
+				<span class="k">print</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">x</span><span class="si">%02X</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">ele</span><span class="p">,</span>
+			<span class="k">print</span>
+		<span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">sndChar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Invio di 1 carattere espresso come stringa es: &#39;\n&#39; &quot;&quot;&quot;</span>
+		<span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="n">cmd</span><span class="p">:</span>
+			<span class="n">cha</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%c</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">ele</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cha</span><span class="p">)</span>
+			<span class="c"># ritardo tra un invio e il successivo</span>
+			<span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlTx</span><span class="p">)</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deb</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">cha</span> <span class="o">==</span> <span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">:</span>
+				<span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">print</span> <span class="n">cha</span><span class="p">,</span>
+
+	<span class="k">def</span> <span class="nf">sndString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Invio di una stringa &#39;str&#39; (stringa ascii) &quot;&quot;&quot;</span>
+		<span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+			<span class="c"># ritardo tra un invio e il successivo</span>
+			<span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlTx</span><span class="p">)</span>
+		<span class="c"># debug</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deb</span><span class="p">:</span>
+			<span class="k">print</span> <span class="s">&quot;send:&quot;</span><span class="p">,</span>
+			<span class="n">printHex</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">rcvByte</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di 1 byte (funzione non bloccante) &quot;&quot;&quot;</span>
+		<span class="c"># verifico se c&#39;e&#39; qualcosa in ricezione</span>
+		<span class="n">cou</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">inWaiting</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">cou</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="c"># prelievo un byte</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">cou</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">None</span>
+
+	<span class="c"># alias di rcvByte</span>
+	<span class="k">def</span> <span class="nf">rcvChar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di un carattere (funzione non bloccante) &quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvByte</span><span class="p">()</span>
+
+	<span class="k">def</span> <span class="nf">rcvString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di una N caratteri (funzione non bloccante) &quot;&quot;&quot;</span>
+		<span class="c"># verifico quanti caratteri ci sono gia&#39; nel buffer</span>
+		<span class="n">cou</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">inWaiting</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">cou</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">cou</span> <span class="o">&gt;=</span> <span class="n">num</span><span class="p">:</span>
+				<span class="c"># provo la ricezione</span>
+				<span class="n">dat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">dat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">cou</span><span class="p">)</span>
+				<span class="c"># dati letti</span>
+				<span class="n">num</span> <span class="o">=</span> <span class="n">cou</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">dat</span> <span class="o">=</span> <span class="bp">None</span>
+			<span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">return</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">dat</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">rcvDataTimeOut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tou</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di una sequenza di bytes entro un certo tempo</span>
+<span class="sd">			&lt;- self.buf = caratteri acquisiti</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="c"># pilisco il buffer prima della ricezione</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">buf</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+		<span class="c"># contatore caratteri da ricevere</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cou</span> <span class="o">=</span> <span class="mi">0</span>
+
+		<span class="c"># referenzio lo start per il tOut</span>
+		<span class="n">tim</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span>
+
+		<span class="c"># flag</span>
+		<span class="n">flg</span> <span class="o">=</span> <span class="bp">True</span>
+		<span class="k">while</span> <span class="n">flg</span><span class="p">:</span>
+			<span class="c"># calcolo il tempo trascorso</span>
+			<span class="n">now</span> <span class="o">=</span> <span class="p">(</span><span class="n">clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">tim</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="n">tou</span><span class="p">:</span>
+				<span class="c"># forzo l&#39;uscita (tempo scaduto)</span>
+				<span class="n">flg</span> <span class="o">=</span> <span class="bp">False</span>
+			<span class="c"># verifico dati in ricezione</span>
+			<span class="n">cou</span><span class="p">,</span> <span class="n">dat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvString</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">cou</span><span class="p">:</span>
+				<span class="c"># salvo i dati ricevuti</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">buf</span> <span class="o">+=</span> <span class="n">dat</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">cou</span> <span class="o">+=</span> <span class="n">cou</span>
+				<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cou</span> <span class="o">&gt;=</span> <span class="n">num</span><span class="p">:</span>
+					<span class="n">flg</span> <span class="o">=</span> <span class="bp">False</span>
+		<span class="c"># ritorno False se è scaduto il tempo</span>
+		<span class="k">if</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="n">tou</span><span class="p">:</span>
+			<span class="n">ret</span> <span class="o">=</span> <span class="bp">False</span>
+		<span class="c"># ritorno True se ho ricevuto tutti i dati</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">ret</span> <span class="o">=</span> <span class="bp">True</span>
+		<span class="k">return</span> <span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">buf</span><span class="p">)</span>
+
+	<span class="c"># alias di rcvDataTimeOut</span>
+	<span class="k">def</span> <span class="nf">rcvStrTimeOut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tou</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di N caratteri entro un certo tempo</span>
+<span class="sd">			&lt;- self.buf = caratteri acquisiti</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvDataTimeOut</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">tou</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Il codice è stato scritto per non essere <strong>bloccante</strong>. Questo ci permetterà di lavorare in modo asincrono se ne avessimo bisogno.</p>
+<p>Inoltre nel caso volessimo lavorare in modo sincrono ho sfruttato il timer del nostro <strong>PC</strong> per creare un <strong>time out</strong> oltre il quale comunque usciremo dal codice bloccante.</p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="k">def</span> <span class="nf">rcvDataTimeOut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tou</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di una sequenza di bytes entro un certo tempo</span>
+<span class="sd">			&lt;- self.buf = caratteri acquisiti</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="c"># pilisco il buffer prima della ricezione</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">buf</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+		<span class="c"># contatore caratteri da ricevere</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cou</span> <span class="o">=</span> <span class="mi">0</span>
+
+		<span class="c"># referenzio lo start per il tOut</span>
+		<span class="n">tim</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span>
+
+		<span class="c"># flag</span>
+		<span class="n">flg</span> <span class="o">=</span> <span class="bp">True</span>
+		<span class="k">while</span> <span class="n">flg</span><span class="p">:</span>
+			<span class="c"># calcolo il tempo trascorso</span>
+			<span class="n">now</span> <span class="o">=</span> <span class="p">(</span><span class="n">clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">tim</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="n">tou</span><span class="p">:</span>
+				<span class="c"># forzo l&#39;uscita (tempo scaduto)</span>
+				<span class="n">flg</span> <span class="o">=</span> <span class="bp">False</span>
+			<span class="c"># verifico dati in ricezione</span>
+			<span class="n">cou</span><span class="p">,</span> <span class="n">dat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvString</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">cou</span><span class="p">:</span>
+				<span class="c"># salvo i dati ricevuti</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">buf</span> <span class="o">+=</span> <span class="n">dat</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">cou</span> <span class="o">+=</span> <span class="n">cou</span>
+				<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cou</span> <span class="o">&gt;=</span> <span class="n">num</span><span class="p">:</span>
+					<span class="n">flg</span> <span class="o">=</span> <span class="bp">False</span>
+		<span class="c"># ritorno False se è scaduto il tempo</span>
+		<span class="k">if</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="n">tou</span><span class="p">:</span>
+			<span class="n">ret</span> <span class="o">=</span> <span class="bp">False</span>
+		<span class="c"># ritorno True se ho ricevuto tutti i dati</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">ret</span> <span class="o">=</span> <span class="bp">True</span>
+		<span class="k">return</span> <span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">buf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Vi lascio allo studio del rimanente codice.</p>
+</div>
+<div class="section" id="mytry01">
+<h2>myTry01</h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#------------------------------------------------------------------------------</span>
+<span class="c"># myTry</span>
+<span class="c">#------------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry01</span><span class="p">():</span>
+
+	<span class="c"># inizializzazione in base al S.O.</span>
+	<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">&#39;win32&#39;</span><span class="p">:</span>
+		<span class="c"># Windows (numerazione parte da 1)</span>
+		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;COM&quot;</span>
+		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="c"># Unix  (numerazione parte da 0)	</span>
+		<span class="c">#por = &quot;/dev/ttyS&quot;</span>
+		<span class="c">#por = &quot;/dev/ttymxc&quot;</span>
+		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;/dev/ttyUSB&quot;</span>
+		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
+
+	<span class="c">#  istanza di un seriale</span>
+	<span class="bp">self</span> <span class="o">=</span> <span class="n">MySerial</span><span class="p">(</span><span class="n">por</span><span class="o">=</span><span class="n">por</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span> <span class="n">ope</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">deb</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+	<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="p">:</span>
+		<span class="c"># init DTR/RTS</span>
+		<span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="c"># set to low</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+			<span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+			<span class="c"># set to high</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setRTS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+		<span class="k">print</span> <span class="s">&quot;serial open: OK!&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span> 
+
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">print</span> <span class="s">&quot;Serial not found!&quot;</span>
+		<span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+</div>
+<p>Qui vediamo il modo di selezionare l&#8217; inizializzazione in base al <strong>S.O.</strong> sistema operativo in cui gira il codice. Può tornare utile anche in altre applicazioni multi piattaforma.</p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="c"># inizializzazione in base al S.O.</span>
+	<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">&#39;win32&#39;</span><span class="p">:</span>
+		<span class="c"># Windows (numerazione parte da 1)</span>
+		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;COM&quot;</span>
+		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="c"># Unix  (numerazione parte da 0)	</span>
+		<span class="c">#por = &quot;/dev/ttyS&quot;</span>
+		<span class="c">#por = &quot;/dev/ttymxc&quot;</span>
+		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;/dev/ttyUSB&quot;</span>
+		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Inoltre ho aggiunto del codice di esempio per fare vedere come sollecitare l&#8217; handshake.</p>
+<div class="highlight-python"><div class="highlight"><pre>			<span class="c"># set to low</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+			<span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+			<span class="c"># set to high</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setRTS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mytry02">
+<h2>myTry02</h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">myTry02</span><span class="p">():</span>
+	<span class="bp">self</span> <span class="o">=</span> <span class="n">myTry01</span><span class="p">()</span>
+	<span class="k">if</span> <span class="bp">self</span><span class="p">:</span>
+		<span class="c"># invio una stringa</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">sndString</span><span class="p">(</span><span class="s">&quot;Ciao mondo!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+		<span class="c"># attendo (num) N caratteri entro (tou) un tempo</span>
+		<span class="n">res</span><span class="p">,</span><span class="n">buf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvStrTimeOut</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">tou</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+		<span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="s">&#39;timeOut:&#39;</span><span class="p">,</span><span class="s">&#39;ok:&#39;</span><span class="p">)[</span><span class="n">res</span><span class="p">],</span> <span class="s">&quot;chars receiver:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+		<span class="k">print</span> <span class="s">&quot;buf:&quot;</span><span class="p">,</span>
+		<span class="c"># visualizza anche i caratteri speciali</span>
+		<span class="n">printHex</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+		<span class="c"># print &quot;%s&quot; %buf</span>
+</pre></div>
+</div>
+<p>Qui sfruttiamo il codice di prima per l&#8217; inizializzazione. Poi facendo un <strong>loop</strong> hardware sui segnali <strong>Tx</strong> e <strong>Rx</strong> del nostro dispositivo seriale proviamo ad inviare e ricevere una stringa col nostro codice.</p>
+<p>Se proviamo ad avviare il <strong>test</strong> da terminale <strong>$ python mySerial.py</strong> vedremo:</p>
+<div class="figure align-center" id="id2">
+<img alt="alternate text" src="../../../_images/mySerial.png" />
+<p class="caption"><span class="caption-text"><em>mySerial</em> in esecuzione.</span></p>
+</div>
+</div>
+<div class="section" id="package">
+<h2>Package</h2>
+<p>La struttura aggiornata del nostro package è la seguente:</p>
+<div class="highlight-rest"><div class="highlight"><pre>myAppSerial/
+  l00_start.py
+  l01_startGtk.py
+  my00init.py
+  myLib/
+    __init__.py
+    myProtocol/
+      __init__.py
+      my00init.py
+      mySerial.py
+</pre></div>
+</div>
+<p>Per scaricare la nuova versione <a class="reference download internal" href="../../../_downloads/20150905.zip"><span class="xref download docutils literal"><span class="pre">20150905.zip</span></span></a></p>
+</div>
+<div class="section" id="saluti">
+<h2>Saluti</h2>
+<p>Per oggi mi fermo qui.</p>
+<p>Nel prossimo post vedremo il lato del protocollo.</p>
+<p>Ciao alla prossima. (stay tune!)</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Scritto da Orcim</span>
+        </div>
+        <div class="categories">
+            <span>
+                Pubblicato in:
+                <a href="../../../categories/programming.html">programming</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tag:
+                <a href="../../../tags/programming.html">programming</a>, <a href="../../../tags/python.html">python</a>, <a href="../../../tags/gtk.html">gtk</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="in_attesa_del_prossimo_post.html">in attesa del prossimo post</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/09/05/myserial";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Cerca</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section><div class="widget">
+    <h1>Articoli Recenti</h1>
+    <ul><li>
+            <a href="#">mySerial</a>
+        </li><li>
+            <a href="in_attesa_del_prossimo_post.html">in attesa del prossimo post</a>
+        </li><li>
+            <a href="../04/myradbutton.html">myRadioButton</a>
+        </li><li>
+            <a href="../03/mychkbutton.html">myCheckButton</a>
+        </li><li>
+            <a href="../02/mybutton1.html">myButton (il seguito)</a>
+        </li><li>
+            <a href="../01/mybutton.html">myButton</a>
+        </li><li>
+            <a href="../../08/31/mytxtview.html">myTextView</a>
+        </li><li>
+            <a href="../../08/28/myentry.html">myEntry</a>
+        </li><li>
+            <a href="../../08/27/mylabel.html">myLabel</a>
+        </li><li>
+            <a href="../../08/26/boxevent.html">boxEvent</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Tag Cloud</h1>
+      <a href="../../../tags/generico.html" style="font-size: 8pt">generico</a>&nbsp;&nbsp;
+      <a href="../../../tags/gtk.html" style="font-size: 18pt">gtk</a>&nbsp;&nbsp;
+      <a href="../../../tags/programming.html" style="font-size: 20pt">programming</a>&nbsp;&nbsp;
+      <a href="../../../tags/python.html" style="font-size: 19pt">python</a>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2015, Orcim. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>
