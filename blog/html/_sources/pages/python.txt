@@ -1,7 +1,7 @@
 Python
 ======
 
-In questa pagina tengo il riassunto dei links che puntano ai post relativi a **python**
+In questa pagina tengo il riassunto dei links che puntano ai post relativi a **python**. La stessa cosa potreste ottenerla cliccando sul tag. Ma in questa pagina la cosa viene strutturata in modo diverso.
 
 Post 
 ----
