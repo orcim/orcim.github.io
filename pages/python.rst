@@ -21,3 +21,5 @@ Post
 * `mybutton1 <../2015/09/02/mybutton1.html>`_
 * `mychkbutton <../2015/09/03/mychkbutton.html>`_
 * `myradbutton <../2015/09/04/myradbutton.html>`_
+
+.. note:: Per avere la libreria aggiornata scaricatela dall' ultimo presente.
