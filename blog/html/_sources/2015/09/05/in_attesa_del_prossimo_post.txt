@@ -3,6 +3,8 @@ in attesa del prossimo post
 
 Oggi ho aggiunto una pagina "Python" per avere a portata di mano i **links** relativi alle nostre librerie.
 
+.. more::
+
 .. figure:: /_static/micioEnea.png
 	:align: center
 	:alt: alternate text
