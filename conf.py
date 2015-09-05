@@ -54,10 +54,10 @@ html_theme_options = {}
 rss_service = None
 
 # Generate full posts for RSS feed even when using "read more"
-rss_generate_full_posts = False
+rss_generate_full_posts = None
 
 # Number of blog posts per page
-posts_per_page = 10
+posts_per_page = 5
 
 # Character use to replace non-alphanumeric characters in slug
 slug_word_separator = '_'

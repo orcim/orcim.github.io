@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="my notes of pyGtk">
         <meta name="viewport" content="width=device-width">
-        <title>Pagina iniziale &mdash; myBlog</title>
+        <title>Pagina 3 &mdash; myBlog</title>
             <link rel="stylesheet" href="_static/normalize.css" type="text/css">
             <link rel="stylesheet" href="_static/sphinx.css" type="text/css">
             <link rel="stylesheet" href="_static/main.css" type="text/css">
@@ -28,7 +28,7 @@
         <script>window.jQuery || document.write('<script src="_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="_static/plugins.js"></script>
         <script src="_static/main.js"></script>
-        <link rel="next" title="Articoli meno recenti" href="page2.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.html" /><script type="text/javascript">
+        <link rel="next" title="Articoli meno recenti" href="page4.html" /><link rel="prev" title="Articoli più recenti" href="page2.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '1.5',
@@ -54,11 +54,11 @@
 
       <div id="container"><header role="banner">
             <hgroup>
-              <h1><a href="#">myBlog</a></h1><h2>by Orcim</h2></hgroup>
+              <h1><a href="index.html">myBlog</a></h1><h2>by Orcim</h2></hgroup>
           </header>
       <nav role="navigation">
             <ul><li class="main-nav">
-                  <a href="#">Pagina iniziale</a>
+                  <a href="index.html">Pagina iniziale</a>
                 </li>
               <li class="main-nav">
                   <a href="pages/python.html">Python</a>
@@ -68,12 +68,25 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
-            <span>settembre 04, 2015</span>
+            <span>agosto 23, 2015</span>
         </div>
         <div class="section">
-            <h1><a href="2015/09/04/myradbutton.html">myRadioButton</a></h1>
-<p>Il widget <strong>radio button</strong> viene usato quando si ha la necessità di selezionare uno degli N valori presenti. Un numero intero indica la selezione.</p>
-<p class="readmorewrapper"><a class="readmore" href="2015/09/04/myradbutton.html#more">Continua a leggere...</a></p> 
+            <h1><a href="2015/08/23/package.html">Package</a></h1>
+<p>Oggi vedremo come strutturare il nostro prima <strong>package</strong>.</p>
+<p>In pratica dobbiamo creare una directory a cui assegneremo il nome <strong>myWidg</strong> ed inserire al suo interno i nostri files.</p>
+<p class="readmorewrapper"><a class="readmore" href="2015/08/23/package.html#more">Continua a leggere...</a></p> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -97,20 +110,30 @@
                 <a href="tags/programming.html">programming</a>, <a href="tags/python.html">python</a>, <a href="tags/gtk.html">gtk</a></span>
         </div>
         <div class="comments">
-            <a href="http://orcim.github.io/blog/html/2015/09/04/myradbutton.html#disqus_thread" data-disqus-identifier="2015/09/04/myradbutton">Leave a comment</a>
+            <a href="http://orcim.github.io/blog/html/2015/08/23/package.html#disqus_thread" data-disqus-identifier="2015/08/23/package">Leave a comment</a>
         </div></div><div class="separator post_separator"></div><div class="timestamp postmeta">
-            <span>settembre 03, 2015</span>
+            <span>agosto 22, 2015</span>
         </div>
         <div class="section">
-            <h1><a href="2015/09/03/mychkbutton.html">myCheckButton</a></h1>
-<p>Il modulo <strong>my03ChkButton</strong> contiene una serie di widgets per la gestione dei <strong>check buttons</strong> che sono degli oggetti che permettono la selezione (attiva/disattiva) attraverso un click sopra l’ oggetto stesso.</p>
-<p class="readmorewrapper"><a class="readmore" href="2015/09/03/mychkbutton.html#more">Continua a leggere...</a></p> 
- 
- 
- 
- 
- 
- 
+            <div class="section" id="applicazione-base">
+<h1><a href="2015/08/22/applicazione_base.html">Applicazione Base</a></h1>
+<p>Oggi vedremo una struttura di una applicazione base.</p>
+<p>In pratica creiamo un template di contenitori per separare le varie aree dove andremo successivamente ad inserire i nostri <strong>widgets</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">"""</span>
+<span class="sd">"conf                                       .------------------------.</span>
+<span class="sd">"0001 - aBox            (h application)     | application            |</span>
+<span class="sd">"0002   - gBox            (h global)        |   .--------------------.</span>
+<span class="sd">"0004   - mBox            (v main)          |   | g | m | menu       |</span>
+<span class="sd">"0008     - uBox            (h menu)        |   | l | a .------------.</span>
+<span class="sd">"0010     - bBox            (v body)        |   | o | i | body       |</span>
+<span class="sd">"0020     - sBox            (h status)      |   | b | n |            |</span>
+<span class="sd">"                                           |   | a |   .------------.</span>
+<span class="sd">"                                           |   | l |   | status     |</span>
+<span class="sd">"                                           .---.---.----------------.</span>
+<span class="sd">"""</span>
+</pre></div>
+</div>
+<p class="readmorewrapper"><a class="readmore" href="2015/08/22/applicazione_base.html#more">Continua a leggere...</a></p></div>
  
 
         </div>
@@ -129,17 +152,16 @@
                 <a href="tags/programming.html">programming</a>, <a href="tags/python.html">python</a>, <a href="tags/gtk.html">gtk</a></span>
         </div>
         <div class="comments">
-            <a href="http://orcim.github.io/blog/html/2015/09/03/mychkbutton.html#disqus_thread" data-disqus-identifier="2015/09/03/mychkbutton">Leave a comment</a>
+            <a href="http://orcim.github.io/blog/html/2015/08/22/applicazione_base.html#disqus_thread" data-disqus-identifier="2015/08/22/applicazione_base">Leave a comment</a>
         </div></div><div class="separator post_separator"></div><div class="timestamp postmeta">
-            <span>settembre 02, 2015</span>
+            <span>agosto 21, 2015</span>
         </div>
         <div class="section">
-            <h1><a href="2015/09/02/mybutton1.html">myButton (il seguito)</a></h1>
-<p>Continuiamo con la descrizione, del modulo <strong>myButton</strong>, iniziata nel precedente post.</p>
-<p class="readmorewrapper"><a class="readmore" href="2015/09/02/mybutton1.html#more">Continua a leggere...</a></p> 
- 
- 
- 
+            <div class="section" id="contenitori">
+<h1><a href="2015/08/21/box.html">Contenitori</a></h1>
+<p>Oggi parleremo dei contenitori <strong>Box</strong> e <strong>Frame</strong>. Ne esistono altri come Grid, Table, ecc. ma per il momento ci concentriamo su questi due.</p>
+<p>Come ricorderete nel precedente post nelle definizioni erano presenti <strong>myBox1</strong> e <strong>myFrame1</strong>.</p>
+<p class="readmorewrapper"><a class="readmore" href="2015/08/21/box.html#more">Continua a leggere...</a></p></div>
  
  
 
@@ -159,14 +181,26 @@
                 <a href="tags/programming.html">programming</a>, <a href="tags/python.html">python</a>, <a href="tags/gtk.html">gtk</a></span>
         </div>
         <div class="comments">
-            <a href="http://orcim.github.io/blog/html/2015/09/02/mybutton1.html#disqus_thread" data-disqus-identifier="2015/09/02/mybutton1">Leave a comment</a>
+            <a href="http://orcim.github.io/blog/html/2015/08/21/box.html#disqus_thread" data-disqus-identifier="2015/08/21/box">Leave a comment</a>
         </div></div><div class="separator post_separator"></div><div class="timestamp postmeta">
-            <span>settembre 01, 2015</span>
+            <span>agosto 20, 2015</span>
         </div>
         <div class="section">
-            <h1><a href="2015/09/01/mybutton.html">myButton</a></h1>
-<p>Il modulo <strong>my03Button</strong> contiene una serie di widgets per la gestione del <strong>button</strong> tradizione.</p>
-<p class="readmorewrapper"><a class="readmore" href="2015/09/01/mybutton.html#more">Continua a leggere...</a></p> 
+            <h1><a href="2015/08/20/gtk.html">Gtk</a></h1>
+<p>Perchè Gtk e non Qt o altro?</p>
+<p>Quando ho iniziato a programmare in modalità grafica le Qt non erano ancora proprio libere. Ma non solo. In <strong>linux</strong> io preferisco Gnome a Kde perciò è venuto del tutto naturale la scelta. A distanza di anni non me ne pento. Anche se una volta compreso il loro funzionamento si scopre che passare da un ambiente ad un altro non è così difficile perchè i motori che girano sotto sono molto simili.</p>
+<p class="readmorewrapper"><a class="readmore" href="2015/08/20/gtk.html#more">Continua a leggere...</a></p> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -193,14 +227,24 @@
                 <a href="tags/programming.html">programming</a>, <a href="tags/python.html">python</a>, <a href="tags/gtk.html">gtk</a></span>
         </div>
         <div class="comments">
-            <a href="http://orcim.github.io/blog/html/2015/09/01/mybutton.html#disqus_thread" data-disqus-identifier="2015/09/01/mybutton">Leave a comment</a>
+            <a href="http://orcim.github.io/blog/html/2015/08/20/gtk.html#disqus_thread" data-disqus-identifier="2015/08/20/gtk">Leave a comment</a>
         </div></div><div class="separator post_separator"></div><div class="timestamp postmeta">
-            <span>agosto 31, 2015</span>
+            <span>agosto 19, 2015</span>
         </div>
         <div class="section">
-            <h1><a href="2015/08/31/mytxtview.html">myTextView</a></h1>
-<p>Il widget <strong>myTxtView</strong> serve a visualizzare il contenuto del widget <strong>TextBuffer</strong> che memorizza del testo con attributi associati. In altre parole la base di un editor di testo.</p>
-<p class="readmorewrapper"><a class="readmore" href="2015/08/31/mytxtview.html#more">Continua a leggere...</a></p> 
+            <h1><a href="2015/08/19/template_base.html">Template base</a></h1>
+<p>Dopo un pò di ciacole, come si dice a Venezia, iniziamo a vedere un aspetto della programmazione che a mio modesto avviso viene spesso sottovalutato.</p>
+<p>Quando iniziamo a scrivere del codice ci dobbiamo ricordare di dare una struttura al nostro lavoro, nota bene sto sottolineando la parola <strong>Lavoro</strong> non codice.</p>
+<p class="readmorewrapper"><a class="readmore" href="2015/08/19/template_base.html#more">Continua a leggere...</a></p> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -220,15 +264,15 @@
         <div class="tags">
             <span>
                 Tag:
-                <a href="tags/programming.html">programming</a>, <a href="tags/python.html">python</a>, <a href="tags/gtk.html">gtk</a></span>
+                <a href="tags/programming.html">programming</a>, <a href="tags/python.html">python</a></span>
         </div>
         <div class="comments">
-            <a href="http://orcim.github.io/blog/html/2015/08/31/mytxtview.html#disqus_thread" data-disqus-identifier="2015/08/31/mytxtview">Leave a comment</a>
+            <a href="http://orcim.github.io/blog/html/2015/08/19/template_base.html#disqus_thread" data-disqus-identifier="2015/08/19/template_base">Leave a comment</a>
         </div></div><div class="archive_link">
         <a href="archive.html"> &mdash; Archivio Blog &mdash; </a>
     </div><ul class="related clearfix">
-            <li class="left"></li>
-            <li class="right"><a href="page2.html">Articoli meno recenti</a> &raquo; </li>
+            <li class="left"> &laquo; <a href="page2.html">Articoli più recenti</a></li>
+            <li class="right"><a href="page4.html">Articoli meno recenti</a> &raquo; </li>
         </ul></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
     <h1><a href="#searchbox">Cerca</a></h1>
     <form action="search.html" method="get">
