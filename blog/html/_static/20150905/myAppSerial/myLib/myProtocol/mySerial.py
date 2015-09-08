@@ -23,7 +23,7 @@
 	getCD()                 #return the state of the CD line
 """
 
-myRev = "(rev.150525)"
+myRev = "(rev.150906)"
 #-----------------------------------------------------------------------------
 # Modules
 #-----------------------------------------------------------------------------
@@ -52,35 +52,25 @@ def printHex(str):
 class MySerial(object):
 	""" gestione di una comunicazione Seriale
 		Attributi:
-			ser
-				- gestione Serial
-			dlTx
-				- ritardo tra un Tx ed un'altro
-			cou
-				- caratteri ricevuti
-			buf
-				- buffer di ricezione
+			- ser 			istanza seriale
+			- dlTx 			ritardo tra un invio ed un'altro
+			- cou 			caratteri ricevuti
+			- buf 			buffer di ricezione
 		Metodi:
-			close
-				- Chiusura del socket
-			chaSetting
-				- configurazione della connessione
-			sndChar
-				- Invio di un char espresso come stringa es: '\n'
-			sndString
-				- Invio di una stringa 'str' (stringa ascii)
-			rcvChar
-				- Ricezione di un carattere (funzione non bloccante)
-			rcvString
-				- Ricezione di una N caratteri (funzione non bloccante)
-			rcvStrTimeOut
-				- Ricezione di N caratteri entro un certo tempo
+			- close			chiusura del socket
+			- chaSetting	configurazione parametri
+			- sndChar		invio di un char espresso come stringa es: '\n'
+			- sndString		invio di una stringa es: 'str' (stringa ascii)
+			- rcvChar		ricezione di un carattere (funzione non bloccante)
+			- rcvString		ricezione di una N caratteri (funzione non bloccante)
+			- rcvStrTimeOut	ricezione di N caratteri entro un certo tempo
 	"""
 
 	def __init__(self, por="/dev/ttyS", par=['1','115200','8','N','1'], ope=True, deb=False):
 		""" Inizializzo il dispositivo
-			@par    parametri di configurazione
-			@ope    stabilisco se deve essere aperta la porta
+			-> por    tipo device (dipende dal S.O.)
+			-> par    parametri di configurazione
+			-> ope    stabilisco se deve essere aperta la connessione
 		"""
 		# referenzio il flag di Debug
 		self.deb = deb
@@ -199,7 +189,7 @@ class MySerial(object):
 			printHex(str)
 
 	def rcvByte(self):
-		""" Ricezione di 1 byte (funzione non bloccante) """
+		""" Ricezione di N bytes (funzione non bloccante) """
 		# verifico se c'e' qualcosa in ricezione
 		cou = self.ser.inWaiting()
 		if cou > 0:
@@ -210,11 +200,11 @@ class MySerial(object):
 
 	# alias di rcvByte
 	def rcvChar(self):
-		""" Ricezione di un carattere (funzione non bloccante) """
+		""" Ricezione di N bytes (funzione non bloccante) """
 		return self.rcvByte()
 
 	def rcvString(self, num=1):
-		""" Ricezione di una N caratteri (funzione non bloccante) """
+		""" Attesa di N bytes (funzione non bloccante) """
 		# verifico quanti caratteri ci sono gia' nel buffer
 		cou = self.ser.inWaiting()
 		if cou > 0:
@@ -316,7 +306,7 @@ def myTry02():
 		# invio una stringa
 		self.sndString("Ciao mondo!\n")
 		# attendo (num) N caratteri entro (tou) un tempo
-		res,buf = self.rcvStrTimeOut(num=50, tou=0.1)
+		res,buf = self.rcvStrTimeOut(num=50, tou=0.01)
 		print "%s" %('timeOut:','ok:')[res], "chars receiver:",len(buf)
 		print "buf:",
 		# visualizza anche i caratteri speciali

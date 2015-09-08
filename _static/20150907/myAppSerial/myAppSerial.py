@@ -2,36 +2,96 @@
 # -*- coding: utf-8 -*-
 """ lista degli oggetti definiti:
 
-	- myApp
-
+	- myAppSerial
 """
-from my00init import *
 
-myRev = "(rev.150529)"
+myRev = "(rev.150907)"
 #-----------------------------------------------------------------------------
 # Modules
 #-----------------------------------------------------------------------------
-# import cairo
-# import math
+from my00init import *
+
+#-----------------------------------------------------------------------------
+# aggiorno l'ambiente
+# inseriamo i nostri packages che vogliamo usare
+insLib(myRoot+'/myLib/myProtocol',True)
 
 #-----------------------------------------------------------------------------
 # myModules
 #-----------------------------------------------------------------------------
-# structures C
-from ctypes import *
-from myApp import MyWind
+from myApp import MyApp #(contiene my00initGtk)
+from mySerial import MySerial
+from myProtocol import MyProtocol
+
 #-----------------------------------------------------------------------------
 # myDefines
 #-----------------------------------------------------------------------------
-# comunication
-# from mySerial import MySerial
-# from myProtocol import MyProtocol, myParser
-# canBus
-from myDevice import MyDevice
+def chaBackColor(obj=None, css="MyWind", col="#666666"):
+	" cambio colore al background dell'oggetto"
+	obj.set_name(css)
+	# colore background
+	style_provider = Gtk.CssProvider()
+	css = "#%s {background-color: %s; }" %(css, col)
+	# css = """
+	# #MyWind {
+	#     background-color: #F00;
+	# }
+	# """
+	style_provider.load_from_data(css)
+	Gtk.StyleContext.add_provider_for_screen(
+		Gdk.Screen.get_default(), 
+		style_provider,     
+		Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+	)
 
 #-----------------------------------------------------------------------------
-def myNone(*args):
-	pass
+def stpCmd(obj=None, dev=None):
+	"send next line"
+	try:
+		while 1:
+			val = obj.next()
+			# print val,
+
+			# convert value
+			val = stpCnv(val)
+			# dev.prot.sendListCommands([val,], log=0)
+			self.bufDev = val[:]
+			return True
+	# evita l'eccezzione
+	except StopIteration:
+		return False
+
+#-----------------------------------------------------------------------------
+def stpCnv(val=None):
+	"convert value"
+	if self.namFil[-4:] == ".bin":
+		# remove CR,LF
+		val = val.strip('\r\n')
+		# check format
+		if len(val) % 2 != 0:
+			print "Entry format: ff0091"
+			val = ""
+		else:
+			# split string to substring with lenght = 2 
+			data = [val[i:i+2] for i in range(0, len(val), 2)]
+			# print data
+			val = []
+			for ele in data:
+				val.append("%c" %atoi(ele,16))
+			val = "".join(val)
+	return [val,]
+
+#-----------------------------------------------------------------------------
+def stpFile(nam="data/cmdCanBus.cmd"):
+	"send file one by one line"
+	self.namFil = nam
+	try:
+		hnd = file(self.namFil,"r")
+		for ele in hnd:
+			yield ele
+	except:
+		print "file not found!"
+		yield False
 
 #-----------------------------------------------------------------------------
 # myClass
@@ -40,12 +100,60 @@ def myNone(*args):
 #-----------------------------------------------------------------------------
 # myTry
 #-----------------------------------------------------------------------------
-def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
-	""" receiver & transmission
-	"""
+def myTry01(deb=1):
+	""" + window (self)                                                   
+	"conf                                       .------------------------.
+	"0001 - aBox            (h application)     | application            |
+	"0002   - gBox            (h global)        |   .--------------------.
+	"0004   - mBox            (v main)          |   | g | m | menu       |
+	"0008     - uBox            (h menu)        |   | l | a .------------.
+	"0010     - bBox            (v body)        |   | o | i | body       |
+	"0020     - sBox            (h status)      |   | b | n |            |
+	"                                           |   | a |   .------------.
+	"                                           |   | l |   | status     |
+	"                                           .---.---.----------------.
+	""" 
+	# istanza l'applicazione base (no application, global, main, menu, status)
+	self = MyApp(width=400, height=400, title="myApp", 
+					center=True, color="#bbb", conf=0x0010, show=0)
+
+
+	# inizializzazione in base al S.O.
+	if sys.platform == 'win32':
+		# Windows (numerazione parte da 1)
+		por = "COM"
+		par = ['1','115200','8','N','1']
+	else:
+		# Unix  (numerazione parte da 0)	
+		#por = "/dev/ttyS"
+		#por = "/dev/ttymxc"
+		por = "/dev/ttyUSB"
+		par = ['0','115200','8','N','1']
+
+	# definisco il parser
+	def myParser(*args):		
+		print 'parser:', args
+		# mantiene il loop attivo (esce solo per timeOut!)
+		return True
+
+	#  istanza di un seriale
+	dev = MySerial(por=por, par=par, ope=1, deb=deb)
+	if dev.ser:
+		print "device Ok"
+		self.dev = MyProtocol(ser=dev, sta='*', sto=['\r','\n'], hex=0, cal=None)
+		# attivo il parser
+		self.cal = myParser
+		return self
+	else:
+		print "device Ko"
+		sys.exit()
+
+#-----------------------------------------------------------------------------
+def myTry02(self):
+	"GUI (Graphics User Interface)"
 
 	from my01Box import myFrame
-	from my02TxtView import myScrTexVieFrame    
+	from my02TxtView import myTxtView
 	from my02Entry import myEntFrame, myEntList
 	from my02Label import myLabFrame
 	from my03Button import myButton, myButFrame
@@ -53,13 +161,13 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 #myFraScrTexView
 	#          0,   1,   2,   3,   4,    5,    6,       7 
 	# fram,[labe,xBox,buff,text,cTag,clear,write,writeTag]
-	fram,othe = myScrTexVieFrame(name='logBuffer', colo="black",
-								widt=400, heig=400, 
-								font="courier 9", edit=False, 
-								left=1, righ=1, bord=3,
-								bFra=1, sFra=Gtk.SHADOW_ETCHED_OUT, tFra='v' )
+	fram,othe = myTxtView(name='logBuffer', colo="black",
+							widt=400, heig=400, 
+							font="courier 9", edit=False, 
+							left=1, righ=1, bord=3,
+							bFra=1, sFra=Gtk.SHADOW_ETCHED_OUT, tFra='v' )
 	# insert object in apllication
-	self.vBox.pack_start(fram, False, False, 1)
+	self.bBox.pack_start(fram, False, False, 1)
 	
 	# referenzio gli attributi
 	self.cTag = othe[4]
@@ -72,108 +180,81 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 	sys.stdout = self
 
 ##############################################################################
-#myFrame (Rx Buffer)
-	# fram,[labe,xBox]
-	obje, othe = myFrame(name='Rx buffer', obje=None, colo='black',
-						bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
-						tBox='h', aBox=[False, False, 10])
-	# referenzio l'oggetto
-	self.boxBuf = othe[1]
-	# change background color to Class
-	chaBackColor(obj=obje, css="boxBuf", col="#a0a0a0")
+# Device
 
-	# insert object in application
-	self.vBox.pack_start(obje, False, False, 1)
+	# re-imposta il titolo dell'applicazione
+	self.set_title(self.title + " %s" %self.dev.ser.por)
+	print self.dev.ser.par
 
-#myChkButton (enable Rx)
-	# ridefinisco la callback        
-	def on_clicked(widg, name, *data):
-		pass
-	# butt, call
-	obje, othe = myChkButton(name='Ena', 
-							valu=True, colo='black', 
-							call= on_clicked, data=['-',])
-	# referenzio l'oggetto
-	self.chkEna = obje
-	# fram,[labe,xBox]
-	obj1, oth1 = myFrame(name='Rx', obje=obje, colo='black',
-						 bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
-						 tBox='h' )
-	# insert object in application
-	self.boxBuf.pack_start(obj1, False, False, 1)
+	self.dev.couErr = 0
 
-#myLabFrame (counter Rx data)
-	#fram, [labe, lFrm, xBox]
-	obje, othe = myLabFrame(name='0', 
-							leng=len('0')+1, prea=' ', post='', 
-							font='Arial 10', 
-							colo='blue',
-							nFra='Rx.data', cFra='black', bFra=1, sFra=Gtk.SHADOW_ETCHED_OUT, 
-							tFra='h', aFra=[False, False, 1])
-	# referenzio l'oggetto
-	self.labRcv = othe[0]
-	# insert object in application
-	self.boxBuf.pack_start(obje, False, False, 1)
+	self.debLog = 1
+	self.bufDev = 0
+	self.couRcv = 0
+	self.couSnd = 0
+	self.couFil = 0
+	self.namFil = ""
+	self.start = time()
+	def devRx(self):
+		# if self.chkEna.get_active():
+		if 1:
+			# ricevo dati
+			try:
+				# lettura dati
+				data = self.dev.read()
+				if data:
+					# aggiorno bytes ricevuti
+					self.couRcv += len(data)
+					self.labRcv.set_text(" %d" %self.couRcv)
 
-#myButton (clear buffer)
-	# ridefinisco la callback        
-	def on_clicked(widg, *data):
-		self.clear()
-		# frame ricevuti
-		self.couRcv = 0
-		self.couSnd = 0
-		self.labRcv.set_text(" %d" %self.couRcv)
-		self.labSnd.set_text(" %d" %self.couSnd)
-	# fram, [labe, xBox, butt, call]
-	obje, othe = myButFrame(name="buffer", 
-							icon=Gtk.STOCK_OK, 
-							call=on_clicked, data=[],
-							bFra=1, sFra=Gtk.SHADOW_ETCHED_OUT, 
-							tFra='v', aFra=[False, False, 1])
-	# imposto la label
-	othe[2].props.label = "clear"    
-	# insert object in application
-	self.boxBuf.pack_start(obje, False, False, 1)
+					# print data,
+					self.write(data)
+					# clear data rx
+					self.dev.myPars.data = None
 
-#myChkButton (view Hid)
-	# ridefinisco la callback        
-	def on_clicked(widg, name, *data):
-		if widg.get_active():
-			self.dev0.prot.hid = 1
-		else:
-			self.dev0.prot.hid = 0
-	# butt, call
-	obje, othe = myChkButton(name='view', 
-							valu=0, colo='black', 
-							call= on_clicked, data=['-',])
-	# referenzio l'oggetto
-	self.chkHid = obje
-	# fram,[labe,xBox]
-	obj1, oth1 = myFrame(name='Hide', obje=obje, colo='black',
-						 bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
-						 tBox='h' )
-	# insert object in application
-	self.boxBuf.pack_start(obj1, False, False, 1)
+			except Exception,err:
+				if "DEV read error" in err:
+					pass
+				else:
+					self.dev.couErr += 1
+					print "err:", self.dev.couErr, err
+		sleep(0.001)
+		# rimane attivo
+		return True
 
-#myChkButton (view Hex)
-	# ridefinisco la callback        
-	def on_clicked(widg, name, *data):
-		if widg.get_active():
-			self.dev0.prot.hex = 1
-		else:
-			self.dev0.prot.hex = 0
-	# butt, call
-	obje, othe = myChkButton(name='view', 
-							valu=0, colo='black', 
-							call= on_clicked, data=['-',])
-	# referenzio l'oggetto
-	self.chkHex = obje
-	# fram,[labe,xBox]
-	obj1, oth1 = myFrame(name='Hex', obje=obje, colo='black',
-						 bord=2, shad=Gtk.SHADOW_ETCHED_OUT,
-						 tBox='h' )
-	# insert object in application
-	self.boxBuf.pack_start(obj1, False, False, 1)
+	# referenzio il metodo che inserisco nel loop di Idle
+	self.rxDev = GObject.idle_add(devRx, self)
+
+	def devTx(self):
+		# invio dati
+		try:
+			# send parameters
+			if self.bufDev:
+
+				# print data_str
+				self.dev.prot.sendListCommands(self.bufDev, log=0)
+				self.bufDev = []
+
+				self.couSnd +=1
+				self.labSnd.set_text(" %d" %self.couSnd)
+				# delay richiesta ritardata
+				#GLib.timeout_add(300, reqPar, self)
+			else:
+				pass
+
+		except:
+			if self.debLog:
+				print("MyDevice write Frame error")
+
+		# visualizzo tempo trascorso
+		# print "tim:%s" %(time() - self.start)
+
+		sleep(0.001)
+		# rimane attivo
+		return True
+
+	# referenzio il metodo che inserisco nel loop di Idle
+	self.txDev = GObject.idle_add(devTx, self)
 
 ##############################################################################
 #myFrame (Tx Commands)
@@ -187,7 +268,7 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 	chaBackColor(obj=obje, css="boxCmd", col="#a0a0a0")
 	
 	# insert object in application
-	self.vBox.pack_start(obje, False, False, 1)
+	self.bBox.pack_start(obje, False, False, 1)
 
 #myChkButton (tx)
 	# ridefinisco la callback        
@@ -231,11 +312,11 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 		if val != False:
 			val = stpCnv(val)
 			# send first line
-			# self.dev0.prot.sendListCommands([val,], log=0)
+			# self.dev.prot.sendListCommands([val,], log=0)
 			self.bufDev = val[:]
 
 			# background work
-			GObject.idle_add(stpCmd, self.cmdDev, self.dev0)
+			GObject.idle_add(stpCmd, self.cmdDev, self.dev)
 
 	# fram, [labe, xBox, butt, call]
 	obje, othe = myButFrame(name="file.tx", 
@@ -278,7 +359,7 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 		# send data
 		if data_str:
 			# print data_str
-			# self.dev0.prot.sendListCommands(data_str, log=0)
+			# self.dev.prot.sendListCommands(data_str, log=0)
 			self.bufDev = data_str[:]
 
 	#fram, [labe, xBoxcmdB, entr, call]        
@@ -329,8 +410,8 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 #myChkButton (enable Binary)
 	# ridefinisco la callback        
 	def on_clicked(widg, name, *data):
-		self.dev0.prot.asc = not widg.get_active()
-		# print self.dev0.prot.asc
+		self.dev.prot.asc = not widg.get_active()
+		# print self.dev.prot.asc
 	# butt, call
 	obje, othe = myChkButton(name='Ena', 
 							valu=0, colo='black', 
@@ -347,7 +428,7 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 #myChkButton (enable Debug)
 	# ridefinisco la callback        
 	def on_clicked(widg, name, *data):
-		self.dev0.mySer.deb = widg.get_active()
+		self.dev.mySer.deb = widg.get_active()
 	# butt, call
 	obje, othe = myChkButton(name='Ena', 
 							valu=0, colo='black', 
@@ -365,9 +446,9 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 	# ridefinisco la callback        
 	def on_clicked(widg, name, *data):
 		if widg.get_active():
-			self.dev0.mySer.ser.setRTS(1)
+			self.dev.mySer.ser.setRTS(1)
 		else:
-			self.dev0.mySer.ser.setRTS(0)
+			self.dev.mySer.ser.setRTS(0)
 	# butt, call
 	obje, othe = myChkButton(name='On', 
 							valu=1, colo='black', 
@@ -385,9 +466,9 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 	# ridefinisco la callback        
 	def on_clicked(widg, name, *data):
 		if widg.get_active():
-			self.dev0.mySer.ser.setDTR(1)
+			self.dev.mySer.ser.setDTR(1)
 		else:
-			self.dev0.mySer.ser.setDTR(0)
+			self.dev.mySer.ser.setDTR(0)
 	# butt, call
 	obje, othe = myChkButton(name='On', 
 							valu=1, colo='black', 
@@ -401,162 +482,48 @@ def myTry01(por="0", dev="/dev/ttyUSB", baud='115200'):
 	# insert object in application
 	self.boxCmd.pack_start(obj1, False, False, 1)
 
-##############################################################################
-# Device
-
-	# istanza del bus
-	# self.dev0 = MyDevice("0", "/dev/ttyACM", baud='115200')
-	self.dev0 = MyDevice(por, dev, baud)
-	if not self.dev0.mySer.ser:
-		printD("device not present!")
-	else:
-		# re-imposta il titolo dell'applicazione
-		self.set_title(self.title + " %s" %self.dev0.mySer.por)
-		print self.dev0.mySer.par
-
-	self.dev0.couErr = 0
-
-	self.debLog = 1
-	self.bufDev = 0
-	self.couRcv = 0
-	self.couSnd = 0
-	self.couFil = 0
-	self.namFil = ""
-	self.start = time()
-	def devRx(self):
-		if self.chkEna.get_active():
-			# ricevo dati
-			try:
-				# lettura dati
-				data = self.dev0.read()
-				if data:
-					# aggiorno bytes ricevuti
-					self.couRcv += len(data)
-					self.labRcv.set_text(" %d" %self.couRcv)
-					# # stampa i dati
-					# if self.dev0.myPars.flgTx:
-					# 	print "->", data
-					# else:
-					# 	print "<-", data
-
-					# print data,
-					self.write(data)
-					# clear data rx
-					self.dev0.myPars.data = None
-
-			except Exception,err:
-				if "DEV read error" in err:
-					pass
-				else:
-					self.dev0.couErr += 1
-					print "err:", self.dev0.couErr, err
-		sleep(0.001)
-		# rimane attivo
-		return True
-
-	# referenzio il metodo che inserisco nel loop di Idle
-	self.rxDev = GObject.idle_add(devRx, self)
-
-	def devTx(self):
-		# invio dati
-		try:
-			# send parameters
-			if self.bufDev:
-
-				# print data_str
-				self.dev0.prot.sendListCommands(self.bufDev, log=0)
-				self.bufDev = []
-
-				self.couSnd +=1
-				self.labSnd.set_text(" %d" %self.couSnd)
-				# delay richiesta ritardata
-				#GLib.timeout_add(300, reqPar, self)
-			else:
-				pass
-
-		except:
-			if self.debLog:
-				print("MyDevice write Frame error")
-
-		# visualizzo tempo trascorso
-		# print "tim:%s" %(time() - self.start)
-
-		sleep(0.001)
-		# rimane attivo
-		return True
-
-	# referenzio il metodo che inserisco nel loop di Idle
-	self.txDev = GObject.idle_add(devTx, self)
-
-#-----------------------------------------------------------------------------
-# myGenerators
-#-----------------------------------------------------------------------------
-def stpFile(nam="data/cmdCanBus.cmd"):
-	"send file one by one line"
-	self.namFil = nam
-	try:
-		hnd = file(self.namFil,"r")
-		for ele in hnd:
-			yield ele
-	except:
-		print "file not found!"
-		yield False
-
-#-----------------------------------------------------------------------------
-def stpCmd(obj=None, dev=None):
-	"send next line"
-	try:
-		while 1:
-			val = obj.next()
-			# print val,
-
-			# convert value
-			val = stpCnv(val)
-			# dev.prot.sendListCommands([val,], log=0)
-			self.bufDev = val[:]
-			return True
-	# evita l'eccezzione
-	except StopIteration:
-		return False
-
-#-----------------------------------------------------------------------------
-def stpCnv(val=None):
-	"convert value"
-	if self.namFil[-4:] == ".bin":
-		# remove CR,LF
-		val = val.strip('\r\n')
-		# check format
-		if len(val) % 2 != 0:
-			print "Entry format: ff0091"
-			val = ""
-		else:
-			# split string to substring with lenght = 2 
-			data = [val[i:i+2] for i in range(0, len(val), 2)]
-			# print data
-			val = []
-			for ele in data:
-				val.append("%c" %atoi(ele,16))
-			val = "".join(val)
-	return [val,]
-
 #-----------------------------------------------------------------------------
 # Main
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
 
-	choi = 0
+	# test arguments
+	if len(sys.argv) == 1:
+		# no arguments (scelgo io)
+		choi = 2
+	else:
+		# get first argument (scelta esterna)
+		choi = int(sys.argv[1])
 
-	if choi == 0:
-		# istanza l'applicazione principale
-		self = MyWind(width=800, height=500, title="myTerminal %s" %myRev, center=True, color="#b0b0b0")
-		# rx & tx isobus
-		myTry01(por="0", dev="/dev/ttyUSB", baud='115200')
-		# avvia applicazione
-		Gtk.main()
-	elif choi == 1:
-		# istanza l'applicazione principale
-		self = MyWind(width=800, height=500, title="myTerminal %s" %myRev, center=True, color="#b0b0b0")
-		# rx & tx isobus
-		myTry01(por="1", dev="/dev/ttyUSB", baud='115200')
-		# avvia applicazione
-		Gtk.main()
+	if choi == 1:
+		# istanza l'Applicazione (MyApp)
+		# inizializza il device seriale
+		self = myTry01()
+
+		# test: invio un comando
+		self.sendListCommands(["cmd_1",])
+		# attesa risposta entro 10mSec (tou, cal, *args)
+		print "time: %f" %myTimeOut(0.01, self.loop)
+
+	elif choi == 2:
+		# istanza l'Applicazione (MyApp)
+		# inizializza il device seriale
+		self = myTry01()
+		myTry02(self)
+
+		# test: invio un comando in apertura
+		# self.dev.sendListCommands(["cmd_1",])
+
+		# delay richiesta ritardata
+		GLib.timeout_add(300, self.dev.sendListCommands, ["cmd_1",])
+
+		# delay richiesta ritardata
+		GLib.timeout_add(600, self.dev.sendListCommands, ["cmd_2",])
+
+	# avvia applicazione
+	Gtk.main()
+
+	# # redirect sul proprio buffer text
+	# sys.stdout = sys.__stdout__
+	# # test: invio un comando
+	# self.dev.sendListCommands(["cmd_1",])

@@ -1,0 +1,7 @@
+Inoltre abbiamo forzato il **parser** continuo, senza attendere lo stop, per avere 
+una risposta in tempo reale nella visualizzazione della GUI futura.
+
+.. literalinclude:: /_static/20150906/myAppSerial/myLib/myProtocol/myProtocol.py
+	:language: python
+	:lines: 198-206
+

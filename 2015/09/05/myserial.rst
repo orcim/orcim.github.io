@@ -165,5 +165,5 @@ Ciao alla prossima. (stay tune!)
 
 .. author:: default
 .. categories:: programming
-.. tags:: programming, python, gtk
+.. tags:: programming, python
 .. comments::

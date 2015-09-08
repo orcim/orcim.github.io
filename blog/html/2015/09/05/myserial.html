@@ -28,7 +28,7 @@
         <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="../../../_static/plugins.js"></script>
         <script src="../../../_static/main.js"></script>
-        <link rel="next" title="in attesa del prossimo post" href="in_attesa_del_prossimo_post.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+        <link rel="next" title="in attesa del prossimo post" href="in_attesa_del_prossimo_post.html" /><link rel="prev" title="myProtocol" href="../06/myprotocol.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '1.5',
@@ -140,35 +140,25 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
 <span class="k">class</span> <span class="nc">MySerial</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot; gestione di una comunicazione Seriale</span>
 <span class="sd">		Attributi:</span>
-<span class="sd">			ser</span>
-<span class="sd">				- gestione Serial</span>
-<span class="sd">			dlTx</span>
-<span class="sd">				- ritardo tra un Tx ed un&#39;altro</span>
-<span class="sd">			cou</span>
-<span class="sd">				- caratteri ricevuti</span>
-<span class="sd">			buf</span>
-<span class="sd">				- buffer di ricezione</span>
+<span class="sd">			- ser 			istanza seriale</span>
+<span class="sd">			- dlTx 			ritardo tra un invio ed un&#39;altro</span>
+<span class="sd">			- cou 			caratteri ricevuti</span>
+<span class="sd">			- buf 			buffer di ricezione</span>
 <span class="sd">		Metodi:</span>
-<span class="sd">			close</span>
-<span class="sd">				- Chiusura del socket</span>
-<span class="sd">			chaSetting</span>
-<span class="sd">				- configurazione della connessione</span>
-<span class="sd">			sndChar</span>
-<span class="sd">				- Invio di un char espresso come stringa es: &#39;\n&#39;</span>
-<span class="sd">			sndString</span>
-<span class="sd">				- Invio di una stringa &#39;str&#39; (stringa ascii)</span>
-<span class="sd">			rcvChar</span>
-<span class="sd">				- Ricezione di un carattere (funzione non bloccante)</span>
-<span class="sd">			rcvString</span>
-<span class="sd">				- Ricezione di una N caratteri (funzione non bloccante)</span>
-<span class="sd">			rcvStrTimeOut</span>
-<span class="sd">				- Ricezione di N caratteri entro un certo tempo</span>
+<span class="sd">			- close			chiusura del socket</span>
+<span class="sd">			- chaSetting	configurazione parametri</span>
+<span class="sd">			- sndChar		invio di un char espresso come stringa es: &#39;\n&#39;</span>
+<span class="sd">			- sndString		invio di una stringa es: &#39;str&#39; (stringa ascii)</span>
+<span class="sd">			- rcvChar		ricezione di un carattere (funzione non bloccante)</span>
+<span class="sd">			- rcvString		ricezione di una N caratteri (funzione non bloccante)</span>
+<span class="sd">			- rcvStrTimeOut	ricezione di N caratteri entro un certo tempo</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 
 	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">por</span><span class="o">=</span><span class="s">&quot;/dev/ttyS&quot;</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">],</span> <span class="n">ope</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">deb</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot; Inizializzo il dispositivo</span>
-<span class="sd">			@par    parametri di configurazione</span>
-<span class="sd">			@ope    stabilisco se deve essere aperta la porta</span>
+<span class="sd">			-&gt; por    tipo device (dipende dal S.O.)</span>
+<span class="sd">			-&gt; par    parametri di configurazione</span>
+<span class="sd">			-&gt; ope    stabilisco se deve essere aperta la connessione</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="c"># referenzio il flag di Debug</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">deb</span> <span class="o">=</span> <span class="n">deb</span>
@@ -287,7 +277,7 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
 			<span class="n">printHex</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
 	<span class="k">def</span> <span class="nf">rcvByte</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Ricezione di 1 byte (funzione non bloccante) &quot;&quot;&quot;</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di N bytes (funzione non bloccante) &quot;&quot;&quot;</span>
 		<span class="c"># verifico se c&#39;e&#39; qualcosa in ricezione</span>
 		<span class="n">cou</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">inWaiting</span><span class="p">()</span>
 		<span class="k">if</span> <span class="n">cou</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -298,11 +288,11 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
 
 	<span class="c"># alias di rcvByte</span>
 	<span class="k">def</span> <span class="nf">rcvChar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Ricezione di un carattere (funzione non bloccante) &quot;&quot;&quot;</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di N bytes (funzione non bloccante) &quot;&quot;&quot;</span>
 		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvByte</span><span class="p">()</span>
 
 	<span class="k">def</span> <span class="nf">rcvString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Ricezione di una N caratteri (funzione non bloccante) &quot;&quot;&quot;</span>
+		<span class="sd">&quot;&quot;&quot; Attesa di N bytes (funzione non bloccante) &quot;&quot;&quot;</span>
 		<span class="c"># verifico quanti caratteri ci sono gia&#39; nel buffer</span>
 		<span class="n">cou</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">inWaiting</span><span class="p">()</span>
 		<span class="k">if</span> <span class="n">cou</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -360,21 +350,21 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
 <span class="sd">			&lt;- self.buf = caratteri acquisiti</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvDataTimeOut</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">tou</span><span class="p">)</span>
+
+<span class="c">#------------------------------------------------------------------------------</span>
+<span class="c"># myTry</span>
+<span class="c">#------------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry01</span><span class="p">():</span>
+
+	<span class="c"># inizializzazione in base al S.O.</span>
+	<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">&#39;win32&#39;</span><span class="p">:</span>
+		<span class="c"># Windows (numerazione parte da 1)</span>
+		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;COM&quot;</span>
 </pre></div>
 </div>
 <p>Il codice è stato scritto per non essere <strong>bloccante</strong>. Questo ci permetterà di lavorare in modo asincrono se ne avessimo bisogno.</p>
 <p>Inoltre nel caso volessimo lavorare in modo sincrono ho sfruttato il timer del nostro <strong>PC</strong> per creare un <strong>time out</strong> oltre il quale comunque usciremo dal codice bloccante.</p>
-<div class="highlight-python"><div class="highlight"><pre>	<span class="k">def</span> <span class="nf">rcvDataTimeOut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tou</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Ricezione di una sequenza di bytes entro un certo tempo</span>
-<span class="sd">			&lt;- self.buf = caratteri acquisiti</span>
-<span class="sd">		&quot;&quot;&quot;</span>
-		<span class="c"># pilisco il buffer prima della ricezione</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">buf</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-		<span class="c"># contatore caratteri da ricevere</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">cou</span> <span class="o">=</span> <span class="mi">0</span>
-
-		<span class="c"># referenzio lo start per il tOut</span>
-		<span class="n">tim</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre>		<span class="n">tim</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span>
 
 		<span class="c"># flag</span>
 		<span class="n">flg</span> <span class="o">=</span> <span class="bp">True</span>
@@ -399,23 +389,23 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
 		<span class="k">else</span><span class="p">:</span>
 			<span class="n">ret</span> <span class="o">=</span> <span class="bp">True</span>
 		<span class="k">return</span> <span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">buf</span><span class="p">)</span>
+
+	<span class="c"># alias di rcvDataTimeOut</span>
+	<span class="k">def</span> <span class="nf">rcvStrTimeOut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tou</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Ricezione di N caratteri entro un certo tempo</span>
+<span class="sd">			&lt;- self.buf = caratteri acquisiti</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvDataTimeOut</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">tou</span><span class="p">)</span>
+
+<span class="c">#------------------------------------------------------------------------------</span>
+<span class="c"># myTry</span>
 </pre></div>
 </div>
 <p>Vi lascio allo studio del rimanente codice.</p>
 </div>
 <div class="section" id="mytry01">
 <h2>myTry01</h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#------------------------------------------------------------------------------</span>
-<span class="c"># myTry</span>
-<span class="c">#------------------------------------------------------------------------------</span>
-<span class="k">def</span> <span class="nf">myTry01</span><span class="p">():</span>
-
-	<span class="c"># inizializzazione in base al S.O.</span>
-	<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">&#39;win32&#39;</span><span class="p">:</span>
-		<span class="c"># Windows (numerazione parte da 1)</span>
-		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;COM&quot;</span>
-		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
-	<span class="k">else</span><span class="p">:</span>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="k">else</span><span class="p">:</span>
 		<span class="c"># Unix  (numerazione parte da 0)	</span>
 		<span class="c">#por = &quot;/dev/ttyS&quot;</span>
 		<span class="c">#por = &quot;/dev/ttymxc&quot;</span>
@@ -440,46 +430,56 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
 	<span class="k">else</span><span class="p">:</span>
 		<span class="k">print</span> <span class="s">&quot;Serial not found!&quot;</span>
 		<span class="k">return</span> <span class="bp">None</span>
-</pre></div>
-</div>
-<p>Qui vediamo il modo di selezionare l&#8217; inizializzazione in base al <strong>S.O.</strong> sistema operativo in cui gira il codice. Può tornare utile anche in altre applicazioni multi piattaforma.</p>
-<div class="highlight-python"><div class="highlight"><pre>	<span class="c"># inizializzazione in base al S.O.</span>
-	<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">&#39;win32&#39;</span><span class="p">:</span>
-		<span class="c"># Windows (numerazione parte da 1)</span>
-		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;COM&quot;</span>
-		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
-	<span class="k">else</span><span class="p">:</span>
-		<span class="c"># Unix  (numerazione parte da 0)	</span>
-		<span class="c">#por = &quot;/dev/ttyS&quot;</span>
-		<span class="c">#por = &quot;/dev/ttymxc&quot;</span>
-		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;/dev/ttyUSB&quot;</span>
-		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Inoltre ho aggiunto del codice di esempio per fare vedere come sollecitare l&#8217; handshake.</p>
-<div class="highlight-python"><div class="highlight"><pre>			<span class="c"># set to low</span>
-			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-			<span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
-			<span class="c"># set to high</span>
-			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setRTS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="mytry02">
-<h2>myTry02</h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">myTry02</span><span class="p">():</span>
+
+<span class="c">#------------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry02</span><span class="p">():</span>
 	<span class="bp">self</span> <span class="o">=</span> <span class="n">myTry01</span><span class="p">()</span>
 	<span class="k">if</span> <span class="bp">self</span><span class="p">:</span>
 		<span class="c"># invio una stringa</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">sndString</span><span class="p">(</span><span class="s">&quot;Ciao mondo!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
 		<span class="c"># attendo (num) N caratteri entro (tou) un tempo</span>
-		<span class="n">res</span><span class="p">,</span><span class="n">buf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvStrTimeOut</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">tou</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+		<span class="n">res</span><span class="p">,</span><span class="n">buf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcvStrTimeOut</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">tou</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 		<span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="s">&#39;timeOut:&#39;</span><span class="p">,</span><span class="s">&#39;ok:&#39;</span><span class="p">)[</span><span class="n">res</span><span class="p">],</span> <span class="s">&quot;chars receiver:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
-		<span class="k">print</span> <span class="s">&quot;buf:&quot;</span><span class="p">,</span>
-		<span class="c"># visualizza anche i caratteri speciali</span>
-		<span class="n">printHex</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Qui vediamo il modo di selezionare l&#8217; inizializzazione in base al <strong>S.O.</strong> sistema operativo in cui gira il codice. Può tornare utile anche in altre applicazioni multi piattaforma.</p>
+<div class="highlight-python"><div class="highlight"><pre>		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
+
+	<span class="c">#  istanza di un seriale</span>
+	<span class="bp">self</span> <span class="o">=</span> <span class="n">MySerial</span><span class="p">(</span><span class="n">por</span><span class="o">=</span><span class="n">por</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span> <span class="n">ope</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">deb</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+	<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="p">:</span>
+		<span class="c"># init DTR/RTS</span>
+		<span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="c"># set to low</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+			<span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+			<span class="c"># set to high</span>
+</pre></div>
+</div>
+<p>Inoltre ho aggiunto del codice di esempio per fare vedere come sollecitare l&#8217; handshake.</p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="k">else</span><span class="p">:</span>
+		<span class="k">print</span> <span class="s">&quot;Serial not found!&quot;</span>
+		<span class="k">return</span> <span class="bp">None</span>
+
+<span class="c">#------------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry02</span><span class="p">():</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mytry02">
+<h2>myTry02</h2>
+<div class="highlight-python"><div class="highlight"><pre>		<span class="n">printHex</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
 		<span class="c"># print &quot;%s&quot; %buf</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># Main</span>
+<span class="c">#------------------------------------------------------------------------------</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+
+	<span class="c"># test arguments</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="c"># no arguments (scelgo io)</span>
+		<span class="n">choi</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 <p>Qui sfruttiamo il codice di prima per l&#8217; inizializzazione. Poi facendo un <strong>loop</strong> hardware sui segnali <strong>Tx</strong> e <strong>Rx</strong> del nostro dispositivo seriale proviamo ad inviare e ricevere una stringa col nostro codice.</p>
@@ -526,10 +526,10 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
         <div class="tags">
             <span>
                 Tag:
-                <a href="../../../tags/programming.html">programming</a>, <a href="../../../tags/python.html">python</a>, <a href="../../../tags/gtk.html">gtk</a></span>
+                <a href="../../../tags/programming.html">programming</a>, <a href="../../../tags/python.html">python</a></span>
         </div>
         </div><ul class="related clearfix">
-            <li class="left"></li>
+            <li class="left"> &laquo; <a href="../06/myprotocol.html">myProtocol</a></li>
             <li class="right"><a href="in_attesa_del_prossimo_post.html">in attesa del prossimo post</a> &raquo; </li>
         </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/09/05/myserial";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
     <h1><a href="#searchbox">Cerca</a></h1>
@@ -540,6 +540,8 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
 </div></section><section><div class="widget">
     <h1>Articoli Recenti</h1>
     <ul><li>
+            <a href="../06/myprotocol.html">myProtocol</a>
+        </li><li>
             <a href="#">mySerial</a>
         </li><li>
             <a href="in_attesa_del_prossimo_post.html">in attesa del prossimo post</a>
@@ -557,14 +559,12 @@ Vi rimando al <a class="reference external" href="http://pyserial.sourceforge.ne
             <a href="../../08/28/myentry.html">myEntry</a>
         </li><li>
             <a href="../../08/27/mylabel.html">myLabel</a>
-        </li><li>
-            <a href="../../08/26/boxevent.html">boxEvent</a>
         </li></ul>
 </div>
 </section><section><div class="widget">
     <h1>Tag Cloud</h1>
       <a href="../../../tags/generico.html" style="font-size: 8pt">generico</a>&nbsp;&nbsp;
-      <a href="../../../tags/gtk.html" style="font-size: 18pt">gtk</a>&nbsp;&nbsp;
+      <a href="../../../tags/gtk.html" style="font-size: 17pt">gtk</a>&nbsp;&nbsp;
       <a href="../../../tags/programming.html" style="font-size: 20pt">programming</a>&nbsp;&nbsp;
       <a href="../../../tags/python.html" style="font-size: 19pt">python</a>
 </div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
