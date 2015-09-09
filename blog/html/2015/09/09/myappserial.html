@@ -1,0 +1,806 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="my notes of pyGtk">
+        <meta name="viewport" content="width=device-width">
+        <title>myAppSerial &mdash; myBlog</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="myProtocol" href="../06/myprotocol.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script><script type="text/javascript" src="../../../_static/google_analytics.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">myBlog</a></h1><h2>by Orcim</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Pagina iniziale</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/python.html">Python</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/about.html">About</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>settembre 09, 2015</span>
+        </div>
+    <div class="section" id="myappserial">
+<h1>myAppSerial</h1>
+<p>Bene siamo arrivati alla nostra prima applicazione grafica.</p>
+<p>Partiamo copiando la nostra prova <strong>myTry01</strong> del modulo <strong>l01_startGtk</strong></p>
+<div id="more"> </div><p>Modifichiamo la configurazione in <strong>conf=0x0010</strong> perchè non ci servono i box:</p>
+<ul class="simple">
+<li>application</li>
+<li>global</li>
+<li>main</li>
+<li>menu</li>
+<li>status</li>
+</ul>
+<div class="section" id="mytry01">
+<h2>myTry01</h2>
+<p>Aggiungiamo l&#8217; istanza del nostro <strong>device</strong> seriale con relativa configurazione.</p>
+<p>Questa potete copiarla da <strong>myTry01</strong> del modulo <strong>myProtocol</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># myTry</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">myTry01</span><span class="p">(</span><span class="n">deb</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot; + window (self)                                                   </span>
+<span class="sd">	&quot;conf                                       .------------------------.</span>
+<span class="sd">	&quot;0001 - aBox            (h application)     | application            |</span>
+<span class="sd">	&quot;0002   - gBox            (h global)        |   .--------------------.</span>
+<span class="sd">	&quot;0004   - mBox            (v main)          |   | g | m | menu       |</span>
+<span class="sd">	&quot;0008     - uBox            (h menu)        |   | l | a .------------.</span>
+<span class="sd">	&quot;0010     - bBox            (v body)        |   | o | i | body       |</span>
+<span class="sd">	&quot;0020     - sBox            (h status)      |   | b | n |            |</span>
+<span class="sd">	&quot;                                           |   | a |   .------------.</span>
+<span class="sd">	&quot;                                           |   | l |   | status     |</span>
+<span class="sd">	&quot;                                           .---.---.----------------.</span>
+<span class="sd">	&quot;&quot;&quot;</span> 
+	<span class="c"># istanza l&#39;applicazione base (no application, global, main, menu, status)</span>
+	<span class="bp">self</span> <span class="o">=</span> <span class="n">MyApp</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;myApp&quot;</span><span class="p">,</span> 
+					<span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;#bbb&quot;</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="mh">0x0010</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+	<span class="c"># inizializzazione in base al S.O.</span>
+	<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">&#39;win32&#39;</span><span class="p">:</span>
+		<span class="c"># Windows (numerazione parte da 1)</span>
+		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;COM&quot;</span>
+		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="c"># Unix  (numerazione parte da 0)	</span>
+		<span class="c">#por = &quot;/dev/ttyS&quot;</span>
+		<span class="c">#por = &quot;/dev/ttymxc&quot;</span>
+		<span class="n">por</span> <span class="o">=</span> <span class="s">&quot;/dev/ttyUSB&quot;</span>
+		<span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0&#39;</span><span class="p">,</span><span class="s">&#39;115200&#39;</span><span class="p">,</span><span class="s">&#39;8&#39;</span><span class="p">,</span><span class="s">&#39;N&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">]</span>
+
+	<span class="c">#  istanza di un seriale</span>
+	<span class="n">dev</span> <span class="o">=</span> <span class="n">MySerial</span><span class="p">(</span><span class="n">por</span><span class="o">=</span><span class="n">por</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span> <span class="n">ope</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">deb</span><span class="o">=</span><span class="n">deb</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="p">:</span>
+	<span class="c"># if 1:</span>
+		<span class="k">print</span> <span class="s">&quot;device Ok&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev</span> <span class="o">=</span> <span class="n">MyProtocol</span><span class="p">(</span><span class="n">ser</span><span class="o">=</span><span class="n">dev</span><span class="p">,</span> <span class="n">sta</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">sto</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">,</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">],</span> <span class="nb">hex</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cal</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+		<span class="c"># contatore di errori</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">couErr</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="c"># istanza il Parser</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">prs</span> <span class="o">=</span> <span class="n">MyParser</span><span class="p">()</span>
+		<span class="c"># attivo il parser</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">cal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">prs</span><span class="o">.</span><span class="n">parser</span>
+
+		<span class="c"># re-imposta il titolo dell&#39;applicazione</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">+</span> <span class="s">&quot; </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">por</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">par</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">myRev</span><span class="p">)</span> <span class="p">)</span>
+
+		<span class="k">return</span> <span class="bp">self</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">print</span> <span class="s">&quot;device Ko&quot;</span>
+		<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>myTry01</strong> la useremo come base di partenza per avere la struttura base della nostra applicazioen <strong>Gtk</strong>.</p>
+<p>Per finire notare che abbiamo cambiato il titolo della nostra applicazione aggiungendo la <strong>revisione</strong> e la <strong>configurazione</strong> come promemoria.</p>
+<div class="highlight-python"><div class="highlight"><pre>		<span class="c"># re-imposta il titolo dell&#39;applicazione</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">+</span> <span class="s">&quot; </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">por</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">par</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">myRev</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mytry02">
+<h2>myTry02</h2>
+<p>In <strong>myTry02</strong> viene definita la nostra <strong>GUI</strong> personale.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">myTry02</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="s">&quot;GUI (Graphics User Interface)&quot;</span>
+
+	<span class="kn">from</span> <span class="nn">my01Box</span> <span class="kn">import</span> <span class="n">myFrame</span>
+	<span class="kn">from</span> <span class="nn">my02TxtView</span> <span class="kn">import</span> <span class="n">myTxtView</span>
+	<span class="kn">from</span> <span class="nn">my02Entry</span> <span class="kn">import</span> <span class="n">myEntFrame</span><span class="p">,</span> <span class="n">myEntList</span>
+	<span class="kn">from</span> <span class="nn">my02Label</span> <span class="kn">import</span> <span class="n">myLabFrame</span>
+	<span class="kn">from</span> <span class="nn">my03Button</span> <span class="kn">import</span> <span class="n">myButton</span><span class="p">,</span> <span class="n">myButFrame</span>
+	<span class="kn">from</span> <span class="nn">my03ChkButton</span> <span class="kn">import</span> <span class="n">myChkButton</span>
+<span class="c">#myTxtView</span>
+	<span class="c">#          0,   1,   2,   3,   4,    5,    6,       7 </span>
+	<span class="c"># fram,[labe,xBox,buff,text,cTag,clear,write,writeTag]</span>
+	<span class="n">fram</span><span class="p">,</span><span class="n">othe</span> <span class="o">=</span> <span class="n">myTxtView</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;logBuffer&#39;</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span>
+							<span class="n">widt</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">heig</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> 
+							<span class="n">font</span><span class="o">=</span><span class="s">&quot;courier 9&quot;</span><span class="p">,</span> <span class="n">edit</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> 
+							<span class="n">left</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">righ</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bord</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+							<span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in apllication</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">bBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">fram</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+	
+	<span class="c"># referenzio gli attributi</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">cTag</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+	<span class="c"># referenzio i metodi</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="c"># *msg</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">wriTg</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="c"># str=&quot;&quot;, tag=&quot;blaWhi&quot;</span>
+
+	<span class="c"># redefine self.wriTg in protol</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">wriTg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wriTg</span>
+	
+	<span class="c"># redirect sul proprio buffer text</span>
+	<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span>
+
+<span class="c">##############################################################################</span>
+<span class="c"># Device</span>
+
+	<span class="c"># self.start = time()</span>
+
+	<span class="bp">self</span><span class="o">.</span><span class="n">debLog</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">couRcv</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">couFil</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">namFil</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+	<span class="k">def</span> <span class="nf">devRx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="c"># if self.chkEna.get_active():</span>
+		<span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="c"># ricevo dati</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="c"># lettura dati</span>
+				<span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+				<span class="c"># if data:</span>
+				<span class="c"># 	# aggiorno bytes ricevuti</span>
+				<span class="c"># 	self.couRcv += len(data)</span>
+				<span class="c"># 	self.labRcv.set_text(&quot; %d&quot; %self.couRcv)</span>
+
+				<span class="c"># 	# print data,</span>
+				<span class="c"># 	self.write(data)</span>
+				<span class="c"># 	# clear data rx</span>
+				<span class="c"># 	self.dev.prs.data = None</span>
+
+			<span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">err</span><span class="p">:</span>
+				<span class="k">if</span> <span class="s">&quot;DEV read error&quot;</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
+					<span class="k">pass</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="k">pass</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">couErr</span> <span class="o">+=</span> <span class="mi">1</span>
+					<span class="k">print</span> <span class="s">&quot;err:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">couErr</span><span class="p">,</span> <span class="n">err</span>
+		<span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+		<span class="c"># rimane attivo</span>
+		<span class="k">return</span> <span class="bp">True</span>
+
+	<span class="c"># referenzio il metodo che inserisco nel loop di Idle</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">rxDev</span> <span class="o">=</span> <span class="n">GObject</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="n">devRx</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">devTx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="c"># invio dati</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="c"># send parameters</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span><span class="p">:</span>
+
+				<span class="c"># print data_str</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">sendListCommands</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span><span class="p">,</span> <span class="n">sto</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span> <span class="o">=</span> <span class="p">[]</span>
+
+				<span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span> <span class="o">+=</span><span class="mi">1</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">labSnd</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&quot; </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">pass</span>
+
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debLog</span><span class="p">:</span>
+				<span class="k">print</span><span class="p">(</span><span class="s">&quot;MyDevice write Frame error&quot;</span><span class="p">)</span>
+
+		<span class="c"># visualizzo tempo trascorso</span>
+		<span class="c"># print &quot;tim:%s&quot; %(time() - self.start)</span>
+
+		<span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+		<span class="c"># rimane attivo</span>
+		<span class="k">return</span> <span class="bp">True</span>
+
+	<span class="c"># referenzio il metodo che inserisco nel loop di Idle</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">txDev</span> <span class="o">=</span> <span class="n">GObject</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="n">devTx</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+<span class="c">##############################################################################</span>
+<span class="c">#myFrame (Tx Commands)</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Tx commands&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						<span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						<span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+	<span class="c"># change background color to Class</span>
+	<span class="n">chaBackColor</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="s">&quot;boxCmd&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#a0a0a0&quot;</span><span class="p">)</span>
+	
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">bBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myLabFrame (counter Tx data)</span>
+	<span class="c">#fram, [labe, lFrm, xBox]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myLabFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;0&#39;</span><span class="p">,</span> 
+							<span class="n">leng</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="s">&#39;0&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">prea</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> 
+							<span class="n">font</span><span class="o">=</span><span class="s">&#39;Arial 10&#39;</span><span class="p">,</span> 
+							<span class="n">colo</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span>
+							<span class="n">nFra</span><span class="o">=</span><span class="s">&#39;Tx.data&#39;</span><span class="p">,</span> <span class="n">cFra</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">labSnd</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myEntFrame (cmd Serial)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_activate</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="n">data_str</span> <span class="o">=</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+		<span class="c"># CR	</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chkCR</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="n">data_str</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span>
+		<span class="c"># LF</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chkLF</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="n">data_str</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+		<span class="c"># convert to list</span>
+		<span class="n">data_str</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_str</span><span class="p">,]</span>
+
+		<span class="c"># send data</span>
+		<span class="k">if</span> <span class="n">data_str</span><span class="p">:</span>
+			<span class="c"># print data_str</span>
+			<span class="c"># self.dev.prot.sendListCommands(data_str, sto=&quot;&quot;, log=0)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span> <span class="o">=</span> <span class="n">data_str</span>
+			<span class="c"># printHex(data_str[0])</span>
+
+	<span class="c">#fram, [labe, xBoxcmdB, entr, call]        </span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myEntFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> 
+							<span class="n">numb</span><span class="o">=</span><span class="mi">29</span><span class="p">,</span>
+							<span class="n">call</span><span class="o">=</span><span class="n">on_activate</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
+							<span class="n">nFra</span><span class="o">=</span><span class="s">&#39;cmd.Serial&#39;</span><span class="p">,</span> <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">entCmdSerial</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable CR)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">pass</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Ena&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkCR</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;CR&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable LF)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">pass</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Ena&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkLF</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;LF&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable Debug)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">deb</span> <span class="o">=</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">()</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Ena&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkDeb</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Deb&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable RTS)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setRTS</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setRTS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;On&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkRts</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Rts&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable DTR)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;On&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkDtr</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Dtr&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="logger">
+<h3>Logger</h3>
+<p>Il primo <strong>widget</strong> inserito è un <strong>myTxtView</strong> che lo useremo come <strong>logger</strong> della nostra applicazione. Qui vedremo i nostri <strong>Tx</strong> e <strong>Rx</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#myTxtView</span>
+	<span class="c">#          0,   1,   2,   3,   4,    5,    6,       7 </span>
+	<span class="c"># fram,[labe,xBox,buff,text,cTag,clear,write,writeTag]</span>
+	<span class="n">fram</span><span class="p">,</span><span class="n">othe</span> <span class="o">=</span> <span class="n">myTxtView</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;logBuffer&#39;</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span>
+							<span class="n">widt</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">heig</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> 
+							<span class="n">font</span><span class="o">=</span><span class="s">&quot;courier 9&quot;</span><span class="p">,</span> <span class="n">edit</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> 
+							<span class="n">left</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">righ</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bord</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+							<span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> <span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in apllication</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">bBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">fram</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+	
+	<span class="c"># referenzio gli attributi</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">cTag</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+	<span class="c"># referenzio i metodi</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="c"># *msg</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">wriTg</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="c"># str=&quot;&quot;, tag=&quot;blaWhi&quot;</span>
+
+	<span class="c"># redefine self.wriTg in protol</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">wriTg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wriTg</span>
+	
+	<span class="c"># redirect sul proprio buffer text</span>
+	<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span>
+</pre></div>
+</div>
+<p>Notate che abbiamo fatto un <strong>redirect</strong> per indirizzare lo <strong>stdout</strong> nel nostro <strong>logger</strong>. Questo avviene perchè abbiamo mantenuto la compatibilità delle chiamate.</p>
+</div>
+<div class="section" id="device">
+<h3>Device</h3>
+<p>La seconda <strong>sezione</strong> viene enfatizzata da un commento per aumentare la leggibilità.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##############################################################################</span>
+<span class="c"># Device</span>
+
+	<span class="c"># self.start = time()</span>
+
+	<span class="bp">self</span><span class="o">.</span><span class="n">debLog</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">couRcv</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">couFil</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">namFil</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+	<span class="k">def</span> <span class="nf">devRx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="c"># if self.chkEna.get_active():</span>
+		<span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="c"># ricevo dati</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="c"># lettura dati</span>
+				<span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+				<span class="c"># if data:</span>
+				<span class="c"># 	# aggiorno bytes ricevuti</span>
+				<span class="c"># 	self.couRcv += len(data)</span>
+				<span class="c"># 	self.labRcv.set_text(&quot; %d&quot; %self.couRcv)</span>
+
+				<span class="c"># 	# print data,</span>
+				<span class="c"># 	self.write(data)</span>
+				<span class="c"># 	# clear data rx</span>
+				<span class="c"># 	self.dev.prs.data = None</span>
+
+			<span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">err</span><span class="p">:</span>
+				<span class="k">if</span> <span class="s">&quot;DEV read error&quot;</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
+					<span class="k">pass</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="k">pass</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">couErr</span> <span class="o">+=</span> <span class="mi">1</span>
+					<span class="k">print</span> <span class="s">&quot;err:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">couErr</span><span class="p">,</span> <span class="n">err</span>
+		<span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+		<span class="c"># rimane attivo</span>
+		<span class="k">return</span> <span class="bp">True</span>
+
+	<span class="c"># referenzio il metodo che inserisco nel loop di Idle</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">rxDev</span> <span class="o">=</span> <span class="n">GObject</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="n">devRx</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">devTx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="c"># invio dati</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="c"># send parameters</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span><span class="p">:</span>
+
+				<span class="c"># print data_str</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">sendListCommands</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span><span class="p">,</span> <span class="n">sto</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span> <span class="o">=</span> <span class="p">[]</span>
+
+				<span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span> <span class="o">+=</span><span class="mi">1</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">labSnd</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&quot; </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">pass</span>
+
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debLog</span><span class="p">:</span>
+				<span class="k">print</span><span class="p">(</span><span class="s">&quot;MyDevice write Frame error&quot;</span><span class="p">)</span>
+
+		<span class="c"># visualizzo tempo trascorso</span>
+		<span class="c"># print &quot;tim:%s&quot; %(time() - self.start)</span>
+
+		<span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+		<span class="c"># rimane attivo</span>
+		<span class="k">return</span> <span class="bp">True</span>
+
+	<span class="c"># referenzio il metodo che inserisco nel loop di Idle</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">txDev</span> <span class="o">=</span> <span class="n">GObject</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="n">devTx</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Qui abbiamo creato 2 metodi <strong>devRx</strong> e <strong>devTx</strong> per automatizzare l&#8217;aggiornamento.
+Li abbiamo aggiunti al <strong>loop</strong> di <strong>idle</strong> così verranno richiamati quando non vi sono altre priorità.</p>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="c"># referenzio il metodo che inserisco nel loop di Idle</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">rxDev</span> <span class="o">=</span> <span class="n">GObject</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="n">devRx</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>	<span class="c"># referenzio il metodo che inserisco nel loop di Idle</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">txDev</span> <span class="o">=</span> <span class="n">GObject</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="n">devTx</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tx">
+<h3>Tx</h3>
+<p>Per finire abbiamo aggiunto una <strong>sezione</strong> per la gestione delle nostre trasmissioni.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##############################################################################</span>
+<span class="c">#myFrame (Tx Commands)</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Tx commands&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						<span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						<span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+	<span class="c"># change background color to Class</span>
+	<span class="n">chaBackColor</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="s">&quot;boxCmd&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#a0a0a0&quot;</span><span class="p">)</span>
+	
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">bBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myLabFrame (counter Tx data)</span>
+	<span class="c">#fram, [labe, lFrm, xBox]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myLabFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;0&#39;</span><span class="p">,</span> 
+							<span class="n">leng</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="s">&#39;0&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">prea</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> 
+							<span class="n">font</span><span class="o">=</span><span class="s">&#39;Arial 10&#39;</span><span class="p">,</span> 
+							<span class="n">colo</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span>
+							<span class="n">nFra</span><span class="o">=</span><span class="s">&#39;Tx.data&#39;</span><span class="p">,</span> <span class="n">cFra</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">labSnd</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myEntFrame (cmd Serial)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_activate</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="n">data_str</span> <span class="o">=</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+		<span class="c"># CR	</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chkCR</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="n">data_str</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span>
+		<span class="c"># LF</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chkLF</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="n">data_str</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+		<span class="c"># convert to list</span>
+		<span class="n">data_str</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_str</span><span class="p">,]</span>
+
+		<span class="c"># send data</span>
+		<span class="k">if</span> <span class="n">data_str</span><span class="p">:</span>
+			<span class="c"># print data_str</span>
+			<span class="c"># self.dev.prot.sendListCommands(data_str, sto=&quot;&quot;, log=0)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">bufDev</span> <span class="o">=</span> <span class="n">data_str</span>
+			<span class="c"># printHex(data_str[0])</span>
+
+	<span class="c">#fram, [labe, xBoxcmdB, entr, call]        </span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myEntFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> 
+							<span class="n">numb</span><span class="o">=</span><span class="mi">29</span><span class="p">,</span>
+							<span class="n">call</span><span class="o">=</span><span class="n">on_activate</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
+							<span class="n">nFra</span><span class="o">=</span><span class="s">&#39;cmd.Serial&#39;</span><span class="p">,</span> <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">entCmdSerial</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable CR)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">pass</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Ena&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkCR</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;CR&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable LF)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">pass</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Ena&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkLF</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;LF&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable Debug)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">deb</span> <span class="o">=</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">()</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Ena&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkDeb</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Deb&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable RTS)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setRTS</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setRTS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;On&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkRts</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Rts&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable DTR)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setDTR</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;On&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkDtr</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Dtr&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxCmd</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Come potete vedere abbiamo inserito la possibilità di abilitare il fine linea <strong>LF</strong> e il ritorno carrello <strong>CR</strong> nelle nostre TX.</p>
+<p>Per test ho inserito anche la possibilità di modificare lo stato dei segnali <strong>RTS</strong> e <strong>DTR</strong></p>
+<p>Per finire ho aggiunto un contatore delle nostre trasmissioni <strong>Tx.Data</strong></p>
+</div>
+</div>
+<div class="section" id="main">
+<h2>main</h2>
+<p>Il nostro <strong>main</strong> richiama le 2 definizioni <strong>myTryXX</strong> e per dimostrazione aggiunge 2 trasmissioni.</p>
+<div class="highlight-python"><div class="highlight"><pre>		<span class="c"># istanza l&#39;Applicazione (MyApp)</span>
+		<span class="c"># inizializza il device seriale</span>
+		<span class="bp">self</span> <span class="o">=</span> <span class="n">myTry01</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+		<span class="n">myTry02</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+		<span class="c"># test: invio un comando in apertura</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">sendListCommands</span><span class="p">([</span><span class="s">&quot;cmd_1&quot;</span><span class="p">,],</span> <span class="n">sto</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">)</span>
+
+		<span class="c"># delay richiesta ritardata</span>
+		<span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">sendListCommands</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;cmd_2&quot;</span><span class="p">,],</span> <span class="n">sto</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Se proviamo ad avviare il nostro <strong>script</strong> vedremo:</p>
+<div class="figure align-center" id="id1">
+<img alt="alternate text" src="../../../_images/myAppSerial.png" />
+<p class="caption"><span class="caption-text"><em>myAppSerial</em> in esecuzione.</span></p>
+</div>
+<p>Come potete notare appaiono le 3 trasmissione Tx/Rx.</p>
+<p><strong>Tx</strong> viene enfatizzata dal colore verde.</p>
+<p><strong>Rx</strong> viene enfatizzata dal prepost <strong>rx:</strong></p>
+<p>Le prime 2 trasmissioni sono automatiche da codice.</p>
+<div class="highlight-python"><div class="highlight"><pre>		<span class="c"># test: invio un comando in apertura</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">sendListCommands</span><span class="p">([</span><span class="s">&quot;cmd_1&quot;</span><span class="p">,],</span> <span class="n">sto</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">)</span>
+
+		<span class="c"># delay richiesta ritardata</span>
+		<span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">sendListCommands</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;cmd_2&quot;</span><span class="p">,],</span> <span class="n">sto</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>La terza l&#8217; abbiamo fatta noi tramite il widget <strong>cmd.Serial</strong>.</p>
+</div>
+<div class="section" id="package">
+<h2>Package</h2>
+<p>La struttura aggiornata del nostro package è la seguente:</p>
+<div class="highlight-rest"><div class="highlight"><pre>myAppSerial/
+  l00_start.py
+  l01_startGtk.py
+  my00init.py
+  myAppSerial.py
+  myLib/
+    __init__.py
+    myProtocol/
+      __init__.py
+      my00init.py
+      myProtocol.py
+      mySerial.py
+</pre></div>
+</div>
+<p>Per scaricare la nuova versione <a class="reference download internal" href="../../../_downloads/20150909.zip"><span class="xref download docutils literal"><span class="pre">20150909.zip</span></span></a></p>
+</div>
+<div class="section" id="saluti">
+<h2>Saluti</h2>
+<p>Per oggi mi fermo qui.</p>
+<p>Nel prossimo post aggiungeremo alla nostra <strong>GUI</strong> altre caratteristiche.</p>
+<p>Ciao alla prossima. (stay tune!)</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Scritto da Orcim</span>
+        </div>
+        <div class="categories">
+            <span>
+                Pubblicato in:
+                <a href="../../../categories/programming.html">programming</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tag:
+                <a href="../../../tags/programming.html">programming</a>, <a href="../../../tags/python.html">python</a>, <a href="../../../tags/gtk.html">gtk</a>, <a href="../../../tags/application.html">application</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="../06/myprotocol.html">myProtocol</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/09/09/myappserial";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Cerca</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section><div class="widget">
+    <h1>Articoli Recenti</h1>
+    <ul><li>
+            <a href="#">myAppSerial</a>
+        </li><li>
+            <a href="../06/myprotocol.html">myProtocol</a>
+        </li><li>
+            <a href="../05/myserial.html">mySerial</a>
+        </li><li>
+            <a href="../05/in_attesa_del_prossimo_post.html">in attesa del prossimo post</a>
+        </li><li>
+            <a href="../04/myradbutton.html">myRadioButton</a>
+        </li><li>
+            <a href="../03/mychkbutton.html">myCheckButton</a>
+        </li><li>
+            <a href="../02/mybutton1.html">myButton (il seguito)</a>
+        </li><li>
+            <a href="../01/mybutton.html">myButton</a>
+        </li><li>
+            <a href="../../08/31/mytxtview.html">myTextView</a>
+        </li><li>
+            <a href="../../08/28/myentry.html">myEntry</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Tag Cloud</h1>
+      <a href="../../../tags/application.html" style="font-size: 8pt">application</a>&nbsp;&nbsp;
+      <a href="../../../tags/generico.html" style="font-size: 8pt">generico</a>&nbsp;&nbsp;
+      <a href="../../../tags/gtk.html" style="font-size: 18pt">gtk</a>&nbsp;&nbsp;
+      <a href="../../../tags/programming.html" style="font-size: 20pt">programming</a>&nbsp;&nbsp;
+      <a href="../../../tags/python.html" style="font-size: 19pt">python</a>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2015, Orcim. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>
