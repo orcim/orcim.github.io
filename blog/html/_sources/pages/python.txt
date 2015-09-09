@@ -30,7 +30,12 @@ Post
 **root/myLib/myProtocol**
 
 	* `myserial <../2015/09/05/myserial.html>`_
+	* `myprotocol <../2015/09/06/myprotocol.html>`_
 
+
+**applications**
+
+	* `myappserial <../2015/09/09/myappserial.html>`_
 
 Note
 ----
