@@ -145,6 +145,8 @@ La struttura aggiornata del nostro package è la seguente:
 
 Per scaricare la nuova versione :download:`20150909.zip </_static/20150909.zip>`
 
+.. note:: Ricordatevi di fare il loop **TX<->Rx** sulla seriale e di impostare la porta giusta del vostro device su **myTry01**!
+
 Saluti
 ------
 
