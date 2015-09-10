@@ -1,0 +1,455 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="my notes of pyGtk">
+        <meta name="viewport" content="width=device-width">
+        <title>myAppSerial (II) &mdash; myBlog</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="myAppSerial" href="../09/myappserial.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/translations.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script><script type="text/javascript" src="../../../_static/google_analytics.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">myBlog</a></h1><h2>by Orcim</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Pagina iniziale</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/python.html">Python</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/about.html">About</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>settembre 10, 2015</span>
+        </div>
+    <div class="section" id="myappserial-ii">
+<h1>myAppSerial (II)</h1>
+<p>Bene continuamo la nostra <strong>GUI</strong></p>
+<p>Oggi creiamo la <strong>sezione</strong> Rx Buffer.</p>
+<div id="more"> </div><div class="section" id="mytry02">
+<h2>myTry02</h2>
+<p>In <strong>myTry02</strong> aggiungiamo la sezione di ricezione dati.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##############################################################################</span>
+<span class="c">#myFrame (Rx Buffer)</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Rx buffer&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						<span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						<span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aBox</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+	<span class="c"># change background color to Class</span>
+	<span class="n">chaBackColor</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="s">&quot;boxBuf&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#a0a0a0&quot;</span><span class="p">)</span>
+
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">bBox</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myLabFrame (counter Rx data)</span>
+	<span class="c">#fram, [labe, lFrm, xBox]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myLabFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;0&#39;</span><span class="p">,</span> 
+							<span class="n">leng</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="s">&#39;0&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">prea</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> 
+							<span class="n">font</span><span class="o">=</span><span class="s">&#39;Arial 10&#39;</span><span class="p">,</span> 
+							<span class="n">colo</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span>
+							<span class="n">nFra</span><span class="o">=</span><span class="s">&#39;Rx.data&#39;</span><span class="p">,</span> <span class="n">cFra</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">labRcv</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (enable Rx)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">pass</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Ena&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkEna</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Rx&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myButton (clear buffer)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+		<span class="c"># frame ricevuti</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">couRcv</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">labRcv</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&quot; </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">couRcv</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">labSnd</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&quot; </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span><span class="p">)</span>
+	<span class="c"># fram, [labe, xBox, butt, call]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;buffer&quot;</span><span class="p">,</span> 
+							<span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_OK</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
+							<span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># imposto la label</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;clear&quot;</span>    
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (view Hid)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">hid</span> <span class="o">=</span> <span class="mi">1</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">hid</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;view&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkHid</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Hide&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#myChkButton (view Hex)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">hex</span> <span class="o">=</span> <span class="mi">1</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">hex</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;view&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkHex</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Hex&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="rx">
+<h3>Rx</h3>
+<p>Come potete vedere abbiamo inserito:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Il contatore dei dati ricevuti</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#myLabFrame (counter Rx data)</span>
+	<span class="c">#fram, [labe, lFrm, xBox]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myLabFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;0&#39;</span><span class="p">,</span> 
+							<span class="n">leng</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="s">&#39;0&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">prea</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> 
+							<span class="n">font</span><span class="o">=</span><span class="s">&#39;Arial 10&#39;</span><span class="p">,</span> 
+							<span class="n">colo</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span>
+							<span class="n">nFra</span><span class="o">=</span><span class="s">&#39;Rx.data&#39;</span><span class="p">,</span> <span class="n">cFra</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">labRcv</span> <span class="o">=</span> <span class="n">othe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Qui referenziamo l&#8217; oggetto <strong>self.labRcv</strong> che ci servirà per aggiornare il contatore.</p>
+<blockquote>
+<div><ul class="simple">
+<li>La possibilità di abilitare/disabilitare la ricezione dati</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#myChkButton (enable Rx)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">pass</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Ena&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkEna</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Rx&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Con la referenza <strong>self.chkEna</strong> abilitiamo/disabilitiamo la ricezione dati nel metodo <strong>devRx</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Un pulsante per la pulizia del nostro logger che resetta anche i contatori Rx/Tx</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#myButton (clear buffer)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+		<span class="c"># frame ricevuti</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">couRcv</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">labRcv</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&quot; </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">couRcv</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">labSnd</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&quot; </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">couSnd</span><span class="p">)</span>
+	<span class="c"># fram, [labe, xBox, butt, call]</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myButFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;buffer&quot;</span><span class="p">,</span> 
+							<span class="n">icon</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STOCK_OK</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span><span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[],</span>
+							<span class="n">bFra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sFra</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span> 
+							<span class="n">tFra</span><span class="o">=</span><span class="s">&#39;v&#39;</span><span class="p">,</span> <span class="n">aFra</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+	<span class="c"># imposto la label</span>
+	<span class="n">othe</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;clear&quot;</span>    
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obje</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Qui definiamo una nuova <strong>callback</strong> per il nostro pulsante che esegue tutte le operazioni richieste.</p>
+<blockquote>
+<div><ul class="simple">
+<li>La possibilità di visualizzare i caratteri non stampabili</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#myChkButton (view Hid)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">hid</span> <span class="o">=</span> <span class="mi">1</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">hid</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;view&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkHid</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Hide&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Anche qui definiamo una nuova <strong>callback</strong> che attiva/disattiva il flag <strong>self.dev.hid</strong> presente nel modulo del protocollo per rendere visibili i caratteri non stampabili.</p>
+<blockquote>
+<div><ul class="simple">
+<li>La possibilità di visualizzare i caratteri ricevuti in formato esadecimale</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#myChkButton (view Hex)</span>
+	<span class="c"># ridefinisco la callback        </span>
+	<span class="k">def</span> <span class="nf">on_clicked</span><span class="p">(</span><span class="n">widg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">widg</span><span class="o">.</span><span class="n">get_active</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">hex</span> <span class="o">=</span> <span class="mi">1</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">hex</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="c"># butt, call</span>
+	<span class="n">obje</span><span class="p">,</span> <span class="n">othe</span> <span class="o">=</span> <span class="n">myChkButton</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;view&#39;</span><span class="p">,</span> 
+							<span class="n">valu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> 
+							<span class="n">call</span><span class="o">=</span> <span class="n">on_clicked</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,])</span>
+	<span class="c"># referenzio l&#39;oggetto</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">chkHex</span> <span class="o">=</span> <span class="n">obje</span>
+	<span class="c"># fram,[labe,xBox]</span>
+	<span class="n">obj1</span><span class="p">,</span> <span class="n">oth1</span> <span class="o">=</span> <span class="n">myFrame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Hex&#39;</span><span class="p">,</span> <span class="n">obje</span><span class="o">=</span><span class="n">obje</span><span class="p">,</span> <span class="n">colo</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+						 <span class="n">bord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shad</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SHADOW_ETCHED_OUT</span><span class="p">,</span>
+						 <span class="n">tBox</span><span class="o">=</span><span class="s">&#39;h&#39;</span> <span class="p">)</span>
+	<span class="c"># insert object in application</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">boxBuf</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Allo stesso modo definiamo una nuova <strong>callback</strong> che attiva/disattiva il flag <strong>self.dev.hex</strong> presente nel modulo del protocollo per visualizzare i caratteri ricevuti nella codifica esadecimale.</p>
+</div>
+</div>
+<div class="section" id="parser">
+<h2>Parser</h2>
+<p>Abbiamo ridefinito il parser per le nuove necessità.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyParser</span><span class="p">:</span>
+
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">None</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+
+	<span class="k">def</span> <span class="nf">parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+		<span class="s">&quot;parsing&quot;</span>
+
+		<span class="c"># data input</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][:]</span>
+		<span class="c"># data output </span>
+		<span class="c"># print &quot;rx:&quot;, self.data,</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">wriTg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="s">&quot;bluWhi&quot;</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+			<span class="c"># aggiorno bytes ricevuti</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">couRcv</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">labRcv</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&quot; </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">couRcv</span><span class="p">)</span>
+
+		<span class="c"># mantiene il loop attivo</span>
+		<span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</div>
+<p>Notare che adesso richiede in ingresso l&#8217; attributo <strong>app</strong> che ci serve come riferimento per poter scrivere nel <strong>logger</strong> e aggiornare il <strong>contatore</strong> dei bytes ricevuti.</p>
+</div>
+<div class="section" id="main">
+<h2>Main</h2>
+<p>Il nostro <strong>main</strong> adesso invia un messaggio di prova attende 3 secondi e pulisce il nostro <strong>logger</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre>		<span class="n">myTry02</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+		<span class="c"># richiesta di invio ritardata</span>
+		<span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">sendListCommands</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;prova di invio!&quot;</span><span class="p">,],</span> <span class="n">sto</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">)</span>
+
+		<span class="c"># richiesta di pulizia ritardata</span>
+		<span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">3600</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">)</span>
+
+	<span class="c"># avvia applicazione</span>
+	<span class="n">Gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Se proviamo ad avviare il nostro <strong>script</strong> vedremo:</p>
+<div class="figure align-center" id="id1">
+<img alt="alternate text" src="../../../_images/myAppSerial2.png" />
+<p class="caption"><span class="caption-text"><em>myAppSerial</em> in esecuzione.</span></p>
+</div>
+<p>Come potete notare adesso ci sono le sezioni <strong>Rx</strong> e <strong>Tx</strong> con i relativi widgets.</p>
+</div>
+<div class="section" id="package">
+<h2>Package</h2>
+<p>La struttura aggiornata del nostro package è la seguente:</p>
+<div class="highlight-rest"><div class="highlight"><pre>myAppSerial/
+  l00_start.py
+  l01_startGtk.py
+  my00init.py
+  myAppSerial.py
+  myLib/
+    __init__.py
+    myProtocol/
+      __init__.py
+      my00init.py
+      myProtocol.py
+      mySerial.py
+</pre></div>
+</div>
+<p>Per scaricare la nuova versione <a class="reference download internal" href="../../../_downloads/20150910.zip"><span class="xref download docutils literal"><span class="pre">20150910.zip</span></span></a></p>
+</div>
+<div class="section" id="saluti">
+<h2>Saluti</h2>
+<p>Bene nel prossimo post arricchiremo la nostra applicazione con altre caratteristiche.</p>
+<p>Ciao alla prossima. (stay tune!)</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Scritto da Orcim</span>
+        </div>
+        <div class="categories">
+            <span>
+                Pubblicato in:
+                <a href="../../../categories/programming.html">programming</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tag:
+                <a href="../../../tags/programming.html">programming</a>, <a href="../../../tags/python.html">python</a>, <a href="../../../tags/gtk.html">gtk</a>, <a href="../../../tags/application.html">application</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="../09/myappserial.html">myAppSerial</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "orcimgithubio";    var disqus_identifier = "2015/09/10/myappserial2";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Cerca</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section><div class="widget">
+    <h1>Articoli Recenti</h1>
+    <ul><li>
+            <a href="#">myAppSerial (II)</a>
+        </li><li>
+            <a href="../09/myappserial.html">myAppSerial</a>
+        </li><li>
+            <a href="../06/myprotocol.html">myProtocol</a>
+        </li><li>
+            <a href="../05/myserial.html">mySerial</a>
+        </li><li>
+            <a href="../05/in_attesa_del_prossimo_post.html">in attesa del prossimo post</a>
+        </li><li>
+            <a href="../04/myradbutton.html">myRadioButton</a>
+        </li><li>
+            <a href="../03/mychkbutton.html">myCheckButton</a>
+        </li><li>
+            <a href="../02/mybutton1.html">myButton (il seguito)</a>
+        </li><li>
+            <a href="../01/mybutton.html">myButton</a>
+        </li><li>
+            <a href="../../08/31/mytxtview.html">myTextView</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Tag Cloud</h1>
+      <a href="../../../tags/application.html" style="font-size: 8pt">application</a>&nbsp;&nbsp;
+      <a href="../../../tags/generico.html" style="font-size: 8pt">generico</a>&nbsp;&nbsp;
+      <a href="../../../tags/gtk.html" style="font-size: 18pt">gtk</a>&nbsp;&nbsp;
+      <a href="../../../tags/programming.html" style="font-size: 20pt">programming</a>&nbsp;&nbsp;
+      <a href="../../../tags/python.html" style="font-size: 19pt">python</a>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2015, Orcim. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

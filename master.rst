@@ -4,6 +4,7 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
+   2015/09/10/myappserial2
    2015/09/09/myappserial
    2015/09/06/myprotocol
    2015/09/05/myserial
