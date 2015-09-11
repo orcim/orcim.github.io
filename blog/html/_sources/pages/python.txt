@@ -37,6 +37,7 @@ Post
 
 	* `myappserial <../2015/09/09/myappserial.html>`_
 	* `myappserial 2 <../2015/09/10/myappserial2.html>`_
+	* `myappserial 3 <../2015/09/11/myappserial3.html>`_
 
 Note
 ----
